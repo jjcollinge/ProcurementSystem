@@ -11,12 +11,22 @@ package procurementsystem;
  * @author Simon
  */
 public class ProcurementSystem {
-
+  
+    public static class Application implements Runnable {
+        public void run() {
+            // Application logic goes here...
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+   
+        // Parse any command line arguments here
+        
+        // Start application thread
+        new Thread(new Application()).start();
     }
-    
+     
 }
