@@ -8,7 +8,7 @@ package procurementsystem;
 
 /**
  *
- * @author b1009269
+ * @author Simon
  */
 public class ProcurementSystem {
 
