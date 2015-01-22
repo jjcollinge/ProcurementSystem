@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package procurementsystem;
 
 /**
@@ -13,8 +7,14 @@ package procurementsystem;
 public class ProcurementSystem {
   
     public static class Application implements Runnable {
+
+        /**
+         * Main application sequence
+         */
+        @Override
         public void run() {
             // Application logic goes here...
+            final MainInterface UI = new MainInterface();
         }
     }
     
