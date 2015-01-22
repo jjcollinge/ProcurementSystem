@@ -39,5 +39,114 @@ public class JUnitTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     // @Test
-    // public void hello() {}
+    // public void hello() 
+    
+    //test stubs implemented from site manager use case diagram
+    @Test
+    public void ViewCatalog()
+    {
+        
+    }
+    
+    @Test
+    public void AddItemsToAnOrder()
+    {
+        
+    }
+    
+    @Test
+    public void ViewExistingOrders()
+    {
+        
+    }
+    
+    @Test
+    public void OrderStatus()
+    {
+        
+    }
+    
+    @Test
+    public void ViewInvoice()
+    {
+        
+    }
+    
+    @Test
+    public void ViewAuditTrail()
+    {
+        
+    }
+    
+    @Test
+    public void CancelOrder()
+    {
+        
+    }
+    
+    @Test
+    public void ViewDeliveryDate()
+    {
+        
+    }
+    
+    @Test
+    public void AmendOrder()
+    {
+        
+    }
+    
+    @Test
+    public void FilterExistingOrders()
+    {
+        
+    }
+    
+    @Test
+    public void PlaceAnOrder()
+    {
+        
+    }
+    
+    @Test
+    public void EditAnOrder()
+    {
+        
+    }
+    
+    @Test
+    public void AddSpecialInstructionToOrder()
+    {
+        
+    }
+    
+    @Test
+    public void ChangeItemQuantityInOrder()
+    {
+        
+    }
+    
+    @Test
+    public void RecordDeliveries()
+    {
+        
+    }
+    
+    @Test
+    public void ApproveDelivery()
+    {
+        
+    }
+    
+    @Test
+    public void RecordIncorrectDelivery()
+    {
+        
+    }
+    
+    @Test
+    public void SelectAnOrderToDeliver()
+    {
+        
+    }
 }
