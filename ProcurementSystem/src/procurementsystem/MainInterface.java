@@ -23,37 +23,10 @@ public class MainInterface extends UserInterface {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        NewOrderBtn1 = new javax.swing.JButton();
-        existingOrdersBtn1 = new javax.swing.JButton();
-        recordDeliveryBtn1 = new javax.swing.JButton();
         browseCatalogBtn = new javax.swing.JButton();
-        newOrderBtn2 = new javax.swing.JButton();
-        existingOrdersBtn2 = new javax.swing.JButton();
-        recordDeliveryBtn2 = new javax.swing.JButton();
-
-        NewOrderBtn1.setText("New Order");
-        NewOrderBtn1.setToolTipText("Create a new order");
-        NewOrderBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewOrderBtn1ActionPerformed(evt);
-            }
-        });
-
-        existingOrdersBtn1.setText("Existing Orders");
-        existingOrdersBtn1.setToolTipText("Create a new order");
-        existingOrdersBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                existingOrdersBtn1ActionPerformed(evt);
-            }
-        });
-
-        recordDeliveryBtn1.setText("Record Delivery");
-        recordDeliveryBtn1.setToolTipText("Create a new order");
-        recordDeliveryBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recordDeliveryBtn1ActionPerformed(evt);
-            }
-        });
+        newOrderBtn = new javax.swing.JButton();
+        existingOrdersBtn = new javax.swing.JButton();
+        recordDeliveryBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,27 +38,27 @@ public class MainInterface extends UserInterface {
             }
         });
 
-        newOrderBtn2.setText("New Order");
-        newOrderBtn2.setToolTipText("Create a new order");
-        newOrderBtn2.addActionListener(new java.awt.event.ActionListener() {
+        newOrderBtn.setText("New Order");
+        newOrderBtn.setToolTipText("Create a new order");
+        newOrderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newOrderBtn2ActionPerformed(evt);
+                newOrderBtnActionPerformed(evt);
             }
         });
 
-        existingOrdersBtn2.setText("Existing Orders");
-        existingOrdersBtn2.setToolTipText("Create a new order");
-        existingOrdersBtn2.addActionListener(new java.awt.event.ActionListener() {
+        existingOrdersBtn.setText("Existing Orders");
+        existingOrdersBtn.setToolTipText("Create a new order");
+        existingOrdersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                existingOrdersBtn2ActionPerformed(evt);
+                existingOrdersBtnActionPerformed(evt);
             }
         });
 
-        recordDeliveryBtn2.setText("Record Delivery");
-        recordDeliveryBtn2.setToolTipText("Create a new order");
-        recordDeliveryBtn2.addActionListener(new java.awt.event.ActionListener() {
+        recordDeliveryBtn.setText("Record Delivery");
+        recordDeliveryBtn.setToolTipText("Create a new order");
+        recordDeliveryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recordDeliveryBtn2ActionPerformed(evt);
+                recordDeliveryBtnActionPerformed(evt);
             }
         });
 
@@ -96,9 +69,9 @@ public class MainInterface extends UserInterface {
             .addGroup(layout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newOrderBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(existingOrdersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(recordDeliveryBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(existingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(recordDeliveryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseCatalogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(131, Short.MAX_VALUE))
         );
@@ -106,11 +79,11 @@ public class MainInterface extends UserInterface {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(newOrderBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(existingOrdersBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(existingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(recordDeliveryBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(recordDeliveryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(browseCatalogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -120,32 +93,24 @@ public class MainInterface extends UserInterface {
     }// </editor-fold>//GEN-END:initComponents
 
     private void browseCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseCatalogBtnActionPerformed
-        // TODO add your handling code here:
+        CatalogUI catalogUI = new CatalogUI();
+        catalogUI.Run();
     }//GEN-LAST:event_browseCatalogBtnActionPerformed
 
-    private void NewOrderBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewOrderBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NewOrderBtn1ActionPerformed
+    private void newOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderBtnActionPerformed
+        PlaceOrderUI placeOrderUI = new PlaceOrderUI();
+        placeOrderUI.Run();
+    }//GEN-LAST:event_newOrderBtnActionPerformed
 
-    private void newOrderBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newOrderBtn2ActionPerformed
+    private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
+        ViewOrderUI viewOrderUI = new ViewOrderUI();
+        viewOrderUI.Run();
+    }//GEN-LAST:event_existingOrdersBtnActionPerformed
 
-    private void existingOrdersBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_existingOrdersBtn1ActionPerformed
-
-    private void existingOrdersBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_existingOrdersBtn2ActionPerformed
-
-    private void recordDeliveryBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordDeliveryBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recordDeliveryBtn1ActionPerformed
-
-    private void recordDeliveryBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordDeliveryBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recordDeliveryBtn2ActionPerformed
+    private void recordDeliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordDeliveryBtnActionPerformed
+        DeliveryUI deliveryUI = new DeliveryUI();
+        deliveryUI.Run();
+    }//GEN-LAST:event_recordDeliveryBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,12 +148,9 @@ public class MainInterface extends UserInterface {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton NewOrderBtn1;
     private javax.swing.JButton browseCatalogBtn;
-    private javax.swing.JButton existingOrdersBtn1;
-    private javax.swing.JButton existingOrdersBtn2;
-    private javax.swing.JButton newOrderBtn2;
-    private javax.swing.JButton recordDeliveryBtn1;
-    private javax.swing.JButton recordDeliveryBtn2;
+    private javax.swing.JButton existingOrdersBtn;
+    private javax.swing.JButton newOrderBtn;
+    private javax.swing.JButton recordDeliveryBtn;
     // End of variables declaration//GEN-END:variables
 }

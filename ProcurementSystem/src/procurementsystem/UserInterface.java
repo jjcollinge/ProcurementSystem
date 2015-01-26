@@ -12,5 +12,4 @@ public class UserInterface extends javax.swing.JFrame {
      * This could be an interface class which extends
      * Runnable.
      */
-    
 }
