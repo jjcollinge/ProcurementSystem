@@ -15,7 +15,7 @@ public class Order {
     private String site;
     
     public Order() {
-        
+        orderLines = new ArrayList<OrderLine>();
     }
     
     /**
@@ -70,13 +70,18 @@ public class Order {
         
     }
     
+    public ArrayList<OrderLine> getOrderLines() {
+        return this.orderLines;
+    }
+    
     /**
      * Add an Item to Order
      * @param item
      * @param quantity 
      */
     public void addItem(Item item, int quantity) {
-            
+            OrderLine orderLine = new OrderLine(item, quantity);
+            orderLines.add(orderLine);
     }
     
 }

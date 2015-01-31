@@ -11,8 +11,9 @@ public class OrderLine {
     /**
      * Default constructor
      */
-    public OrderLine() {
-        
+    public OrderLine(Item item, int quantity) {
+        this.item = item;
+        this.quantity = quantity;
     }
     
     /**
@@ -28,4 +29,13 @@ public class OrderLine {
     public void changeQuantity() {
         
     }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+    
 }

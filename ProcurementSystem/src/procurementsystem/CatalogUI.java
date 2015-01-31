@@ -221,9 +221,13 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
-//       for(Item item : selectedItems) {
-//           PlaceOrderUI.addItem(item, 1);
-//       }   
+       for(int i = 0; i < selectedItems.size(); i++) {
+           Item item = selectedItems.get(i);
+           int index = allItems.indexOf(item);
+           PlaceOrderUI.addItem(item, (Integer)itemQuantities.get(index));
+       }   
+       PlaceOrderUI ui = new PlaceOrderUI();
+       ui.checkout();
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
     private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
