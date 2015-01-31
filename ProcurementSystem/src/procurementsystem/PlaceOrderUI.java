@@ -7,6 +7,8 @@ package procurementsystem;
  */
 public class PlaceOrderUI extends UserInterface {
 
+    private static Order newOrder;
+    
     /**
      * Creates new form PlaceOrderUI
      */
@@ -75,11 +77,11 @@ public class PlaceOrderUI extends UserInterface {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //that.setVisible(true);
-                
-                Order newOrder = new Order();
+                newOrder = new Order();
                 
                 CatalogUI catalogUI = new CatalogUI();
                 catalogUI.Run();
+                
             }
         });
     }
@@ -96,6 +98,10 @@ public class PlaceOrderUI extends UserInterface {
      */
     public Order getOption() {
         return null;
+    }
+    
+    public static void addItem(Item item, int quantity) {
+        newOrder.addItem(item, quantity);
     }
     
     /**
