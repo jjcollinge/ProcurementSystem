@@ -17,4 +17,5 @@ public abstract class UserInterface extends javax.swing.JFrame {
      * Wrapper method to invoke the JFrame thread
      */
     public abstract void Run();
+    
 }

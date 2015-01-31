@@ -3,15 +3,19 @@ package procurementsystem;
 
 /**
  *
- * @author b1001251
+ * @author JC
  */
 public class CatalogUI extends UserInterface {
-
+    private Catalog catalog;
+    
     /**
      * Creates new form CatalogUI
      */
     public CatalogUI() {
         initComponents();
+        
+        //Settings
+        this.setSize(400, 540);
     }
 
     /**
@@ -24,6 +28,9 @@ public class CatalogUI extends UserInterface {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(400, 540));
+        setPreferredSize(new java.awt.Dimension(400, 540));
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -33,7 +40,7 @@ public class CatalogUI extends UserInterface {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
         pack();
@@ -42,7 +49,7 @@ public class CatalogUI extends UserInterface {
     /**
      * Main execution method for UserInterface
      */
-    public static void Run() {
+    public void Run() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -65,11 +72,16 @@ public class CatalogUI extends UserInterface {
             java.util.logging.Logger.getLogger(CatalogUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        CatalogUI that = this;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CatalogUI().setVisible(true);
+                that.setVisible(true);
+                
+                catalog = Catalog.getCatalog();
+                displayCatalog();
             }
         });
     }
@@ -82,7 +94,7 @@ public class CatalogUI extends UserInterface {
      * Display the Catalog
      */
     public void displayCatalog() {
-        //TODO
+        
     }
     
     /**

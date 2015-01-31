@@ -12,6 +12,9 @@ public class ViewOrderUI extends UserInterface {
      */
     public ViewOrderUI() {
         initComponents();
+        
+        //Settings
+        this.setSize(400, 540);
     }
 
     /**
@@ -33,7 +36,7 @@ public class ViewOrderUI extends UserInterface {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
         pack();
@@ -65,11 +68,13 @@ public class ViewOrderUI extends UserInterface {
             java.util.logging.Logger.getLogger(ViewOrderUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        ViewOrderUI that = this;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewOrderUI().setVisible(true);
+                that.setVisible(true);
             }
         });
     }

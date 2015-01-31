@@ -12,6 +12,9 @@ public class PlaceOrderUI extends UserInterface {
      */
     public PlaceOrderUI() {
         initComponents();
+        
+        //Settings
+        this.setSize(400, 540);
     }
 
     /**
@@ -33,7 +36,7 @@ public class PlaceOrderUI extends UserInterface {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
         pack();
@@ -66,10 +69,17 @@ public class PlaceOrderUI extends UserInterface {
         }
         //</editor-fold>
 
+        PlaceOrderUI that = this;
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlaceOrderUI().setVisible(true);
+                that.setVisible(true);
+                
+                Order newOrder = new Order();
+                
+                CatalogUI catalogUI = new CatalogUI();
+                //catalogUI.Run();
             }
         });
     }
@@ -84,9 +94,9 @@ public class PlaceOrderUI extends UserInterface {
     /**
      * Returns the option
      */
-    /* public Order getOption() {
-        return someOrder;
-    }*/
+    public Order getOption() {
+        return null;
+    }
     
     /**
      * Returns the currently selected item
