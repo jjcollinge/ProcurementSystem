@@ -79,7 +79,7 @@ public class PlaceOrderUI extends UserInterface {
                 Order newOrder = new Order();
                 
                 CatalogUI catalogUI = new CatalogUI();
-                //catalogUI.Run();
+                catalogUI.Run();
             }
         });
     }

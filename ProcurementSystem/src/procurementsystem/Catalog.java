@@ -8,11 +8,27 @@ import java.util.ArrayList;
  */
 public class Catalog {
     
-    private ArrayList<Item> listofItems;    //included <Item>
+    private ArrayList<Item> listOfItems;    //included <Item>
     private static Catalog singleton;
     
     private Catalog() {
-        
+        Item itemA = new Item("A", 30.4, "Item");
+        Item itemB = new Item("B", 23.45, "Item");
+        listOfItems = new ArrayList<Item>();
+        listOfItems.add(itemA);
+        listOfItems.add(itemB);
+    }
+    
+    /**
+     * Return Catalog
+     * n.b. should this be here, if its just returning the current instance? is it a singleton?
+     * @return 
+     */
+    public static Catalog getCatalog() {
+        if(singleton == null) {
+            singleton = new Catalog();
+        }
+        return singleton;
     }
     
     /**
@@ -35,17 +51,9 @@ public class Catalog {
     public void filterByType() {
         
     }
-    
-    /**
-     * Return Catalog
-     * n.b. should this be here, if its just returning the current instance? is it a singleton?
-     * @return 
-     */
-    public static Catalog getCatalog() {
-        if(singleton == null) {
-            singleton = new Catalog();
-        }
-        return singleton;
+
+    public ArrayList<Item> getListOfItems() {
+        return listOfItems;
     }
     
 }

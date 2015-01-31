@@ -1,21 +1,36 @@
 
 package procurementsystem;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JList;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author JC
  */
 public class CatalogUI extends UserInterface {
     private Catalog catalog;
+    private ArrayList<Item> selectedItems;
+    private DefaultListModel model;
     
     /**
      * Creates new form CatalogUI
      */
     public CatalogUI() {
-        initComponents();
         
-        //Settings
+        // Member data
+        selectedItems = new ArrayList<>();
+        model = new DefaultListModel();
+        
+        // Interface Settings
         this.setSize(400, 540);
+   
+        initComponents();   
+        listOfItems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
     /**
@@ -27,24 +42,60 @@ public class CatalogUI extends UserInterface {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listOfItems = new javax.swing.JList();
+        proceedBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 540));
         setPreferredSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
+        listOfItems.setModel(model);
+        jScrollPane1.setViewportView(listOfItems);
+
+        proceedBtn.setText("Proceed to Quantity Review");
+        proceedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proceedBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(proceedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(189, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(proceedBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void proceedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedBtnActionPerformed
+ 
+        int[] indices = listOfItems.getSelectedIndices();
+        for(int i = 0; i < indices.length; i++) {
+            System.out.println("Selected index: " + indices[i]);
+            selectedItems.add((Item)model.get(indices[i]));
+        }
+      
+    }//GEN-LAST:event_proceedBtnActionPerformed
 
     /**
      * Main execution method for UserInterface
@@ -94,7 +145,12 @@ public class CatalogUI extends UserInterface {
      * Display the Catalog
      */
     public void displayCatalog() {
-        
+        ArrayList<Item> itemList = catalog.getListOfItems();
+        System.out.println("catalog items: " + itemList);
+        model.clear();
+        for(Item item : itemList) {
+            model.addElement(item);
+        }
     }
     
     /**
@@ -107,10 +163,17 @@ public class CatalogUI extends UserInterface {
     /**
      * Set selected item
      */
-    public void setSeletectedItem(/*item*/) {
-        //someItem = item;
+    public void setSeletectedItem(Item item) {
+        //selectedItems = item;
+    }
+    
+    public DefaultListModel getModel() {
+        return model;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listOfItems;
+    private javax.swing.JButton proceedBtn;
     // End of variables declaration//GEN-END:variables
 }
