@@ -144,6 +144,9 @@
                       <Connection code="itemQuantities" type="code"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listOfSelectedItemQuantitiesValueChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

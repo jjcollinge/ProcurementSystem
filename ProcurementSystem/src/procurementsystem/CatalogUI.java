@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -30,18 +35,18 @@ public class CatalogUI extends UserInterface {
         // Member data
         selectedItems = new ArrayList<>();
         allItems = new DefaultListModel();
-        
+
         //selectedItemsQuantities = new ArrayList<>();
         itemQuantities = new DefaultListModel();
-        
+
         //selectedItemsIcons = new ArrayList<>();
         itemIcons = new DefaultListModel();
-        
+
         // Interface Settings
         this.setSize(400, 540);
 
-        initComponents(); 
-        
+        initComponents();
+
         listOfItems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
@@ -85,6 +90,11 @@ public class CatalogUI extends UserInterface {
         });
 
         listOfSelectedItemQuantities.setModel(itemQuantities);
+        listOfSelectedItemQuantities.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listOfSelectedItemQuantitiesValueChanged(evt);
+            }
+        });
         jScrollPane4.setViewportView(listOfSelectedItemQuantities);
 
         javax.swing.GroupLayout quantityPanelLayout = new javax.swing.GroupLayout(quantityPanel);
@@ -188,13 +198,13 @@ public class CatalogUI extends UserInterface {
 
     private void proceedToQuantityReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToQuantityReviewBtnActionPerformed
         setSelectedItem();
-        
-        for(int i = 0; i < allItems.size(); i++) {
-            
-            Item item = (Item)allItems.get(i);
-            if(selectedItems.contains(item)) {
+
+        for (int i = 0; i < allItems.size(); i++) {
+
+            Item item = (Item) allItems.get(i);
+            if (selectedItems.contains(item)) {
                 itemQuantities.addElement(1);
-                JCheckBox checkBox = new JCheckBox(); 
+                JCheckBox checkBox = new JCheckBox();
                 checkBox.setSelected(true);
                 checkBox.setVisible(true);
                 checkBox.setEnabled(false);
@@ -204,7 +214,7 @@ public class CatalogUI extends UserInterface {
                 itemQuantities.addElement(0);
             }
         }
-        
+
         catalogPanel.setVisible(false);
         quantityPanel.setVisible(true);
         quantityPanel.revalidate();
@@ -216,7 +226,17 @@ public class CatalogUI extends UserInterface {
 //       }   
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
-    
+    private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
+        JTextField quantity = new JTextField();
+        final JComponent[] inputs = new JComponent[]{
+            new JLabel("Quantity"), quantity
+        };
+        JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
+        int quan = Integer.valueOf(quantity.getText());
+        int selectedIndex = ((JList)evt.getSource()).getSelectedIndex();
+        itemQuantities.set(selectedIndex, quan);
+    }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
+
     /**
      * Main execution method for UserInterface
      */
@@ -278,7 +298,7 @@ public class CatalogUI extends UserInterface {
      * Close the Catalog
      */
     public void closeCatalog() {
-       
+
     }
 
     /**
@@ -288,7 +308,7 @@ public class CatalogUI extends UserInterface {
         int[] indices = listOfItems.getSelectedIndices();
         for (int i = 0; i < indices.length; i++) {
             System.out.println("Selected index: " + indices[i]);
-            selectedItems.add((Item)allItems.get(indices[i]));
+            selectedItems.add((Item) allItems.get(indices[i]));
         }
     }
 
