@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -27,10 +28,12 @@ public class CatalogUI extends UserInterface {
     //private ArrayList<Boolean> selectedItemsIcons;
     private DefaultListModel itemIcons;
 
+    private static CatalogUI singleton;
+    
     /**
      * Creates new form CatalogUI
      */
-    public CatalogUI() {
+    private CatalogUI() {
 
         // Member data
         selectedItems = new ArrayList<>();
@@ -44,10 +47,18 @@ public class CatalogUI extends UserInterface {
 
         // Interface Settings
         this.setSize(400, 540);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initComponents();
 
         listOfItems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    }
+    
+    public static CatalogUI getInstance() {
+        if(singleton == null) {
+            singleton = new CatalogUI();
+        }
+        return singleton;
     }
 
     /**
@@ -221,12 +232,14 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
-       for(int i = 0; i < selectedItems.size(); i++) {
+       //TODO: Could remove static reference by using singleton access?
+        PlaceOrderUI ui = PlaceOrderUI.getInstance();
+        
+        for(int i = 0; i < selectedItems.size(); i++) {
            Item item = selectedItems.get(i);
            int index = allItems.indexOf(item);
-           PlaceOrderUI.addItem(item, (Integer)itemQuantities.get(index));
+           ui.addItem(item, (Integer)itemQuantities.get(index));
        }   
-       PlaceOrderUI ui = new PlaceOrderUI();
        ui.checkout();
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 

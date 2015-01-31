@@ -1,20 +1,32 @@
 
 package procurementsystem;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author JC
  */
 public class DeliveryUI extends UserInterface {
 
+    private static DeliveryUI singleton;
+    
     /**
      * Creates new form DeliveryUI
      */
-    public DeliveryUI() {
+    private DeliveryUI() {
         initComponents();
         
         //Settings
         this.setSize(400, 540);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public static DeliveryUI getInstance() {
+        if(singleton == null) {
+            singleton = new DeliveryUI();
+        }
+        return singleton;
     }
 
     /**

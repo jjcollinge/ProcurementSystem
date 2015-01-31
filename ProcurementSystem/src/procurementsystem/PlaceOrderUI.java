@@ -1,8 +1,13 @@
 
 package procurementsystem;
 
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 
 /**
  *
@@ -10,24 +15,35 @@ import javax.swing.DefaultListModel;
  */
 public class PlaceOrderUI extends UserInterface {
 
-    private static Order newOrder;
+    private Order newOrder;
     private CatalogUI catalogUI;
     
     private DefaultListModel items;
     private DefaultListModel quantities;
     
+    private static PlaceOrderUI singleton;
+    
     /**
      * Creates new form PlaceOrderUI
      */
-    public PlaceOrderUI() {
+    private PlaceOrderUI() {
         
         items = new DefaultListModel();
         quantities = new DefaultListModel();
+        newOrder = new Order();
         
         initComponents();
         
         //Settings
         this.setSize(400, 540);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public static PlaceOrderUI getInstance() {
+        if(singleton == null) {
+            singleton = new PlaceOrderUI();
+        }
+        return singleton;
     }
 
     /**
@@ -129,11 +145,30 @@ public class PlaceOrderUI extends UserInterface {
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
         if(catalogUI != null) {
             catalogUI.closeCatalog();
-            //deserialise
-            SetOfOrders orders = new SetOfOrders();
+            SetOfOrders orders = null;
+            try {
+                //deserialise
+                orders = (SetOfOrders)Deserialize(SetOfOrdersFile);
+                System.out.println("Loaded set of orders succesfully");
+            } catch (IOException ex) {
+                Logger.getLogger(PlaceOrderUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(PlaceOrderUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(orders == null) {
+                // file doesn't exist yet so create the object
+                orders = new SetOfOrders();
+            }
             orders.addOrder();
-            //serialise
+            try {
+                Serialize(orders, SetOfOrdersFile);
+                System.out.println("Serialized set of orders succesfully");
+            } catch (IOException ex) {
+                Logger.getLogger(PlaceOrderUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
+        System.out.println("catalogUI is null and cannot be closed");
     }//GEN-LAST:event_placeOrderBtnActionPerformed
 
     /**
@@ -171,7 +206,7 @@ public class PlaceOrderUI extends UserInterface {
                 //that.setVisible(true);
                 newOrder = new Order();
                 
-                catalogUI = new CatalogUI();
+                catalogUI = CatalogUI.getInstance();
                 catalogUI.Run();
             }
         });
@@ -191,7 +226,7 @@ public class PlaceOrderUI extends UserInterface {
         return null;
     }
     
-    public static void addItem(Item item, int quantity) {
+    public void addItem(Item item, int quantity) {
         newOrder.addItem(item, quantity);
     }
     

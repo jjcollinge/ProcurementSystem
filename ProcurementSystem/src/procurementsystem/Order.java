@@ -1,5 +1,6 @@
 package procurementsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
  *
  * @author Simon
  */
-public class Order {
+public class Order implements Serializable {
     private ArrayList<OrderLine> orderLines;
     private Date orderDate;
     private String orderStatus;

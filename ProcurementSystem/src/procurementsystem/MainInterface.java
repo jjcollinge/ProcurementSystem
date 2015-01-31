@@ -1,6 +1,8 @@
 
 package procurementsystem;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author JC
@@ -15,6 +17,7 @@ public class MainInterface extends UserInterface {
         
         // Settings
         this.setSize(400, 540);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -97,22 +100,22 @@ public class MainInterface extends UserInterface {
     }// </editor-fold>//GEN-END:initComponents
 
     private void browseCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseCatalogBtnActionPerformed
-        CatalogUI catalogUI = new CatalogUI();
+        CatalogUI catalogUI = CatalogUI.getInstance();
         getOption(catalogUI);
     }//GEN-LAST:event_browseCatalogBtnActionPerformed
 
     private void newOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderBtnActionPerformed
-        PlaceOrderUI placeOrderUI = new PlaceOrderUI();
+        PlaceOrderUI placeOrderUI = PlaceOrderUI.getInstance();
         getOption(placeOrderUI);
     }//GEN-LAST:event_newOrderBtnActionPerformed
 
     private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
-        ViewOrderUI viewOrderUI = new ViewOrderUI();
+        ViewOrderUI viewOrderUI = ViewOrderUI.getInstance();
         getOption(viewOrderUI);
     }//GEN-LAST:event_existingOrdersBtnActionPerformed
 
     private void recordDeliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordDeliveryBtnActionPerformed
-        DeliveryUI deliveryUI = new DeliveryUI();
+        DeliveryUI deliveryUI = DeliveryUI.getInstance();
         getOption(deliveryUI);
     }//GEN-LAST:event_recordDeliveryBtnActionPerformed
 

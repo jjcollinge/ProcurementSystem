@@ -1,20 +1,32 @@
 
 package procurementsystem;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author JC
  */
 public class ViewOrderUI extends UserInterface {
 
+    private static ViewOrderUI singleton;
+    
     /**
      * Creates new form ViewOrderUI
      */
-    public ViewOrderUI() {
+    private ViewOrderUI() {
         initComponents();
         
         //Settings
         this.setSize(400, 540);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+     public static ViewOrderUI getInstance() {
+        if(singleton == null) {
+            singleton = new ViewOrderUI();
+        }
+        return singleton;
     }
 
     /**

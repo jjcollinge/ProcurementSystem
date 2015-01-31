@@ -1,12 +1,13 @@
 package procurementsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Simon
  */
-public class SetOfOrders {
+public class SetOfOrders implements Serializable {
     private ArrayList<Order> orders;
     
     /**

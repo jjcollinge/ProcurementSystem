@@ -1,10 +1,12 @@
 package procurementsystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Simon
  */
-public class OrderLine {
+public class OrderLine implements Serializable {
     private Item item;
     private int quantity;
     
