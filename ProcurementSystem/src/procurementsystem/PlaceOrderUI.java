@@ -74,7 +74,7 @@ public class PlaceOrderUI extends UserInterface {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                that.setVisible(true);
+                //that.setVisible(true);
                 
                 Order newOrder = new Order();
                 
