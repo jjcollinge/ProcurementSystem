@@ -227,14 +227,17 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
     private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
-        JTextField quantity = new JTextField();
-        final JComponent[] inputs = new JComponent[]{
-            new JLabel("Quantity"), quantity
-        };
-        JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
-        int quan = Integer.valueOf(quantity.getText());
         int selectedIndex = ((JList)evt.getSource()).getSelectedIndex();
-        itemQuantities.set(selectedIndex, quan);
+        if(selectedItems.contains(allItems.get(selectedIndex)))
+        {
+            JTextField quantity = new JTextField();
+            final JComponent[] inputs = new JComponent[]{
+                new JLabel("Quantity"), quantity
+            };
+            JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
+            int quan = Integer.valueOf(quantity.getText());
+            itemQuantities.set(selectedIndex, quan);
+        }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
 
     /**
