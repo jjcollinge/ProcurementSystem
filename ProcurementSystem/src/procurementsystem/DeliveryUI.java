@@ -3,7 +3,7 @@ package procurementsystem;
 
 /**
  *
- * @author b1001251
+ * @author JC
  */
 public class DeliveryUI extends UserInterface {
 
@@ -42,7 +42,7 @@ public class DeliveryUI extends UserInterface {
     /**
      * Main execution method for UserInterface
      */
-    public static void Run() {
+    public void Run() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

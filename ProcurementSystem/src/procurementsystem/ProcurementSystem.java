@@ -6,6 +6,10 @@ package procurementsystem;
  */
 public class ProcurementSystem {
   
+    /**
+     * Separate the application from the main method to 
+     * allow main method overloading
+     */
     public static class Application implements Runnable {
 
         /**
@@ -14,7 +18,8 @@ public class ProcurementSystem {
         @Override
         public void run() {
             // Application logic goes here...
-            // final MainInterface UI = new MainInterface();
+            final MainInterface UI = new MainInterface();
+            UI.Run();
         }
     }
     

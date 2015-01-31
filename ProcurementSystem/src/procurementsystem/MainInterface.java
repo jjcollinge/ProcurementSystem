@@ -3,7 +3,7 @@ package procurementsystem;
 
 /**
  *
- * @author b1001251
+ * @author JC
  */
 public class MainInterface extends UserInterface {
 
@@ -94,28 +94,29 @@ public class MainInterface extends UserInterface {
 
     private void browseCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseCatalogBtnActionPerformed
         CatalogUI catalogUI = new CatalogUI();
-        catalogUI.Run();
+        getOption(catalogUI);
     }//GEN-LAST:event_browseCatalogBtnActionPerformed
 
     private void newOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderBtnActionPerformed
         PlaceOrderUI placeOrderUI = new PlaceOrderUI();
-        placeOrderUI.Run();
+        getOption(placeOrderUI);
     }//GEN-LAST:event_newOrderBtnActionPerformed
 
     private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
         ViewOrderUI viewOrderUI = new ViewOrderUI();
-        viewOrderUI.Run();
+        getOption(viewOrderUI);
     }//GEN-LAST:event_existingOrdersBtnActionPerformed
 
     private void recordDeliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordDeliveryBtnActionPerformed
         DeliveryUI deliveryUI = new DeliveryUI();
-        deliveryUI.Run();
+        getOption(deliveryUI);
     }//GEN-LAST:event_recordDeliveryBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public void getOption(UserInterface ui) {
+        ui.Run();
+    }
+    
+    public void Run() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
