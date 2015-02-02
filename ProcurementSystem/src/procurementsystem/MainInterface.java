@@ -120,7 +120,9 @@ public class MainInterface extends UserInterface {
     }//GEN-LAST:event_recordDeliveryBtnActionPerformed
 
     public void getOption(UserInterface ui) {
+        ui.setPosition(this.getX(), this.getY());
         ui.Run();
+        this.setVisible(false);
     }
     
     public void Run() {
@@ -155,6 +157,11 @@ public class MainInterface extends UserInterface {
                 new MainInterface().setVisible(true);
             }
         });
+    }
+    
+    @Override
+    public void setPosition(int x, int y) {
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

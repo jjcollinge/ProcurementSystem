@@ -207,6 +207,7 @@ public class PlaceOrderUI extends UserInterface {
                 newOrder = new Order();
                 
                 catalogUI = CatalogUI.getInstance();
+                catalogUI.setPosition(that.getX(), that.getY());
                 catalogUI.Run();
             }
         });
@@ -252,6 +253,11 @@ public class PlaceOrderUI extends UserInterface {
         
         this.setVisible(true);
     }
+     
+    @Override
+    public void setPosition(int x, int y) {
+        this.setLocation(x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteSelectedItemBtn;
@@ -263,4 +269,5 @@ public class PlaceOrderUI extends UserInterface {
     private javax.swing.JList quantityOfItemsInOrder;
     private javax.swing.JButton returnToCatalogBtn;
     // End of variables declaration//GEN-END:variables
+
 }

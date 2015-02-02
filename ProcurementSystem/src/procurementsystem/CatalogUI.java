@@ -29,7 +29,7 @@ public class CatalogUI extends UserInterface {
     private DefaultListModel itemIcons;
 
     private static CatalogUI singleton;
-    
+
     /**
      * Creates new form CatalogUI
      */
@@ -53,9 +53,9 @@ public class CatalogUI extends UserInterface {
 
         listOfItems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
-    
+
     public static CatalogUI getInstance() {
-        if(singleton == null) {
+        if (singleton == null) {
             singleton = new CatalogUI();
         }
         return singleton;
@@ -232,21 +232,22 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
-       //TODO: Could remove static reference by using singleton access?
+
         PlaceOrderUI ui = PlaceOrderUI.getInstance();
-        
-        for(int i = 0; i < selectedItems.size(); i++) {
-           Item item = selectedItems.get(i);
-           int index = allItems.indexOf(item);
-           ui.addItem(item, (Integer)itemQuantities.get(index));
-       }   
-       ui.checkout();
+
+        for (int i = 0; i < selectedItems.size(); i++) {
+            Item item = selectedItems.get(i);
+            int index = allItems.indexOf(item);
+            ui.addItem(item, (Integer) itemQuantities.get(index));
+        }
+        ui.setPosition(this.getX(), this.getY());
+        ui.checkout();
+        this.setVisible(false);
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
     private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
-        int selectedIndex = ((JList)evt.getSource()).getSelectedIndex();
-        if(selectedItems.contains(allItems.get(selectedIndex)))
-        {
+        int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
+        if (selectedItems.contains(allItems.get(selectedIndex))) {
             JTextField quantity = new JTextField();
             final JComponent[] inputs = new JComponent[]{
                 new JLabel("Quantity"), quantity
@@ -334,6 +335,11 @@ public class CatalogUI extends UserInterface {
 
     public DefaultListModel getModel() {
         return allItems;
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+        this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

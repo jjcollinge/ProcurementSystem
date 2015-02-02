@@ -113,6 +113,11 @@ public class ViewOrderUI extends UserInterface {
     public void requestFilter() {
         //TODO
     }
+    
+    @Override
+    public void setPosition(int x, int y) {
+        this.setLocation(x, y);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
