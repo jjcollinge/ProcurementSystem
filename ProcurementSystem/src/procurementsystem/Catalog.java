@@ -1,22 +1,24 @@
 package procurementsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Simon
  */
-public class Catalog {
+public class Catalog implements Serializable {
     
     private ArrayList<Item> listOfItems;    //included <Item>
     private static Catalog singleton;
+    private final String filename = "catalog.ser";
     
     private Catalog() {
-        Item itemA = new Item("A", 30.4, "Item");
-        Item itemB = new Item("B", 23.45, "Item");
-        listOfItems = new ArrayList<Item>();
-        listOfItems.add(itemA);
-        listOfItems.add(itemB);
+        
+        listOfItems = (ArrayList<Item>)DataAccessObject.Deserialize(filename);
+        if(listOfItems == null) {
+            initCatalog();
+        }
     }
     
     /**
@@ -29,6 +31,17 @@ public class Catalog {
             singleton = new Catalog();
         }
         return singleton;
+    }
+    
+    public void initCatalog() {
+        listOfItems = new ArrayList<Item>();
+        
+        listOfItems.add(new Item("Architraves standard, pine", 10.0, "2m"));
+        listOfItems.add(new Item("Bolts 5mm, length 25mm", 15.0, "box of 200"));
+        listOfItems.add(new Item("Door brass handles", 5.0, "single"));
+        listOfItems.add(new Item("Concrete mixed by truck", 50.0, "500kg"));
+       
+        DataAccessObject.Serialize(listOfItems, filename);
     }
     
     /**

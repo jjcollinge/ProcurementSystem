@@ -145,28 +145,10 @@ public class PlaceOrderUI extends UserInterface {
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
         if(catalogUI != null) {
             catalogUI.closeCatalog();
-            SetOfOrders orders = null;
-            try {
-                //deserialise
-                orders = (SetOfOrders)Deserialize(SetOfOrdersFile);
-                System.out.println("Loaded set of orders succesfully");
-            } catch (IOException ex) {
-                Logger.getLogger(PlaceOrderUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(PlaceOrderUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if(orders == null) {
-                // file doesn't exist yet so create the object
-                orders = new SetOfOrders();
-            }
-            orders.addOrder();
-            try {
-                Serialize(orders, SetOfOrdersFile);
-                System.out.println("Serialized set of orders succesfully");
-            } catch (IOException ex) {
-                Logger.getLogger(PlaceOrderUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            SetOfOrders orders = SetOfOrders.getInstance();
+            orders.addOrder(newOrder);
+            this.setVisible(false);
+            MainInterface.getInstance().Run();
         }
         System.out.println("catalogUI is null and cannot be closed");
     }//GEN-LAST:event_placeOrderBtnActionPerformed

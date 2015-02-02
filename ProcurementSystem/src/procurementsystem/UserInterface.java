@@ -26,21 +26,4 @@ public abstract class UserInterface extends javax.swing.JFrame {
     public abstract void Run();
     
     public abstract void setPosition(int x, int y);
-    
-    protected static void Serialize(Object obj, String filename) throws IOException
-    {
-        FileOutputStream out = new FileOutputStream(filename);
-        ObjectOutputStream oos = new ObjectOutputStream(out);
-        oos.writeObject(obj);
-        out.close();
-    }
-  
-    protected static Object Deserialize(String filename) throws IOException, ClassNotFoundException
-    {
-        FileInputStream in = new FileInputStream(filename);
-        ObjectInputStream ois = new ObjectInputStream(in);
-        Object obj = ois.readObject();
-        in.close();
-        return obj;
-    }
 }

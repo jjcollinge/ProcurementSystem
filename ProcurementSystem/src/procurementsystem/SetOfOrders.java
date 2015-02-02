@@ -2,6 +2,7 @@ package procurementsystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -9,42 +10,78 @@ import java.util.ArrayList;
  */
 public class SetOfOrders implements Serializable {
     private ArrayList<Order> orders;
+    private static SetOfOrders singleton;
+    private final String filename = "setOfOrders.ser";
     
+    private SetOfOrders() {
+        orders = (ArrayList<Order>)DataAccessObject.Deserialize(filename);
+        if(orders == null) {
+            System.out.println("Couldn't load orders file, creating a new set");
+            orders = new ArrayList<Order>();
+        }
+    }
     
-    public SetOfOrders() {
-        orders = new ArrayList<Order>();
+    @Override
+    public void finalize() {
+        System.out.println("Serialzing orders");
+        DataAccessObject.Serialize(orders, filename);
+    }
+    
+    public static SetOfOrders getInstance() {
+        if(singleton == null) {
+            singleton = new SetOfOrders();     
+        }
+        return singleton;
     }
     
     /**
      * Filter orders by Date
      * n.b. unspecified parameters
      */
-    public void filterByDate() {
-        
+    public ArrayList<Order> filterByDate(Date date) {
+        ArrayList<Order> tmp = new ArrayList<Order>();
+        for(Order order : orders) {
+            if(order.getOrderDate().equals(date)) {
+                tmp.add(order);
+            }
+        }
+        return tmp;
     }
     
     /**
      * Filter by site
      * n.b. unspecified parameters
      */
-    public void filterBySite() {
-        
+    public ArrayList<Order>  filterBySite(String site) {
+        ArrayList<Order> tmp = new ArrayList<Order>();
+        for(Order order : orders) {
+            if(order.getOrderDate().equals(site)) {
+                tmp.add(order);
+            }
+        }
+        return tmp;
     }
     
     /**
      * Filter by supplier
      * n.b. unspecified parameters
      */
-    public void filterBySupplier() {
-        
+    public ArrayList<Order>  filterBySupplier(String supplier) {
+        ArrayList<Order> tmp = new ArrayList<Order>();
+        for(Order order : orders) {
+            if(order.getOrderDate().equals(supplier)) {
+                tmp.add(order);
+            }
+        }
+        return tmp;
     }
     
     /**
      * Add Order to orders
      * n.b. unspecified parameters
      */
-    public void addOrder() {
-        
+    public void addOrder(Order order) {
+        orders.add(order);
     }
     
     /**

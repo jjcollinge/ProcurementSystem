@@ -1,6 +1,8 @@
 package procurementsystem;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -22,6 +24,10 @@ public class ViewOrderUI extends UserInterface {
     private ViewOrderUI() {
         
         allExistingOrdersModel =  new DefaultListModel();
+        allExistingOrders = SetOfOrders.getInstance();
+        for(Order order : allExistingOrders.getAllOrders()) {
+            allExistingOrdersModel.addElement(order);
+        }
         initComponents();
         
         //Settings
@@ -244,24 +250,13 @@ public class ViewOrderUI extends UserInterface {
 
     private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
 
-        try {
-            //deserialise
-            allExistingOrders = (SetOfOrders) Deserialize(SetOfOrdersFile);
-            System.out.println("Loaded set of orders successfully");
-        } catch (IOException ex) {
-            System.out.println("Set of orders file doesn't exist, creating a blank set of orders...");
-            // file doesn't exist or is corrupt so create new set of orders
-            allExistingOrders = new SetOfOrders();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ViewOrderUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        allExistingOrdersModel.clear();
-        for(Order order : allExistingOrders.getAllOrders()) {
+        SetOfOrders orders = SetOfOrders.getInstance();
+        for(Order order : orders.getAllOrders()) {
             allExistingOrdersModel.addElement(order);
         }
         
         contextPanel.setVisible(false);
+        ordersPanel.setVisible(true);
 
     }//GEN-LAST:event_existingOrdersBtnActionPerformed
 
@@ -279,7 +274,8 @@ public class ViewOrderUI extends UserInterface {
     }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
-        requestFilter();
+        String param = locationTextField.getText();
+        requestFilter("site", param);
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
     /**
@@ -337,14 +333,28 @@ public class ViewOrderUI extends UserInterface {
     /**
      * Filter order list
      */
-    public void requestFilter() {
+    public void requestFilter(String filter, Object param) {
+
+        ArrayList<Order> matching = null;
+        if(filter.equalsIgnoreCase("site")) {
+            matching = allExistingOrders.filterBySite((String)param);
+        } else if(filter.equalsIgnoreCase("date")) {
+            matching = allExistingOrders.filterByDate((Date)param);
+        } else if(filter.equalsIgnoreCase("supplier")) {
+            matching = allExistingOrders.filterBySupplier((String)param);
+        }
         
+        allExistingOrdersModel.clear();
+        for(Order order : matching) {
+            allExistingOrdersModel.addElement(order);
+        }
     }
 
     @Override
     public void setPosition(int x, int y) {
         this.setLocation(x, y);
     }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseCatalogBtn;

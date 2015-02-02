@@ -1,10 +1,13 @@
 package procurementsystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Simon
  */
-public class Item {
+public class Item implements Serializable {
+    
     //guessed these variable types as not on class diagram
     private String name;
     private double price;
