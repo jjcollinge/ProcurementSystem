@@ -1,7 +1,11 @@
 package procurementsystem;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
@@ -222,8 +226,15 @@ public class ViewOrdersUI extends UserInterface {
             refreshModel();
             dateFiltered = false;
         } else {
-            String param = dateTextField.getText();
-            requestFilter("site", param);
+            String txt = dateTextField.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+            Date date = null;
+             try {
+                 date = sdf.parse(txt);
+             } catch (ParseException ex) {
+                 Logger.getLogger(ViewOrdersUI.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            requestFilter("date", date);
             dateFiltered = true;
         }
     }//GEN-LAST:event_filterByDateActionPerformed

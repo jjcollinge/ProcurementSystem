@@ -96,4 +96,12 @@ public class Order implements Serializable {
         return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) + " - \"" + specialInstructions.substring(0, 25) + "...\" : " + orderStatus;
     }
     
+    public boolean hasSameDate(Date date) {
+        if(this.orderDate.getYear() == date.getYear() &&
+            this.orderDate.getMonth() == date.getMonth() &&
+                this.orderDate.getDay() == date.getDay()) {
+                    return true;
+                }
+        return false;
+    }
 }

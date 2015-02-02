@@ -35,7 +35,7 @@ public class SetOfOrders implements Serializable {
     public ArrayList<Order> filterByDate(Date date) {
         ArrayList<Order> tmp = new ArrayList<Order>();
         for(Order order : orders) {
-            if(order.getOrderDate().equals(date)) {
+            if(order.hasSameDate(date)){
                 tmp.add(order);
             }
         }
