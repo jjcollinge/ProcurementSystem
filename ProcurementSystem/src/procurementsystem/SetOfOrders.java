@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class SetOfOrders implements Serializable {
     private ArrayList<Order> orders;
     
+    
+    public SetOfOrders() {
+        orders = new ArrayList<Order>();
+    }
+    
     /**
      * Filter orders by Date
      * n.b. unspecified parameters
@@ -53,11 +58,11 @@ public class SetOfOrders implements Serializable {
     
     /**
      * Return all orders
-     * n.b. shouldn't return null
+     * n.b. shouldn't return null - changed from returning SetOfOrders
      * @return SetOfOrders
      */
-    public SetOfOrders getAllOrders() {
-        return null;
+    public ArrayList<Order> getAllOrders() {
+        return orders;
     }
     
     /**

@@ -1,6 +1,9 @@
-
 package procurementsystem;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -10,20 +13,24 @@ import javax.swing.JFrame;
 public class ViewOrderUI extends UserInterface {
 
     private static ViewOrderUI singleton;
-    
+    private SetOfOrders allExistingOrders;
+    private DefaultListModel allExistingOrdersModel;
+
     /**
      * Creates new form ViewOrderUI
      */
     private ViewOrderUI() {
+        
+        allExistingOrdersModel =  new DefaultListModel();
         initComponents();
         
         //Settings
         this.setSize(400, 540);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-     public static ViewOrderUI getInstance() {
-        if(singleton == null) {
+
+    public static ViewOrderUI getInstance() {
+        if (singleton == null) {
             singleton = new ViewOrderUI();
         }
         return singleton;
@@ -65,8 +72,18 @@ public class ViewOrderUI extends UserInterface {
         siteTextField.setText("N/A");
 
         browseCatalogBtn.setText("Browse Catalog");
+        browseCatalogBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseCatalogBtnActionPerformed(evt);
+            }
+        });
 
         existingOrdersBtn.setText("Existing Orders");
+        existingOrdersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                existingOrdersBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contextPanelLayout = new javax.swing.GroupLayout(contextPanel);
         contextPanel.setLayout(contextPanelLayout);
@@ -102,7 +119,7 @@ public class ViewOrderUI extends UserInterface {
                 .addComponent(browseCatalogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(existingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         locationTextField.setText("Sheffield S1");
@@ -111,14 +128,15 @@ public class ViewOrderUI extends UserInterface {
 
         jTextField2.setText("Something else?");
 
-        matchingExistingOrders.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        matchingExistingOrders.setModel(allExistingOrdersModel);
         jScrollPane1.setViewportView(matchingExistingOrders);
 
         returnToMainMenuBtn.setText("Return to Main Menu");
+        returnToMainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnToMainMenuBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ordersPanelLayout = new javax.swing.GroupLayout(ordersPanel);
         ordersPanel.setLayout(ordersPanelLayout);
@@ -148,10 +166,10 @@ public class ViewOrderUI extends UserInterface {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -185,11 +203,56 @@ public class ViewOrderUI extends UserInterface {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void browseCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseCatalogBtnActionPerformed
+
+        CatalogUI ui = CatalogUI.getInstance();
+        ui.setPosition(this.getX(), this.getY());
+        this.setVisible(false);
+        ui.Run();
+
+    }//GEN-LAST:event_browseCatalogBtnActionPerformed
+
+    private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
+
+        try {
+            //deserialise
+            allExistingOrders = (SetOfOrders) Deserialize(SetOfOrdersFile);
+            System.out.println("Loaded set of orders successfully");
+        } catch (IOException ex) {
+            System.out.println("Set of orders file doesn't exist, creating a blank set of orders...");
+            // file doesn't exist or is corrupt so create new set of orders
+            allExistingOrders = new SetOfOrders();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViewOrderUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        allExistingOrdersModel.clear();
+        for(Order order : allExistingOrders.getAllOrders()) {
+            allExistingOrdersModel.addElement(order);
+        }
+        
+        contextPanel.setVisible(false);
+
+    }//GEN-LAST:event_existingOrdersBtnActionPerformed
+
+    private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
+        
+        MainInterface ui = MainInterface.getInstance();
+        ui.setPosition(this.getX(), this.getY());
+        
+        //reset panels
+        contextPanel.setVisible(true);
+        ordersPanel.setVisible(false);
+        
+        this.setVisible(false);
+        ui.Run();
+    }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
     /**
      * Main execution method for UserInterface
@@ -217,7 +280,7 @@ public class ViewOrderUI extends UserInterface {
             java.util.logging.Logger.getLogger(ViewOrderUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         ViewOrderUI that = this;
 
         /* Create and display the form */
@@ -227,30 +290,29 @@ public class ViewOrderUI extends UserInterface {
             }
         });
     }
-    
+
      //private SetOfOrders orderList;
-    
     /**
      * Displays all of the current orders
      */
     public void displayCurrentOrders() {
         //TODO
     }
-    
+
     /**
      * Load all current orders
      */
     public void loadOrders() {
         //TODO
     }
-    
+
     /**
      * Filter order list
      */
     public void requestFilter() {
         //TODO
     }
-    
+
     @Override
     public void setPosition(int x, int y) {
         this.setLocation(x, y);

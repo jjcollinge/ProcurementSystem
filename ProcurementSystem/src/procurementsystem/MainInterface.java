@@ -9,15 +9,24 @@ import javax.swing.JFrame;
  */
 public class MainInterface extends UserInterface {
 
+    private static MainInterface singleton;
+    
     /**
      * Creates new form MainInterface
      */
-    public MainInterface() {
+    private MainInterface() {
         initComponents();
         
         // Settings
         this.setSize(400, 540);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public static MainInterface getInstance() {
+        if(singleton == null) {
+            singleton = new MainInterface();
+        } 
+        return singleton;
     }
 
     /**

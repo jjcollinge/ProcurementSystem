@@ -18,7 +18,7 @@ public class ProcurementSystem {
         @Override
         public void run() {
             // Application logic goes here...
-            final MainInterface UI = new MainInterface();
+            final MainInterface UI = MainInterface.getInstance();
             UI.Run();
         }
     }
