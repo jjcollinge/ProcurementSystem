@@ -27,19 +27,22 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="userComboBox" min="-2" pref="328" max="-2" attributes="0"/>
                   <Component id="newOrderBtn" min="-2" pref="140" max="-2" attributes="0"/>
                   <Component id="existingOrdersBtn" min="-2" pref="140" max="-2" attributes="0"/>
                   <Component id="recordDeliveryBtn" min="-2" pref="140" max="-2" attributes="0"/>
                   <Component id="browseCatalogBtn" min="-2" pref="140" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="224" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="231" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="userComboBox" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace pref="155" max="32767" attributes="0"/>
               <Component id="newOrderBtn" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="existingOrdersBtn" min="-2" pref="47" max="-2" attributes="0"/>
@@ -87,6 +90,19 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recordDeliveryBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="userComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Kumar Kalla"/>
+            <StringItem index="1" value="Elizabeth Webber"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userComboBoxActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

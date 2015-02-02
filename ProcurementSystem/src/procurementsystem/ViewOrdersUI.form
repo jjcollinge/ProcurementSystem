@@ -63,7 +63,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -73,38 +73,40 @@
                                   <Component id="supplierTextField" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="filterByDate" alignment="0" pref="100" max="32767" attributes="0"/>
-                                  <Component id="filterBySiteBtn" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="filterBySupplier" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="filterBySupplierBtn" min="-2" pref="98" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="filterBySiteBtn" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="filterByDateBtn" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="returnToMainMenuBtn" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" pref="350" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="locationTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="filterBySiteBtn" alignment="3" pref="30" max="32767" attributes="0"/>
+                          <Component id="filterBySiteBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="dateTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="filterByDate" alignment="3" pref="30" max="32767" attributes="0"/>
+                          <Component id="filterByDateBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="supplierTextField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="filterBySupplier" alignment="3" pref="30" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="supplierTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="filterBySupplierBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="195" max="-2" attributes="0"/>
@@ -155,7 +157,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="returnToMainMenuBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="filterBySiteBtn">
+            <Component class="javax.swing.JToggleButton" name="filterBySiteBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Site Filtered"/>
               </Properties>
@@ -163,20 +165,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterBySiteBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="filterByDate">
+            <Component class="javax.swing.JToggleButton" name="filterByDateBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Filter by Date"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterByDateActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterByDateBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="filterBySupplier">
+            <Component class="javax.swing.JToggleButton" name="filterBySupplierBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Filter by Supplier"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterBySupplierActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterBySupplierBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

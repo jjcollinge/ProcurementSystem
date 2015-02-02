@@ -1,6 +1,8 @@
 
 package procurementsystem;
 
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 /**
@@ -42,6 +44,7 @@ public class MainInterface extends UserInterface {
         newOrderBtn = new javax.swing.JButton();
         existingOrdersBtn = new javax.swing.JButton();
         recordDeliveryBtn = new javax.swing.JButton();
+        userComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -78,6 +81,13 @@ public class MainInterface extends UserInterface {
             }
         });
 
+        userComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kumar Kalla", "Elizabeth Webber" }));
+        userComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,16 +95,19 @@ public class MainInterface extends UserInterface {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(existingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(recordDeliveryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseCatalogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(231, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
+                .addComponent(userComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                 .addComponent(newOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(existingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,6 +140,19 @@ public class MainInterface extends UserInterface {
         DeliveryUI deliveryUI = DeliveryUI.getInstance();
         getOption(deliveryUI);
     }//GEN-LAST:event_recordDeliveryBtnActionPerformed
+
+    private void userComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userComboBoxActionPerformed
+        // Doing this as there is no User class and therefore no way of adding user permissions
+        if(userComboBox.getSelectedItem() == "Kumar Kalla") {
+            browseCatalogBtn.setVisible(true);
+            newOrderBtn.setVisible(true);
+            existingOrdersBtn.setVisible(true);
+            recordDeliveryBtn.setVisible(true);
+        } else if(userComboBox.getSelectedItem() == "Elizabeth Webber") {
+            newOrderBtn.setVisible(false);
+            recordDeliveryBtn.setVisible(false);
+        }
+    }//GEN-LAST:event_userComboBoxActionPerformed
 
     public void getOption(UserInterface ui) {
         ui.setPosition(this.getX(), this.getY());
@@ -178,5 +204,6 @@ public class MainInterface extends UserInterface {
     private javax.swing.JButton existingOrdersBtn;
     private javax.swing.JButton newOrderBtn;
     private javax.swing.JButton recordDeliveryBtn;
+    private javax.swing.JComboBox userComboBox;
     // End of variables declaration//GEN-END:variables
 }
