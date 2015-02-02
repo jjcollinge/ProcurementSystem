@@ -119,7 +119,7 @@ public class MainInterface extends UserInterface {
     }//GEN-LAST:event_newOrderBtnActionPerformed
 
     private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
-        ViewOrderUI viewOrderUI = ViewOrderUI.getInstance();
+        ViewOrdersUI viewOrderUI = ViewOrdersUI.getInstance();
         getOption(viewOrderUI);
     }//GEN-LAST:event_existingOrdersBtnActionPerformed
 

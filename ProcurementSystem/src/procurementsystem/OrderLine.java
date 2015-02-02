@@ -12,6 +12,8 @@ public class OrderLine implements Serializable {
     
     /**
      * Default constructor
+     * @param item
+     * @param quantity
      */
     public OrderLine(Item item, int quantity) {
         this.item = item;

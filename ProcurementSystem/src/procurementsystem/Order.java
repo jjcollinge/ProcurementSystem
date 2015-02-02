@@ -1,6 +1,7 @@
 package procurementsystem;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class Order implements Serializable {
     
     public Order() {
         orderLines = new ArrayList<OrderLine>();
+        this.orderStatus = "Pending";
     }
     
     /**
@@ -39,7 +41,7 @@ public class Order implements Serializable {
      * @param instructions 
      */
     public void addSpecialInstructions(String instructions) {
-        
+        this.specialInstructions = instructions;
     }
     
     /**
@@ -63,6 +65,10 @@ public class Order implements Serializable {
     public void getAuditTrail() {
         
     }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
     
     /**
      * Print the invoice of the Order
@@ -81,8 +87,13 @@ public class Order implements Serializable {
      * @param quantity 
      */
     public void addItem(Item item, int quantity) {
-            OrderLine orderLine = new OrderLine(item, quantity);
-            orderLines.add(orderLine);
+        OrderLine orderLine = new OrderLine(item, quantity);
+        orderLines.add(orderLine);
+    }
+
+    @Override
+    public String toString() {
+        return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) + " - \"" + specialInstructions.substring(0, 25) + "...\" : " + orderStatus;
     }
     
 }

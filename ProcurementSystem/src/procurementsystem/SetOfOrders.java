@@ -21,12 +21,6 @@ public class SetOfOrders implements Serializable {
         }
     }
     
-    @Override
-    public void finalize() {
-        System.out.println("Serialzing orders");
-        DataAccessObject.Serialize(orders, filename);
-    }
-    
     public static SetOfOrders getInstance() {
         if(singleton == null) {
             singleton = new SetOfOrders();     
@@ -82,6 +76,7 @@ public class SetOfOrders implements Serializable {
      */
     public void addOrder(Order order) {
         orders.add(order);
+        DataAccessObject.Serialize(orders, filename);
     }
     
     /**

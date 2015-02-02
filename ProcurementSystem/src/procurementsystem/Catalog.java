@@ -34,7 +34,7 @@ public class Catalog implements Serializable {
     }
     
     public void initCatalog() {
-        listOfItems = new ArrayList<Item>();
+        listOfItems = new ArrayList<>();
         
         listOfItems.add(new Item("Architraves standard, pine", 10.0, "2m"));
         listOfItems.add(new Item("Bolts 5mm, length 25mm", 15.0, "box of 200"));

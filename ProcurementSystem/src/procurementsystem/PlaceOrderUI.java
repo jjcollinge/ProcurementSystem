@@ -4,6 +4,7 @@ package procurementsystem;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -146,11 +147,14 @@ public class PlaceOrderUI extends UserInterface {
         if(catalogUI != null) {
             catalogUI.closeCatalog();
             SetOfOrders orders = SetOfOrders.getInstance();
+            newOrder.setOrderDate(new Date());
+            newOrder.addSpecialInstructions("These are special instructions");
             orders.addOrder(newOrder);
             this.setVisible(false);
             MainInterface.getInstance().Run();
+        } else {
+            System.out.println("catalogUI is null and cannot be closed");
         }
-        System.out.println("catalogUI is null and cannot be closed");
     }//GEN-LAST:event_placeOrderBtnActionPerformed
 
     /**
