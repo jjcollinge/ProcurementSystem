@@ -3,150 +3,124 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 /**
  *
  * @author Lucy
  */
-public class JUnitTest {
+public class JUnitTest extends TestCase {
     
     public JUnitTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() 
-    
     //test stubs implemented from site manager use case diagram
     @Test
-    public void ViewCatalog()
+    public void testViewCatalog()
     {
-        
+        fail("Catalog not available");
     }
     
     @Test
-    public void AddItemsToAnOrder()
+    public void testAddItemsToAnOrder()
     {
-        
+        fail("Unable to add item to order");
     }
     
     @Test
-    public void ViewExistingOrders()
+    public void testViewExistingOrders()
     {
-        
+        fail("Unable to view existing orders");
     }
     
     @Test
-    public void OrderStatus()
+    public void testOrderStatus()
     {
-        
+        fail("Order status not available");
     }
     
     @Test
-    public void ViewInvoice()
+    public void testViewInvoice()
     {
-        
+        fail("Invoice not available");
     }
     
     @Test
-    public void ViewAuditTrail()
+    public void testViewAuditTrail()
     {
-        
+        fail("Unable to view audit trail");
     }
     
     @Test
-    public void CancelOrder()
+    public void testCancelOrder()
     {
-        
+        fail("Unable to cancel order");
     }
     
     @Test
-    public void ViewDeliveryDate()
+    public void testViewDeliveryDate()
     {
-        
+        fail("Unable to view delivery date");
     }
     
     @Test
-    public void AmendOrder()
+    public void testAmendOrder()
     {
-        
+        fail("Unable to amend order");
     }
     
     @Test
-    public void FilterExistingOrders()
+    public void testFilterExistingOrders()
     {
-        
+        fail("Unable to filter existing orders");
     }
     
     @Test
-    public void PlaceAnOrder()
+    public void testPlaceAnOrder()
     {
-        
+        fail("Unable to place order");
     }
     
     @Test
-    public void EditAnOrder()
+    public void testEditAnOrder()
     {
-        
+        fail("Unable to edit order");
     }
     
     @Test
-    public void AddSpecialInstructionToOrder()
+    public void testAddSpecialInstructionToOrder()
     {
-        
+        fail("Unable to add special instruction to order");
     }
     
     @Test
-    public void ChangeItemQuantityInOrder()
+    public void testChangeItemQuantityInOrder()
     {
-        
+        fail("Unable to change item quantity in order");
     }
     
     @Test
-    public void RecordDeliveries()
+    public void testRecordDeliveries()
     {
-        
+        fail("Unable to record deliveries");
     }
     
     @Test
-    public void ApproveDelivery()
+    public void testApproveDelivery()
     {
-        
+        fail("Unable to approve delivery");
     }
     
     @Test
-    public void RecordIncorrectDelivery()
+    public void testRecordIncorrectDelivery()
     {
-        
+        fail("Unable to record incorrect delivery");
     }
     
     @Test
-    public void SelectAnOrderToDeliver()
+    public void testSelectAnOrderToDeliver()
     {
-        
+        fail("Unable to select and deliver an order");
     }
 }
