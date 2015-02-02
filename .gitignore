@@ -13,3 +13,6 @@ hs_err_pid*
 /ProcurementSystem/nbproject/private/
 /ProcurementSystem/dist/
 /ProcurementSystem/build/
+
+# Serialized data
+*.ser

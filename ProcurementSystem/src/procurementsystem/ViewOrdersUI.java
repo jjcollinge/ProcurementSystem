@@ -14,7 +14,11 @@ public class ViewOrdersUI extends UserInterface {
     private static ViewOrdersUI singleton;
     private SetOfOrders orders;
     private DefaultListModel ordersModel;
-
+    
+    private boolean siteFiltered = false;
+    private boolean dateFiltered = false;
+    private boolean supplierFiltered = false;
+    
     /**
      * Creates new form ViewOrderUI
      */
@@ -39,6 +43,7 @@ public class ViewOrdersUI extends UserInterface {
     public void refreshModel() {
         orders = SetOfOrders.getInstance();
         
+        ordersModel.clear();
         for(Order order : orders.getAllOrders()) {
             ordersModel.addElement(order);
         }
@@ -63,8 +68,8 @@ public class ViewOrdersUI extends UserInterface {
         existingOrdersBtn = new javax.swing.JButton();
         ordersPanel = new javax.swing.JPanel();
         locationTextField = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        dateTextField = new javax.swing.JTextField();
+        supplierTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         matchingExistingOrders = new javax.swing.JList();
         returnToMainMenuBtn = new javax.swing.JButton();
@@ -135,9 +140,9 @@ public class ViewOrdersUI extends UserInterface {
 
         locationTextField.setText("Sheffield S1");
 
-        jTextField1.setText("Something else?");
+        dateTextField.setText("Something else?");
 
-        jTextField2.setText("Something else?");
+        supplierTextField.setText("Something else?");
 
         matchingExistingOrders.setModel(ordersModel);
         jScrollPane1.setViewportView(matchingExistingOrders);
@@ -157,6 +162,11 @@ public class ViewOrdersUI extends UserInterface {
         });
 
         filterByDate.setText("Filter by Date");
+        filterByDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterByDateActionPerformed(evt);
+            }
+        });
 
         filterBySupplier.setText("Filter by Supplier");
         filterBySupplier.addActionListener(new java.awt.event.ActionListener() {
@@ -175,9 +185,9 @@ public class ViewOrdersUI extends UserInterface {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ordersPanelLayout.createSequentialGroup()
                         .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addComponent(dateTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                                 .addComponent(locationTextField))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(filterByDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -197,11 +207,11 @@ public class ViewOrdersUI extends UserInterface {
                     .addComponent(filterBySiteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterByDate, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterBySupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,13 +289,37 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
-        String param = locationTextField.getText();
-        requestFilter("site", param);
+        if(siteFiltered) {
+            refreshModel();
+            siteFiltered = false;
+        } else {
+            String param = locationTextField.getText();
+            requestFilter("site", param);
+            siteFiltered = true;
+        }
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
     private void filterBySupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySupplierActionPerformed
-        // TODO add your handling code here:
+        if(supplierFiltered) {
+            refreshModel();
+            supplierFiltered = false;
+        } else {
+            String param = supplierTextField.getText();
+            requestFilter("supplier", param);
+            supplierFiltered = true;
+        }
     }//GEN-LAST:event_filterBySupplierActionPerformed
+
+    private void filterByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateActionPerformed
+         if(dateFiltered) {
+            refreshModel();
+            dateFiltered = false;
+        } else {
+            String param = dateTextField.getText();
+            requestFilter("site", param);
+            dateFiltered = true;
+        }
+    }//GEN-LAST:event_filterByDateActionPerformed
 
     /**
      * Main execution method for UserInterface
@@ -372,20 +406,20 @@ public class ViewOrdersUI extends UserInterface {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseCatalogBtn;
     private javax.swing.JPanel contextPanel;
+    private javax.swing.JTextField dateTextField;
     private javax.swing.JButton existingOrdersBtn;
     private javax.swing.JButton filterByDate;
     private javax.swing.JButton filterBySiteBtn;
     private javax.swing.JButton filterBySupplier;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JList matchingExistingOrders;
     private javax.swing.JPanel ordersPanel;
     private javax.swing.JButton returnToMainMenuBtn;
     private javax.swing.JLabel siteLabel;
     private javax.swing.JTextField siteTextField;
+    private javax.swing.JTextField supplierTextField;
     private javax.swing.JLabel userLabel;
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
