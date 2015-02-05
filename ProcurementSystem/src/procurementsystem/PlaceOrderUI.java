@@ -74,6 +74,8 @@ public class PlaceOrderUI extends UserInterface {
         placeOrderTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 540));
+        setResizable(false);
 
         itemsInOrder.setModel(items);
         jScrollPane1.setViewportView(itemsInOrder);
@@ -89,6 +91,11 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         returnToCatalogBtn.setText("Return to Catalog");
+        returnToCatalogBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnToCatalogBtnActionPerformed(evt);
+            }
+        });
 
         placeOrderBtn.setText("Place Order");
         placeOrderBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +105,11 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         inputValueField.setText("Input value");
+        inputValueField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputValueFieldKeyReleased(evt);
+            }
+        });
 
         ascendBtn.setText("Ascend");
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +202,12 @@ public class PlaceOrderUI extends UserInterface {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteSelectedItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSelectedItemBtnActionPerformed
-        // TODO add your handling code here:
+        // get selected item
+        int selectedItemIndex = itemsInOrder.getSelectedIndex();
+        
+        // remove from items
+        items.remove(selectedItemIndex);
+        quantities.remove(selectedItemIndex);
     }//GEN-LAST:event_deleteSelectedItemBtnActionPerformed
 
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
@@ -224,6 +241,35 @@ public class PlaceOrderUI extends UserInterface {
             ascending = false;
         }
     }//GEN-LAST:event_descendBtnActionPerformed
+
+    private void inputValueFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValueFieldKeyReleased
+         // get selected item
+        int selectedItemIndex = quantityOfItemsInOrder.getSelectedIndex();
+        
+        // get selected value
+        String txt = inputValueField.getText();
+        
+        // parse input value
+        int value;
+        try {
+            value = Integer.valueOf(txt);
+        } catch(NumberFormatException e) {
+            System.out.println("Couldn't convert input value to Integer");
+            return;
+        }
+        
+        // alter item quantity
+        if(selectedItemIndex >= 0 && selectedItemIndex < quantities.size())
+            quantities.set(selectedItemIndex, value);
+        
+    }//GEN-LAST:event_inputValueFieldKeyReleased
+
+    private void returnToCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToCatalogBtnActionPerformed
+        CatalogUI ui = catalogUI.getInstance();
+        catalogUI.Run();
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_returnToCatalogBtnActionPerformed
 
     /**
      * Main execution method for UserInterface
@@ -265,6 +311,11 @@ public class PlaceOrderUI extends UserInterface {
                 catalogUI.Run();
             }
         });
+    }
+    
+    public void clear() {
+        items.clear();
+        quantities.clear();
     }
     
     /**

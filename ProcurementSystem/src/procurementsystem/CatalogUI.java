@@ -620,8 +620,18 @@ public class CatalogUI extends UserInterface {
                 new JLabel("Quantity"), quantity
             };
             JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
-            int quan = Integer.valueOf(quantity.getText());
-            itemQuantities.set(selectedIndex, quan);
+            
+            String txt = quantity.getText();
+            int value;
+            try {
+                value = Integer.valueOf(txt);
+            } catch (NumberFormatException e) {
+                System.out.println("Couldn't convert input to Integer");
+                return;
+            }
+            if(selectedIndex > 0 && selectedIndex < itemQuantities.size()) {
+                itemQuantities.set(selectedIndex, value);
+            }
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
 
@@ -648,6 +658,9 @@ public class CatalogUI extends UserInterface {
             quantityPanel.remove(box);
         }
         checkBoxes.clear();
+        
+        PlaceOrderUI pui = PlaceOrderUI.getInstance();
+        pui.clear();
 
         quantityPanel.setVisible(false);
         catalogPanel.setVisible(true);
