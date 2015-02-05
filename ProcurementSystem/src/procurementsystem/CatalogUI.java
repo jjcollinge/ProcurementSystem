@@ -22,6 +22,7 @@ public class CatalogUI extends UserInterface {
 
     private Catalog catalog;
     private ArrayList<Item> selectedItems;
+    private ArrayList<JCheckBox> checkBoxes;
     private DefaultListModel allItems;
     //private ArrayList<Integer> selectedItemsQuantities;
     private DefaultListModel itemQuantities;
@@ -44,6 +45,8 @@ public class CatalogUI extends UserInterface {
 
         //selectedItemsIcons = new ArrayList<>();
         itemIcons = new DefaultListModel();
+        
+        checkBoxes = new ArrayList<>();
 
         // Interface Settings
         this.setSize(400, 540);
@@ -92,6 +95,11 @@ public class CatalogUI extends UserInterface {
         jScrollPane2.setViewportView(listOfSelectedItemNames);
 
         cancelOrderBtn.setText("Cancel Order");
+        cancelOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelOrderBtnActionPerformed(evt);
+            }
+        });
 
         proceedToOrderReviewBtn.setText("Proceed to Order Review");
         proceedToOrderReviewBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +224,7 @@ public class CatalogUI extends UserInterface {
             if (selectedItems.contains(item)) {
                 itemQuantities.addElement(1);
                 JCheckBox checkBox = new JCheckBox();
+                checkBoxes.add(checkBox);
                 checkBox.setSelected(true);
                 checkBox.setVisible(true);
                 checkBox.setEnabled(false);
@@ -257,6 +266,23 @@ public class CatalogUI extends UserInterface {
             itemQuantities.set(selectedIndex, quan);
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
+
+    private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
+        selectedItems.clear();
+        itemIcons.clear();
+        itemQuantities.clear();
+        allItems.clear();
+        for(JCheckBox box : checkBoxes) {
+            quantityPanel.remove(box);
+        }
+        checkBoxes.clear();
+        
+        quantityPanel.setVisible(false);
+        catalogPanel.setVisible(true);
+        this.setVisible(false);
+        MainInterface ui = MainInterface.getInstance();
+        ui.Run();
+    }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
     /**
      * Main execution method for UserInterface
