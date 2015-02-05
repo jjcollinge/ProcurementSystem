@@ -82,14 +82,6 @@ public class CatalogUI extends UserInterface {
         alphabeticalSortBtn = new javax.swing.JToggleButton();
         categorySortBtn = new javax.swing.JToggleButton();
         priceSortBtn = new javax.swing.JToggleButton();
-        catalogPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listOfItems = new javax.swing.JList();
-        proceedToQuantityReviewBtn = new javax.swing.JButton();
-        ascendBtn = new javax.swing.JToggleButton();
-        descendBtn = new javax.swing.JToggleButton();
-        catalogPanelTitleSeperator = new javax.swing.JSeparator();
-        catalogPanelTitle = new javax.swing.JLabel();
         quantityPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listOfSelectedItemNames = new javax.swing.JList();
@@ -104,6 +96,16 @@ public class CatalogUI extends UserInterface {
         catalogTitleSeparator = new javax.swing.JSeparator();
         quantityPanelTitleSeparator = new javax.swing.JSeparator();
         quantityPanelTitle = new javax.swing.JLabel();
+        catalogPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listOfItems = new javax.swing.JList();
+        proceedToQuantityReviewBtn = new javax.swing.JButton();
+        ascendBtn = new javax.swing.JToggleButton();
+        descendBtn = new javax.swing.JToggleButton();
+        catalogPanelTitleSeperator = new javax.swing.JSeparator();
+        catalogPanelTitle = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -152,72 +154,6 @@ public class CatalogUI extends UserInterface {
                 .addComponent(categorySortBtn)
                 .addGap(12, 12, 12)
                 .addComponent(priceSortBtn)
-                .addContainerGap())
-        );
-
-        catalogPanel.setVisible(true);
-
-        listOfItems.setModel(allItems);
-        jScrollPane1.setViewportView(listOfItems);
-
-        proceedToQuantityReviewBtn.setText("Proceed to Quantity Review");
-        proceedToQuantityReviewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                proceedToQuantityReviewBtnActionPerformed(evt);
-            }
-        });
-
-        ascendBtn.setText("Ascend");
-        ascendBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ascendBtnActionPerformed(evt);
-            }
-        });
-
-        descendBtn.setText("Descend");
-        descendBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descendBtnActionPerformed(evt);
-            }
-        });
-
-        catalogPanelTitle.setText("Creating new order. Select items.");
-
-        javax.swing.GroupLayout catalogPanelLayout = new javax.swing.GroupLayout(catalogPanel);
-        catalogPanel.setLayout(catalogPanelLayout);
-        catalogPanelLayout.setHorizontalGroup(
-            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(catalogPanelTitleSeperator)
-            .addGroup(catalogPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                    .addGroup(catalogPanelLayout.createSequentialGroup()
-                        .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(catalogPanelLayout.createSequentialGroup()
-                        .addComponent(catalogPanelTitle)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        catalogPanelLayout.setVerticalGroup(
-            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(catalogPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(catalogPanelTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(catalogPanelTitleSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(ascendBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descendBtn)
-                    .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -292,10 +228,6 @@ public class CatalogUI extends UserInterface {
                 .addComponent(cancelOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(proceedToOrderReviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(quantityPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
                 .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
@@ -308,6 +240,10 @@ public class CatalogUI extends UserInterface {
             .addComponent(quantityPanelTitleSeparator)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
                 .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(searchField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
@@ -315,7 +251,7 @@ public class CatalogUI extends UserInterface {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(descendBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(quantityPanelTitle, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(0, 220, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         quantityPanelLayout.setVerticalGroup(
             quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,6 +280,89 @@ public class CatalogUI extends UserInterface {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        catalogPanel.setVisible(true);
+
+        listOfItems.setModel(allItems);
+        jScrollPane1.setViewportView(listOfItems);
+
+        proceedToQuantityReviewBtn.setText("Proceed to Quantity Review");
+        proceedToQuantityReviewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proceedToQuantityReviewBtnActionPerformed(evt);
+            }
+        });
+
+        ascendBtn.setText("Ascend");
+        ascendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ascendBtnActionPerformed(evt);
+            }
+        });
+
+        descendBtn.setText("Descend");
+        descendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descendBtnActionPerformed(evt);
+            }
+        });
+
+        catalogPanelTitle.setText("Creating new order. Select items.");
+
+        jLabel1.setText("Available Catalog");
+
+        javax.swing.GroupLayout catalogPanelLayout = new javax.swing.GroupLayout(catalogPanel);
+        catalogPanel.setLayout(catalogPanelLayout);
+        catalogPanelLayout.setHorizontalGroup(
+            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(catalogPanelTitleSeperator)
+            .addGroup(catalogPanelLayout.createSequentialGroup()
+                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(catalogPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                            .addGroup(catalogPanelLayout.createSequentialGroup()
+                                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(catalogPanelLayout.createSequentialGroup()
+                                .addComponent(catalogPanelTitle)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(catalogPanelLayout.createSequentialGroup()
+                        .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(catalogPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(catalogPanelLayout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        catalogPanelLayout.setVerticalGroup(
+            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(catalogPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(catalogPanelTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(catalogPanelTitleSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(ascendBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descendBtn)
+                    .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
@@ -351,8 +370,8 @@ public class CatalogUI extends UserInterface {
             .addComponent(catalogPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(quantityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(quantityPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
@@ -365,16 +384,16 @@ public class CatalogUI extends UserInterface {
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(quantityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(quantityPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addComponent(defaultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 390, Short.MAX_VALUE)))
         );
         jLayeredPane1.setLayer(defaultPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(catalogPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(quantityPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(catalogPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -404,7 +423,7 @@ public class CatalogUI extends UserInterface {
                 checkBox.setVisible(true);
                 checkBox.setEnabled(false);
                 quantityPanel.add(checkBox);
-                checkBox.setBounds(280, 102 + (i * 22), 40, 40);
+                checkBox.setBounds(295, 190 + (i * 22), 40, 40);
             } else {
                 itemQuantities.addElement(0);
             }
@@ -414,50 +433,6 @@ public class CatalogUI extends UserInterface {
         quantityPanel.setVisible(true);
         quantityPanel.revalidate();
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
-
-    private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
-
-        PlaceOrderUI ui = PlaceOrderUI.getInstance();
-
-        for (int i = 0; i < selectedItems.size(); i++) {
-            Item item = selectedItems.get(i);
-            int index = allItems.indexOf(item);
-            ui.addItem(item, (Integer) itemQuantities.get(index));
-        }
-        ui.setPosition(this.getX(), this.getY());
-        ui.checkout();
-        this.setVisible(false);
-    }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
-
-    private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
-        int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
-        if (selectedItems.contains(allItems.get(selectedIndex))) {
-            JTextField quantity = new JTextField();
-            final JComponent[] inputs = new JComponent[]{
-                new JLabel("Quantity"), quantity
-            };
-            JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
-            int quan = Integer.valueOf(quantity.getText());
-            itemQuantities.set(selectedIndex, quan);
-        }
-    }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
-
-    private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
-        selectedItems.clear();
-        itemIcons.clear();
-        itemQuantities.clear();
-        allItems.clear();
-        for(JCheckBox box : checkBoxes) {
-            quantityPanel.remove(box);
-        }
-        checkBoxes.clear();
-        
-        quantityPanel.setVisible(false);
-        catalogPanel.setVisible(true);
-        this.setVisible(false);
-        MainInterface ui = MainInterface.getInstance();
-        ui.Run();
-    }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         if(!ascending) {
@@ -554,28 +529,6 @@ public class CatalogUI extends UserInterface {
         ascendBtnActionPerformed(null);
     }//GEN-LAST:event_priceSortBtnActionPerformed
 
-    private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
-         if(!ascending1) {
-            reverseList();
-            descendBtn1.setSelected(false);
-            ascendBtn1.setSelected(true);
-            ascending1 = true;
-        }
-    }//GEN-LAST:event_ascendBtn1ActionPerformed
-
-    private void descendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtn1ActionPerformed
-         if(ascending1) {
-            reverseList();
-            ascendBtn1.setSelected(false);
-            descendBtn1.setSelected(true);
-            ascending1 = false;
-        }
-    }//GEN-LAST:event_descendBtn1ActionPerformed
-
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchFieldActionPerformed
-
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         String searchFieldText = searchField.getText();
         if (!searchFieldText.isEmpty()) {
@@ -593,6 +546,72 @@ public class CatalogUI extends UserInterface {
             displayCatalog();
         }
     }//GEN-LAST:event_searchFieldKeyReleased
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void descendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtn1ActionPerformed
+        if(ascending1) {
+            reverseList();
+            ascendBtn1.setSelected(false);
+            descendBtn1.setSelected(true);
+            ascending1 = false;
+        }
+    }//GEN-LAST:event_descendBtn1ActionPerformed
+
+    private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
+        if(!ascending1) {
+            reverseList();
+            descendBtn1.setSelected(false);
+            ascendBtn1.setSelected(true);
+            ascending1 = true;
+        }
+    }//GEN-LAST:event_ascendBtn1ActionPerformed
+
+    private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
+        int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
+        if (selectedItems.contains(allItems.get(selectedIndex))) {
+            JTextField quantity = new JTextField();
+            final JComponent[] inputs = new JComponent[]{
+                new JLabel("Quantity"), quantity
+            };
+            JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
+            int quan = Integer.valueOf(quantity.getText());
+            itemQuantities.set(selectedIndex, quan);
+        }
+    }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
+
+    private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
+
+        PlaceOrderUI ui = PlaceOrderUI.getInstance();
+
+        for (int i = 0; i < selectedItems.size(); i++) {
+            Item item = selectedItems.get(i);
+            int index = allItems.indexOf(item);
+            ui.addItem(item, (Integer) itemQuantities.get(index));
+        }
+        ui.setPosition(this.getX(), this.getY());
+        ui.checkout();
+        this.setVisible(false);
+    }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
+
+    private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
+        selectedItems.clear();
+        itemIcons.clear();
+        itemQuantities.clear();
+        allItems.clear();
+        for(JCheckBox box : checkBoxes) {
+            quantityPanel.remove(box);
+        }
+        checkBoxes.clear();
+
+        quantityPanel.setVisible(false);
+        catalogPanel.setVisible(true);
+        this.setVisible(false);
+        MainInterface ui = MainInterface.getInstance();
+        ui.Run();
+    }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
     /**
      * Main execution method for UserInterface
@@ -707,10 +726,12 @@ public class CatalogUI extends UserInterface {
     private javax.swing.JPanel defaultPanel;
     private javax.swing.JToggleButton descendBtn;
     private javax.swing.JButton descendBtn1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList listOfItems;
     private javax.swing.JList listOfSelectedItemNames;
     private javax.swing.JList listOfSelectedItemQuantities;
