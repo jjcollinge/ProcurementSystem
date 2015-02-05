@@ -1,7 +1,9 @@
 package procurementsystem;
 
 import java.awt.BorderLayout;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
@@ -23,13 +25,14 @@ public class CatalogUI extends UserInterface {
     private Catalog catalog;
     private ArrayList<Item> selectedItems;
     private ArrayList<JCheckBox> checkBoxes;
-    private DefaultListModel allItems;
+    private DefaultListModel<Item> allItems;
     //private ArrayList<Integer> selectedItemsQuantities;
-    private DefaultListModel itemQuantities;
+    private DefaultListModel<Integer> itemQuantities;
     //private ArrayList<Boolean> selectedItemsIcons;
-    private DefaultListModel itemIcons;
+    private DefaultListModel<Boolean> itemIcons;
 
     private static CatalogUI singleton;
+    private boolean ascending = true;
 
     /**
      * Creates new form CatalogUI
@@ -74,6 +77,15 @@ public class CatalogUI extends UserInterface {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        catalogPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listOfItems = new javax.swing.JList();
+        proceedToQuantityReviewBtn = new javax.swing.JButton();
+        alphabeticalSortBtn = new javax.swing.JToggleButton();
+        categorySortBtn = new javax.swing.JToggleButton();
+        priceSortBtn = new javax.swing.JToggleButton();
+        ascendBtn = new javax.swing.JToggleButton();
+        descendBtn = new javax.swing.JToggleButton();
         quantityPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listOfSelectedItemNames = new javax.swing.JList();
@@ -81,13 +93,99 @@ public class CatalogUI extends UserInterface {
         proceedToOrderReviewBtn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         listOfSelectedItemQuantities = new javax.swing.JList();
-        catalogPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listOfItems = new javax.swing.JList();
-        proceedToQuantityReviewBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+
+        catalogPanel.setVisible(true);
+
+        listOfItems.setModel(allItems);
+        jScrollPane1.setViewportView(listOfItems);
+
+        proceedToQuantityReviewBtn.setText("Proceed to Quantity Review");
+        proceedToQuantityReviewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proceedToQuantityReviewBtnActionPerformed(evt);
+            }
+        });
+
+        alphabeticalSortBtn.setText("Alphabetically Ordered");
+        alphabeticalSortBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alphabeticalSortBtnActionPerformed(evt);
+            }
+        });
+
+        categorySortBtn.setText("Order Categorically");
+        categorySortBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categorySortBtnActionPerformed(evt);
+            }
+        });
+
+        priceSortBtn.setText("Order by Unit Price");
+        priceSortBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceSortBtnActionPerformed(evt);
+            }
+        });
+
+        ascendBtn.setText("Ascend");
+        ascendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ascendBtnActionPerformed(evt);
+            }
+        });
+
+        descendBtn.setText("Descend");
+        descendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descendBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout catalogPanelLayout = new javax.swing.GroupLayout(catalogPanel);
+        catalogPanel.setLayout(catalogPanelLayout);
+        catalogPanelLayout.setHorizontalGroup(
+            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(catalogPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
+                        .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(categorySortBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(alphabeticalSortBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
+                        .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(priceSortBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        catalogPanelLayout.setVerticalGroup(
+            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(catalogPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(alphabeticalSortBtn)
+                .addGap(18, 18, 18)
+                .addComponent(categorySortBtn)
+                .addGap(18, 18, 18)
+                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceSortBtn)
+                    .addComponent(ascendBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descendBtn))
+                .addContainerGap())
+        );
 
         quantityPanel.setVisible(false);
 
@@ -143,41 +241,6 @@ public class CatalogUI extends UserInterface {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        catalogPanel.setVisible(true);
-
-        listOfItems.setModel(allItems);
-        jScrollPane1.setViewportView(listOfItems);
-
-        proceedToQuantityReviewBtn.setText("Proceed to Quantity Review");
-        proceedToQuantityReviewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                proceedToQuantityReviewBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout catalogPanelLayout = new javax.swing.GroupLayout(catalogPanel);
-        catalogPanel.setLayout(catalogPanelLayout);
-        catalogPanelLayout.setHorizontalGroup(
-            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(catalogPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        catalogPanelLayout.setVerticalGroup(
-            catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(catalogPanelLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
@@ -198,8 +261,8 @@ public class CatalogUI extends UserInterface {
                     .addComponent(quantityPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
-        jLayeredPane1.setLayer(quantityPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(catalogPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(quantityPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,6 +347,101 @@ public class CatalogUI extends UserInterface {
         ui.Run();
     }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
+    private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
+        if(!ascending) {
+            reverseList();
+            descendBtn.setSelected(false);
+            ascendBtn.setSelected(true);
+            ascending = true;
+        }
+    }//GEN-LAST:event_ascendBtnActionPerformed
+
+    private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
+        if(ascending) {
+            reverseList();
+            ascendBtn.setSelected(false);
+            descendBtn.setSelected(true);
+            ascending = false;
+        }
+    }//GEN-LAST:event_descendBtnActionPerformed
+
+    private void alphabeticalSortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alphabeticalSortBtnActionPerformed
+        Item[] list = new Item[allItems.size()];
+        for(int i = 0; i < allItems.size(); i++) {
+            list[i] = allItems.get(i);
+        }        
+        
+        ArrayList<Item> sortedList = new ArrayList<Item>();
+        for(int i = 0; i < list.length; i++) {
+            sortedList.add(list[i]);
+        }
+        Collections.sort(sortedList);
+        allItems.clear();
+        sortedList.stream().forEach((item) -> {
+            allItems.addElement(item);
+        });
+        
+        categorySortBtn.setSelected(false);
+        priceSortBtn.setSelected(false);
+        ascendBtnActionPerformed(null);
+    }//GEN-LAST:event_alphabeticalSortBtnActionPerformed
+
+    private void categorySortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorySortBtnActionPerformed
+        Item[] list = new Item[allItems.size()];
+        for(int i = 0; i < allItems.size(); i++) {
+            list[i] = allItems.get(i);
+        }    
+        ArrayList<Item> sortedList = new ArrayList<Item>();
+        for(int i = 0; i < list.length; i++) {
+            for(int j = 1; j < list.length -1; j++) {
+                if(list[j-1].compareTo(list[j]) < 0) {
+                    Item cpy = list[j-1];
+                    list[j-1] = list[j];
+                    list[j] = cpy;
+                }
+            }
+        }
+        for(int i = 0; i < list.length; i++) {
+            sortedList.add(list[i]);
+        }
+        allItems.clear();
+        sortedList.stream().forEach((item) -> {
+            allItems.addElement(item);
+        });
+        
+        alphabeticalSortBtn.setSelected(false);
+        priceSortBtn.setSelected(false);
+        ascendBtnActionPerformed(null);
+    }//GEN-LAST:event_categorySortBtnActionPerformed
+
+    private void priceSortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceSortBtnActionPerformed
+        Item[] list = new Item[allItems.size()];
+        for(int i = 0; i < allItems.size(); i++) {
+            list[i] = allItems.get(i);
+        }    
+        ArrayList<Item> sortedList = new ArrayList<Item>();
+        for(int i = 0; i < list.length; i++) {
+            for(int j = 1; j < list.length -1; j++) {
+                if(list[j-1].getPrice() < list[j].getPrice()) {
+                    Item cpy = list[j-1];
+                    list[j-1] = list[j];
+                    list[j] = cpy;
+                }
+            }
+        }
+        for(int i = 0; i < list.length; i++) {
+            sortedList.add(list[i]);
+        }
+        allItems.clear();
+        sortedList.stream().forEach((item) -> {
+            allItems.addElement(item);
+        });
+        
+        alphabeticalSortBtn.setSelected(false);
+        categorySortBtn.setSelected(false);
+        ascendBtnActionPerformed(null);
+    }//GEN-LAST:event_priceSortBtnActionPerformed
+
     /**
      * Main execution method for UserInterface
      */
@@ -321,7 +479,7 @@ public class CatalogUI extends UserInterface {
                 that.setVisible(true);
 
                 catalog = Catalog.getCatalog();
-                displayCatalog();
+                displayCatalog();          
             }
         });
     }
@@ -339,6 +497,10 @@ public class CatalogUI extends UserInterface {
         itemList.stream().forEach((item) -> {
             allItems.addElement(item);
         });
+        alphabeticalSortBtnActionPerformed(null);
+        alphabeticalSortBtn.setSelected(true);
+        ascendBtnActionPerformed(null);
+        ascendBtn.setSelected(true);
     }
 
     /**
@@ -363,14 +525,29 @@ public class CatalogUI extends UserInterface {
         return allItems;
     }
 
+    private void reverseList() {
+        ArrayList<Item> reversedList = new ArrayList<>();
+        for(int i = allItems.size() - 1; i >= 0; i--) {
+            reversedList.add(allItems.get(i));
+        }
+        allItems.clear();
+        reversedList.stream().forEach((item) -> {
+            allItems.addElement(item);
+        });
+    }
+    
     @Override
     public void setPosition(int x, int y) {
         this.setLocation(x, y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton alphabeticalSortBtn;
+    private javax.swing.JToggleButton ascendBtn;
     private javax.swing.JButton cancelOrderBtn;
     private javax.swing.JPanel catalogPanel;
+    private javax.swing.JToggleButton categorySortBtn;
+    private javax.swing.JToggleButton descendBtn;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -378,6 +555,7 @@ public class CatalogUI extends UserInterface {
     private javax.swing.JList listOfItems;
     private javax.swing.JList listOfSelectedItemNames;
     private javax.swing.JList listOfSelectedItemQuantities;
+    private javax.swing.JToggleButton priceSortBtn;
     private javax.swing.JButton proceedToOrderReviewBtn;
     private javax.swing.JButton proceedToQuantityReviewBtn;
     private javax.swing.JPanel quantityPanel;

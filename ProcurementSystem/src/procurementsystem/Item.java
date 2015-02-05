@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author Simon
  */
-public class Item implements Serializable {
+public class Item implements Serializable, Comparable<Item> {
     
     //guessed these variable types as not on class diagram
     private String name;
@@ -34,6 +34,19 @@ public class Item implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
+    
     
     
     /**
@@ -43,6 +56,12 @@ public class Item implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Item otherItem) {
+        int nameDiff = name.compareToIgnoreCase(otherItem.name);
+        return nameDiff;
     }
     
 }
