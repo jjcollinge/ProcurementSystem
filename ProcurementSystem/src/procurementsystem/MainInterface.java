@@ -156,6 +156,8 @@ public class MainInterface extends UserInterface {
 
     private void newOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderBtnActionPerformed
         PlaceOrderUI placeOrderUI = PlaceOrderUI.getInstance();
+        String site = siteField.getText();
+        placeOrderUI.setSite(site);
         getOption(placeOrderUI);
     }//GEN-LAST:event_newOrderBtnActionPerformed
 

@@ -614,29 +614,39 @@ public class CatalogUI extends UserInterface {
 
     private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
         int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
-        if (selectedItems.contains(allItems.get(selectedIndex))) {
-            JTextField quantity = new JTextField();
-            final JComponent[] inputs = new JComponent[]{
-                new JLabel("Quantity"), quantity
-            };
-            JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
-            
-            String txt = quantity.getText();
-            int value;
-            try {
-                value = Integer.valueOf(txt);
-            } catch (NumberFormatException e) {
-                System.out.println("Couldn't convert input to Integer");
-                return;
-            }
-            if(selectedIndex > 0 && selectedIndex < itemQuantities.size()) {
-                itemQuantities.set(selectedIndex, value);
+        
+        if(selectedIndex > 0 && selectedIndex < allItems.size()) {
+        
+            if (selectedItems.contains(allItems.get(selectedIndex))) {
+                
+                JTextField quantity = new JTextField();
+                final JComponent[] inputs = new JComponent[]{
+                    new JLabel("Quantity"), quantity
+                };
+                JOptionPane.showMessageDialog(null, inputs, "Quantity Input", JOptionPane.PLAIN_MESSAGE);
+
+                String txt = quantity.getText();
+                int value;
+                try {
+                    value = Integer.valueOf(txt);
+                } catch (NumberFormatException e) {
+                    System.out.println("Couldn't convert input to Integer");
+                    return;
+                }
+                if(selectedIndex > 0 && selectedIndex < itemQuantities.size()) {
+                    itemQuantities.set(selectedIndex, value);
+                }
             }
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
 
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
-
+        
+        if(selectedItems.size() < 1) {
+            System.out.println("Can't proceed with an empty order!");
+            return;
+        }
+        
         PlaceOrderUI ui = PlaceOrderUI.getInstance();
 
         for (int i = 0; i < selectedItems.size(); i++) {
@@ -644,6 +654,7 @@ public class CatalogUI extends UserInterface {
             int index = allItems.indexOf(item);
             ui.addItem(item, (Integer) itemQuantities.get(index));
         }
+        
         ui.setPosition(this.getX(), this.getY());
         ui.checkout();
         this.setVisible(false);

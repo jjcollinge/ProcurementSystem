@@ -27,6 +27,15 @@ public class Order implements Serializable {
     public void cancelOrder() {
         
     }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+    
     
     /**
      * Returns the orderDate
