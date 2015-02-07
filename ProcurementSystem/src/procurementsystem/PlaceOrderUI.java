@@ -385,13 +385,19 @@ public class PlaceOrderUI extends UserInterface {
     
     private void reverseList() {
         ArrayList<Item> reversedList = new ArrayList<>();
+        ArrayList<Integer> reversedQuantities = new ArrayList<>();
         for(int i = items.size() - 1; i >= 0; i--) {
             reversedList.add(items.get(i));
+            reversedQuantities.add(quantities.get(i));
         }
         items.clear();
         reversedList.stream().forEach((item) -> {
             items.addElement(item);
         });
+        quantities.clear();
+        for(Integer quantity : reversedQuantities) {
+            quantities.addElement(quantity);
+        }
     }
     
     public void setSite(String site) {
