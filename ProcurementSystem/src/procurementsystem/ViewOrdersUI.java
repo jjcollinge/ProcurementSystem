@@ -18,6 +18,8 @@ public class ViewOrdersUI extends UserInterface {
     private static ViewOrdersUI singleton;
     private SetOfOrders orders;
     private DefaultListModel<Order> ordersModel;
+    private DefaultListModel<Item> orderModel;
+    private DefaultListModel<Integer> orderQuantityModel;
     
     private boolean siteFiltered = false;
     private boolean dateFiltered = false;
@@ -30,6 +32,9 @@ public class ViewOrdersUI extends UserInterface {
     private ViewOrdersUI() {
         
         ordersModel =  new DefaultListModel();
+        orderModel = new DefaultListModel();
+        orderQuantityModel = new DefaultListModel();
+        
         refreshModel();
         initComponents();
         
@@ -38,6 +43,8 @@ public class ViewOrdersUI extends UserInterface {
         //Settings
         this.setSize(400, 540);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        orderPanel.setVisible(false);
+        ordersPanel.setVisible(true);
     }
 
     public static ViewOrdersUI getInstance() {
@@ -79,8 +86,28 @@ public class ViewOrdersUI extends UserInterface {
         ascendBtn = new javax.swing.JToggleButton();
         descendBtn = new javax.swing.JToggleButton();
         activeOrdersOnlyBtn = new javax.swing.JToggleButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        itemsOrderedQuantities = new javax.swing.JList();
+        orderPanel = new javax.swing.JPanel();
+        orderPanelTitle = new javax.swing.JLabel();
+        OrderPanelTitleSeparator = new javax.swing.JSeparator();
+        orderDateLabel = new javax.swing.JLabel();
+        orderDateValue = new javax.swing.JLabel();
+        itemsOrderedLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        itemsOrderedList = new javax.swing.JList();
+        deliverDateLabel = new javax.swing.JLabel();
+        deliveryDateValue = new javax.swing.JLabel();
+        signedForByLabel = new javax.swing.JLabel();
+        signedForByValue = new javax.swing.JLabel();
+        deliveryStatusLabel = new javax.swing.JLabel();
+        deliveryStatusValue = new javax.swing.JLabel();
+        printAuditTrailBtn = new javax.swing.JButton();
+        returnToExistingOrdersBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLayeredPane1.setPreferredSize(new java.awt.Dimension(400, 540));
 
         locationTextField.setText("Sheffield S1");
 
@@ -89,6 +116,11 @@ public class ViewOrdersUI extends UserInterface {
         supplierTextField.setText("Type here");
 
         matchingExistingOrders.setModel(ordersModel);
+        matchingExistingOrders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                matchingExistingOrdersValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(matchingExistingOrders);
 
         returnToMainMenuBtn.setText("Return to Main Menu");
@@ -140,40 +172,49 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        itemsOrderedQuantities.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(itemsOrderedQuantities);
+
         javax.swing.GroupLayout ordersPanelLayout = new javax.swing.GroupLayout(ordersPanel);
         ordersPanel.setLayout(ordersPanelLayout);
         ordersPanelLayout.setHorizontalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ordersPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
                     .addGroup(ordersPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(ordersPanelLayout.createSequentialGroup()
-                                .addComponent(ascendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(ascendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(supplierTextField))
+                            .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filterBySiteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filterByDateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ordersPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(ordersPanelLayout.createSequentialGroup()
-                                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterBySiteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(filterByDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 1, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         ordersPanelLayout.setVerticalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ordersPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterBySiteBtn))
@@ -185,102 +226,195 @@ public class ViewOrdersUI extends UserInterface {
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterBySupplierBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ascendBtn)
                     .addComponent(descendBtn)
                     .addComponent(activeOrdersOnlyBtn))
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
+                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(33, 33, 33))
+        );
+
+        orderPanelTitle.setText("Audit - Order Id: 00127653");
+
+        orderDateLabel.setText("Order Date:");
+
+        orderDateValue.setText("12/10/2013");
+
+        itemsOrderedLabel.setText("Items Ordered");
+
+        itemsOrderedList.setModel(orderModel);
+        jScrollPane2.setViewportView(itemsOrderedList);
+
+        deliverDateLabel.setText("Delivery Date:");
+
+        deliveryDateValue.setText("19/10/2013");
+
+        signedForByLabel.setText("Signed For By:");
+
+        signedForByValue.setText("Kumar Kalla");
+
+        deliveryStatusLabel.setText("Delivery Status:");
+
+        deliveryStatusValue.setText("Accepted");
+
+        printAuditTrailBtn.setText("Print Audit Trail");
+        printAuditTrailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printAuditTrailBtnActionPerformed(evt);
+            }
+        });
+
+        returnToExistingOrdersBtn.setText("Return to Existing Orders");
+        returnToExistingOrdersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnToExistingOrdersBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
+        orderPanel.setLayout(orderPanelLayout);
+        orderPanelLayout.setHorizontalGroup(
+            orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(OrderPanelTitleSeparator)
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(orderDateLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderDateValue))
+                            .addComponent(itemsOrderedLabel)))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(deliveryStatusLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(deliveryStatusValue))
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(signedForByLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(signedForByValue))
+                            .addGroup(orderPanelLayout.createSequentialGroup()
+                                .addComponent(deliverDateLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(deliveryDateValue))
+                            .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(orderPanelTitle))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        orderPanelLayout.setVerticalGroup(
+            orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(orderPanelTitle)
+                .addGap(12, 12, 12)
+                .addComponent(OrderPanelTitleSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orderDateLabel)
+                    .addComponent(orderDateValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(itemsOrderedLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deliverDateLabel)
+                    .addComponent(deliveryDateValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(signedForByLabel)
+                    .addComponent(signedForByValue))
+                .addGap(37, 37, 37)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deliveryStatusLabel)
+                    .addComponent(deliveryStatusValue))
+                .addGap(18, 18, 18)
+                .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ordersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(ordersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addComponent(orderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ordersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(ordersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(orderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1.setLayer(ordersPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(orderPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
-        
-        MainInterface ui = MainInterface.getInstance();
-        ui.setPosition(this.getX(), this.getY());
-        
-        this.setVisible(false);
-        ui.Run();
-    }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
+    private void returnToExistingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToExistingOrdersBtnActionPerformed
+        orderPanel.setVisible(false);
+        ordersPanel.setVisible(true);
+    }//GEN-LAST:event_returnToExistingOrdersBtnActionPerformed
 
-    private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
-        if(siteFiltered) {
-            refreshModel();
-            siteFiltered = false;
-        } else {
-            // set flags
-            siteFiltered = true;
-            dateFiltered = false;
-            supplierFiltered = false;
-            // turn off data & supplier
-            filterByDateBtn.setSelected(false);
-            filterBySupplierBtn.setSelected(false);
-            
-            String param = locationTextField.getText();
-            requestFilter("site", param);
-        }
-    }//GEN-LAST:event_filterBySiteBtnActionPerformed
+    private void printAuditTrailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printAuditTrailBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_printAuditTrailBtnActionPerformed
 
-    private void filterByDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateBtnActionPerformed
-        if(dateFiltered) {
-            refreshModel();
-            dateFiltered = false;
-        } else {
-             // set flags
-            dateFiltered = true;
-            siteFiltered = false;
-            supplierFiltered = false;
-            // turn off site & supplier
-            filterBySiteBtn.setSelected(false);
-            filterBySupplierBtn.setSelected(false);
-            
-            String txt = dateTextField.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
-            Date date = null;
-             try {
-                 date = sdf.parse(txt);
-             } catch (ParseException ex) {
-                 Logger.getLogger(ViewOrdersUI.class.getName()).log(Level.SEVERE, null, ex);
-             }
-            requestFilter("date", date);
-           
+    private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
+
+    }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
+
+    private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
+        if(ascending) {
+            reverseList();
+            descendBtn.setSelected(true);
+            ascendBtn.setSelected(false);
+            ascending = false;
         }
-    }//GEN-LAST:event_filterByDateBtnActionPerformed
+    }//GEN-LAST:event_descendBtnActionPerformed
+
+    private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
+        if(!ascending) {
+            reverseList();
+            descendBtn.setSelected(false);
+            ascendBtn.setSelected(true);
+            ascending = true;
+        }
+    }//GEN-LAST:event_ascendBtnActionPerformed
 
     private void filterBySupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySupplierBtnActionPerformed
         if(supplierFiltered) {
@@ -294,35 +428,91 @@ public class ViewOrdersUI extends UserInterface {
             // turn off site && date
             filterBySiteBtn.setSelected(false);
             filterByDateBtn.setSelected(false);
-            
+
             String param = supplierTextField.getText();
             requestFilter("supplier", param);
         }
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
-    private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
-        if(!ascending) {
-            reverseList();
-            descendBtn.setSelected(false);
-            ascendBtn.setSelected(true);
-            ascending = true;
+    private void filterByDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateBtnActionPerformed
+        if(dateFiltered) {
+            refreshModel();
+            dateFiltered = false;
+        } else {
+            // set flags
+            dateFiltered = true;
+            siteFiltered = false;
+            supplierFiltered = false;
+            // turn off site & supplier
+            filterBySiteBtn.setSelected(false);
+            filterBySupplierBtn.setSelected(false);
+
+            String txt = dateTextField.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+            Date date = null;
+            try {
+                date = sdf.parse(txt);
+            } catch (ParseException ex) {
+                Logger.getLogger(ViewOrdersUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            requestFilter("date", date);
+
         }
-    }//GEN-LAST:event_ascendBtnActionPerformed
+    }//GEN-LAST:event_filterByDateBtnActionPerformed
 
-    private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
-        if(ascending) {
-            reverseList();
-            descendBtn.setSelected(true);
-            ascendBtn.setSelected(false);
-            ascending = false;
+    private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
+        if(siteFiltered) {
+            refreshModel();
+            siteFiltered = false;
+        } else {
+            // set flags
+            siteFiltered = true;
+            dateFiltered = false;
+            supplierFiltered = false;
+            // turn off data & supplier
+            filterByDateBtn.setSelected(false);
+            filterBySupplierBtn.setSelected(false);
+
+            String param = locationTextField.getText();
+            requestFilter("site", param);
         }
-    }//GEN-LAST:event_descendBtnActionPerformed
+    }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
-    private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
+    private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
 
+        MainInterface ui = MainInterface.getInstance();
+        ui.setPosition(this.getX(), this.getY());
 
-    }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
+        this.setVisible(false);
+        ui.Run();
+    }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
+    private void matchingExistingOrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_matchingExistingOrdersValueChanged
+        // User has selected an order
+        Order selectedOrder = (Order)matchingExistingOrders.getSelectedValue();
+        initialiseOrderPanel(selectedOrder);
+    }//GEN-LAST:event_matchingExistingOrdersValueChanged
+
+    private void initialiseOrderPanel(Order order) {
+  
+        orderModel.clear();
+        orderQuantityModel.clear();
+        
+        orderDateValue.setText(new SimpleDateFormat("dd/MM/yyyy").format(order.getOrderDate()));
+        deliveryDateValue.setText("This doesn't exist");
+        signedForByValue.setText("Not implemented yet");
+        deliveryStatusValue.setText("Not implemented yet");
+        
+        ArrayList<OrderLine> orderLines = order.getOrderLines();
+        for(OrderLine orderLine : orderLines) {
+            orderModel.addElement(orderLine.getItem());
+            orderQuantityModel.addElement(orderLine.getQuantity());
+        }
+        
+        ordersPanel.setVisible(false);
+        orderPanel.setVisible(true);
+    }
+    
     /**
      * Main execution method for UserInterface
      */
@@ -417,19 +607,37 @@ public class ViewOrdersUI extends UserInterface {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSeparator OrderPanelTitleSeparator;
     private javax.swing.JToggleButton activeOrdersOnlyBtn;
     private javax.swing.JToggleButton ascendBtn;
     private javax.swing.JTextField dateTextField;
+    private javax.swing.JLabel deliverDateLabel;
+    private javax.swing.JLabel deliveryDateValue;
+    private javax.swing.JLabel deliveryStatusLabel;
+    private javax.swing.JLabel deliveryStatusValue;
     private javax.swing.JToggleButton descendBtn;
     private javax.swing.JToggleButton filterByDateBtn;
     private javax.swing.JToggleButton filterBySiteBtn;
     private javax.swing.JToggleButton filterBySupplierBtn;
+    private javax.swing.JLabel itemsOrderedLabel;
+    private javax.swing.JList itemsOrderedList;
+    private javax.swing.JList itemsOrderedQuantities;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JList matchingExistingOrders;
+    private javax.swing.JLabel orderDateLabel;
+    private javax.swing.JLabel orderDateValue;
+    private javax.swing.JPanel orderPanel;
+    private javax.swing.JLabel orderPanelTitle;
     private javax.swing.JPanel ordersPanel;
+    private javax.swing.JButton printAuditTrailBtn;
+    private javax.swing.JButton returnToExistingOrdersBtn;
     private javax.swing.JButton returnToMainMenuBtn;
+    private javax.swing.JLabel signedForByLabel;
+    private javax.swing.JLabel signedForByValue;
     private javax.swing.JTextField supplierTextField;
     // End of variables declaration//GEN-END:variables
 
