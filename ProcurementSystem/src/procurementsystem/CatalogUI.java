@@ -449,8 +449,10 @@ public class CatalogUI extends UserInterface {
         }
         defaultPanel.revalidate();
         defaultPanel.repaint();
-        this.revalidate();
-        this.repaint();
+        catalogPanel.revalidate();
+        catalogPanel.repaint();
+        quantityPanel.revalidate();
+        quantityPanel.repaint();
     }
     
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
@@ -776,7 +778,11 @@ public class CatalogUI extends UserInterface {
      * Close the Catalog
      */
     public void closeCatalog() {
-
+        allItems.clear();
+        itemQuantities.clear();
+        updateCheckBoxes();
+        this.catalogPanel.setVisible(true);
+        this.quantityPanel.setVisible(false);
     }
 
     /**

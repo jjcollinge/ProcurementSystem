@@ -209,31 +209,7 @@ public class PlaceOrderUI extends UserInterface {
         items.remove(selectedItemIndex);
         quantities.remove(selectedItemIndex);
     }//GEN-LAST:event_deleteSelectedItemBtnActionPerformed
-
-    public void updateLists() {
-        // clear all quantities
-        
-        DefaultListModel tmp = quantities;
-        
-        /* for each item check if it is selected and create
-           a checkbox and incremenet the quantity if it is */
-        for (int i = 0; i < items.size(); i++) {
-
-            // get the item from the items list
-            
-            /* TODO: MUST FIX THE REORDERS/SORTING OF QUANTITIES...
-            CURRENTLY JUST CHECKS IF SELECTED. NEEDS TO KNOW WHAT
-            QUANTITIES BELONG WHERE... IN ORDER TO DO THIS THERE 
-            MUST BE SOME KNOWLEDGE OF WHAT ITEM IS ASSOCIATED TO
-            WHICH QUANTITY! ... THIS COULD BE ACHIEVED BY UPDATING
-            THE QUANTITIES MODEL WITHIN THE SAME ALGORITHM AS THE
-            ITEMS!
-            */
-        }
-        this.revalidate();
-        this.repaint();
-    }
-    
+ 
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
         if(catalogUI != null) {
             catalogUI.closeCatalog();
@@ -242,6 +218,7 @@ public class PlaceOrderUI extends UserInterface {
             newOrder.addSpecialInstructions("These are special instructions");
             orders.addOrder(newOrder);
             this.setVisible(false);
+            items.clear();
             MainInterface.getInstance().Run();
         } else {
             System.out.println("catalogUI is null and cannot be closed");
