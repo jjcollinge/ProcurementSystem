@@ -61,32 +61,39 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="dateTextField" pref="240" max="32767" attributes="0"/>
-                                      <Component id="locationTextField" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="supplierTextField" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="filterBySupplierBtn" min="-2" pref="98" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="filterBySiteBtn" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="filterByDateBtn" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="returnToMainMenuBtn" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" pref="350" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="ascendBtn" pref="100" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="descendBtn" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="dateTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="locationTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="supplierTextField" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="activeOrdersOnlyBtn" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="filterBySupplierBtn" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="filterBySiteBtn" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="filterByDateBtn" min="-2" pref="144" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -108,11 +115,17 @@
                           <Component id="supplierTextField" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="filterBySupplierBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="195" max="-2" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="ascendBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="descendBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="activeOrdersOnlyBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="226" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="returnToMainMenuBtn" min="-2" pref="69" max="-2" attributes="0"/>
-                      <EmptySpace pref="105" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -125,12 +138,14 @@
             </Component>
             <Component class="javax.swing.JTextField" name="dateTextField">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Something else?"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new SimpleDateFormat(&quot;dd/M/yyyy&quot;).format(new Date())" type="code"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="supplierTextField">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Something else?"/>
+                <Property name="text" type="java.lang.String" value="Type here"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -179,6 +194,30 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterBySupplierBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="ascendBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ascend"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ascendBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="descendBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Descend"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descendBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="activeOrdersOnlyBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Active Orders Only"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="activeOrdersOnlyBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

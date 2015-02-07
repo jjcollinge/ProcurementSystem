@@ -17,11 +17,12 @@ public class ViewOrdersUI extends UserInterface {
 
     private static ViewOrdersUI singleton;
     private SetOfOrders orders;
-    private DefaultListModel ordersModel;
+    private DefaultListModel<Order> ordersModel;
     
     private boolean siteFiltered = false;
     private boolean dateFiltered = false;
     private boolean supplierFiltered = false;
+    private boolean ascending = true;
     
     /**
      * Creates new form ViewOrderUI
@@ -31,6 +32,8 @@ public class ViewOrdersUI extends UserInterface {
         ordersModel =  new DefaultListModel();
         refreshModel();
         initComponents();
+        
+        activeOrdersOnlyBtn.setSelected(true);
         
         //Settings
         this.setSize(400, 540);
@@ -73,14 +76,17 @@ public class ViewOrdersUI extends UserInterface {
         filterBySiteBtn = new javax.swing.JToggleButton();
         filterByDateBtn = new javax.swing.JToggleButton();
         filterBySupplierBtn = new javax.swing.JToggleButton();
+        ascendBtn = new javax.swing.JToggleButton();
+        descendBtn = new javax.swing.JToggleButton();
+        activeOrdersOnlyBtn = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         locationTextField.setText("Sheffield S1");
 
-        dateTextField.setText("Something else?");
+        dateTextField.setText(new SimpleDateFormat("dd/M/yyyy").format(new Date()));
 
-        supplierTextField.setText("Something else?");
+        supplierTextField.setText("Type here");
 
         matchingExistingOrders.setModel(ordersModel);
         jScrollPane1.setViewportView(matchingExistingOrders);
@@ -113,29 +119,56 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        ascendBtn.setText("Ascend");
+        ascendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ascendBtnActionPerformed(evt);
+            }
+        });
+
+        descendBtn.setText("Descend");
+        descendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descendBtnActionPerformed(evt);
+            }
+        });
+
+        activeOrdersOnlyBtn.setText("Active Orders Only");
+        activeOrdersOnlyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activeOrdersOnlyBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ordersPanelLayout = new javax.swing.GroupLayout(ordersPanel);
         ordersPanel.setLayout(ordersPanelLayout);
         ordersPanelLayout.setHorizontalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ordersPanelLayout.createSequentialGroup()
+            .addGroup(ordersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ordersPanelLayout.createSequentialGroup()
-                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(dateTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(locationTextField))
-                            .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(filterBySiteBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(filterByDateBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                    .addGroup(ordersPanelLayout.createSequentialGroup()
+                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(ordersPanelLayout.createSequentialGroup()
+                                .addComponent(ascendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(supplierTextField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(ordersPanelLayout.createSequentialGroup()
+                                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(filterBySiteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(filterByDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 1, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         ordersPanelLayout.setVerticalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,11 +185,16 @@ public class ViewOrdersUI extends UserInterface {
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterBySupplierBtn))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ascendBtn)
+                    .addComponent(descendBtn)
+                    .addComponent(activeOrdersOnlyBtn))
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -262,6 +300,29 @@ public class ViewOrdersUI extends UserInterface {
         }
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
+    private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
+        if(!ascending) {
+            reverseList();
+            descendBtn.setSelected(false);
+            ascendBtn.setSelected(true);
+            ascending = true;
+        }
+    }//GEN-LAST:event_ascendBtnActionPerformed
+
+    private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
+        if(ascending) {
+            reverseList();
+            descendBtn.setSelected(true);
+            ascendBtn.setSelected(false);
+            ascending = false;
+        }
+    }//GEN-LAST:event_descendBtnActionPerformed
+
+    private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
+
+
+    }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
+
     /**
      * Main execution method for UserInterface
      */
@@ -300,6 +361,17 @@ public class ViewOrdersUI extends UserInterface {
                 that.refreshModel();
                 that.setVisible(true);
             }
+        });
+    }
+    
+    private void reverseList() {
+        ArrayList<Order> reversedList = new ArrayList<>();
+        for(int i = ordersModel.size() - 1; i >= 0; i--) {
+            reversedList.add(ordersModel.get(i));
+        }
+        ordersModel.clear();
+        reversedList.stream().forEach((item) -> {
+            ordersModel.addElement(item);
         });
     }
 
@@ -345,7 +417,10 @@ public class ViewOrdersUI extends UserInterface {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton activeOrdersOnlyBtn;
+    private javax.swing.JToggleButton ascendBtn;
     private javax.swing.JTextField dateTextField;
+    private javax.swing.JToggleButton descendBtn;
     private javax.swing.JToggleButton filterByDateBtn;
     private javax.swing.JToggleButton filterBySiteBtn;
     private javax.swing.JToggleButton filterBySupplierBtn;
