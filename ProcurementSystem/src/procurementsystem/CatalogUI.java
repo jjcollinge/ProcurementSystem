@@ -1,5 +1,6 @@
 package procurementsystem;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
@@ -46,6 +47,8 @@ public class CatalogUI extends UserInterface {
 
         // Interface Settings
         this.setSize(400, 540);
+        
+        getContentPane().setBackground(new Color(64, 64, 64));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initComponents();
@@ -104,6 +107,8 @@ public class CatalogUI extends UserInterface {
 
         defaultPanel.setOpaque(false);
 
+        alphabeticalSortBtn.setBackground(new java.awt.Color(51, 51, 51));
+        alphabeticalSortBtn.setForeground(new java.awt.Color(255, 255, 255));
         alphabeticalSortBtn.setText("Alphabetically Ordered");
         alphabeticalSortBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +116,8 @@ public class CatalogUI extends UserInterface {
             }
         });
 
+        categorySortBtn.setBackground(new java.awt.Color(51, 51, 51));
+        categorySortBtn.setForeground(new java.awt.Color(255, 255, 255));
         categorySortBtn.setText("Order Categorically");
         categorySortBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +125,8 @@ public class CatalogUI extends UserInterface {
             }
         });
 
+        priceSortBtn.setBackground(new java.awt.Color(51, 51, 51));
+        priceSortBtn.setForeground(new java.awt.Color(255, 255, 255));
         priceSortBtn.setText("Order by Unit Price");
         priceSortBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,10 +159,16 @@ public class CatalogUI extends UserInterface {
         );
 
         catalogPanel.setVisible(true);
+        catalogPanel.setBackground(new java.awt.Color(51, 51, 51));
+        catalogPanel.setForeground(new java.awt.Color(255, 255, 255));
 
+        listOfItems.setBackground(new java.awt.Color(51, 51, 51));
+        listOfItems.setForeground(new java.awt.Color(255, 255, 255));
         listOfItems.setModel(allItems);
         jScrollPane1.setViewportView(listOfItems);
 
+        proceedToQuantityReviewBtn.setBackground(new java.awt.Color(102, 102, 102));
+        proceedToQuantityReviewBtn.setForeground(new java.awt.Color(255, 255, 255));
         proceedToQuantityReviewBtn.setText("Proceed to Quantity Review");
         proceedToQuantityReviewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +176,8 @@ public class CatalogUI extends UserInterface {
             }
         });
 
+        ascendBtn.setBackground(new java.awt.Color(51, 51, 51));
+        ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +185,8 @@ public class CatalogUI extends UserInterface {
             }
         });
 
+        descendBtn.setBackground(new java.awt.Color(51, 51, 51));
+        descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,8 +194,11 @@ public class CatalogUI extends UserInterface {
             }
         });
 
+        catalogPanelTitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        catalogPanelTitle.setForeground(new java.awt.Color(255, 255, 255));
         catalogPanelTitle.setText("Creating new order. Select items.");
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Available Catalog");
 
         javax.swing.GroupLayout catalogPanelLayout = new javax.swing.GroupLayout(catalogPanel);
