@@ -1,5 +1,6 @@
 package procurementsystem;
 
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class ViewOrdersUI extends UserInterface {
         
         //Settings
         this.setSize(400, 540);
+        getContentPane().setBackground(new Color(64, 64, 64));
+        
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         orderPanel.setVisible(false);
         ordersPanel.setVisible(true);
@@ -109,12 +113,17 @@ public class ViewOrdersUI extends UserInterface {
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(400, 540));
 
+        ordersPanel.setBackground(new java.awt.Color(51, 51, 51));
+        ordersPanel.setForeground(new java.awt.Color(255, 255, 255));
+
         locationTextField.setText("Sheffield S1");
 
         dateTextField.setText(new SimpleDateFormat("dd/M/yyyy").format(new Date()));
 
         supplierTextField.setText("Type here");
 
+        matchingExistingOrders.setBackground(new java.awt.Color(51, 51, 51));
+        matchingExistingOrders.setForeground(new java.awt.Color(255, 255, 255));
         matchingExistingOrders.setModel(ordersModel);
         matchingExistingOrders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -123,6 +132,8 @@ public class ViewOrdersUI extends UserInterface {
         });
         jScrollPane1.setViewportView(matchingExistingOrders);
 
+        returnToMainMenuBtn.setBackground(new java.awt.Color(102, 102, 102));
+        returnToMainMenuBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnToMainMenuBtn.setText("Return to Main Menu");
         returnToMainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +141,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        filterBySiteBtn.setBackground(new java.awt.Color(102, 102, 102));
+        filterBySiteBtn.setForeground(new java.awt.Color(255, 255, 255));
         filterBySiteBtn.setText("Site Filtered");
         filterBySiteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +150,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        filterByDateBtn.setBackground(new java.awt.Color(102, 102, 102));
+        filterByDateBtn.setForeground(new java.awt.Color(255, 255, 255));
         filterByDateBtn.setText("Filter by Date");
         filterByDateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +159,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        filterBySupplierBtn.setBackground(new java.awt.Color(102, 102, 102));
+        filterBySupplierBtn.setForeground(new java.awt.Color(255, 255, 255));
         filterBySupplierBtn.setText("Filter by Supplier");
         filterBySupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +168,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        ascendBtn.setBackground(new java.awt.Color(102, 102, 102));
+        ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +177,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        descendBtn.setBackground(new java.awt.Color(102, 102, 102));
+        descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +186,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        activeOrdersOnlyBtn.setBackground(new java.awt.Color(102, 102, 102));
+        activeOrdersOnlyBtn.setForeground(new java.awt.Color(255, 255, 255));
         activeOrdersOnlyBtn.setText("Active Orders Only");
         activeOrdersOnlyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +195,8 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        itemsOrderedQuantities.setBackground(new java.awt.Color(51, 51, 51));
+        itemsOrderedQuantities.setForeground(new java.awt.Color(255, 255, 255));
         itemsOrderedQuantities.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -356,7 +381,7 @@ public class ViewOrdersUI extends UserInterface {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ordersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(ordersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addComponent(orderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
