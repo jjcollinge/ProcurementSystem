@@ -1,6 +1,7 @@
 
 package procurementsystem;
 
+import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,10 @@ public class PlaceOrderUI extends UserInterface {
         
         //Settings
         this.setSize(400, 540);
+        getContentPane().setBackground(new Color(64, 64, 64));
+        
+        
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
@@ -77,12 +82,21 @@ public class PlaceOrderUI extends UserInterface {
         setPreferredSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(51, 51, 51));
+
+        itemsInOrder.setBackground(new java.awt.Color(51, 51, 51));
+        itemsInOrder.setForeground(new java.awt.Color(255, 255, 255));
         itemsInOrder.setModel(items);
         jScrollPane1.setViewportView(itemsInOrder);
 
+        quantityOfItemsInOrder.setBackground(new java.awt.Color(51, 51, 51));
+        quantityOfItemsInOrder.setForeground(new java.awt.Color(255, 255, 255));
         quantityOfItemsInOrder.setModel(quantities);
         jScrollPane2.setViewportView(quantityOfItemsInOrder);
 
+        deleteSelectedItemBtn.setBackground(new java.awt.Color(102, 102, 102));
+        deleteSelectedItemBtn.setForeground(new java.awt.Color(255, 255, 255));
         deleteSelectedItemBtn.setText("Delete Selected Item");
         deleteSelectedItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +104,8 @@ public class PlaceOrderUI extends UserInterface {
             }
         });
 
+        returnToCatalogBtn.setBackground(new java.awt.Color(102, 102, 102));
+        returnToCatalogBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnToCatalogBtn.setText("Return to Catalog");
         returnToCatalogBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +113,8 @@ public class PlaceOrderUI extends UserInterface {
             }
         });
 
+        placeOrderBtn.setBackground(new java.awt.Color(102, 102, 102));
+        placeOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
         placeOrderBtn.setText("Place Order");
         placeOrderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +122,7 @@ public class PlaceOrderUI extends UserInterface {
             }
         });
 
+        inputValueField.setForeground(new java.awt.Color(153, 153, 153));
         inputValueField.setText("Input value");
         inputValueField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -111,6 +130,8 @@ public class PlaceOrderUI extends UserInterface {
             }
         });
 
+        ascendBtn.setBackground(new java.awt.Color(51, 51, 51));
+        ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +139,8 @@ public class PlaceOrderUI extends UserInterface {
             }
         });
 
+        descendBtn.setBackground(new java.awt.Color(51, 51, 51));
+        descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,8 +148,12 @@ public class PlaceOrderUI extends UserInterface {
             }
         });
 
+        tapItemToModifyLabel.setBackground(new java.awt.Color(51, 51, 51));
+        tapItemToModifyLabel.setForeground(new java.awt.Color(255, 255, 255));
         tapItemToModifyLabel.setText("Tap item to modify");
 
+        placeOrderTitle.setBackground(new java.awt.Color(51, 51, 51));
+        placeOrderTitle.setForeground(new java.awt.Color(255, 255, 255));
         placeOrderTitle.setText("Order Review - Checkout");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
