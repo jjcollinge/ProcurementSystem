@@ -41,8 +41,8 @@ public class PlaceOrderUI extends UserInterface {
         //Settings
         this.setSize(400, 540);
         getContentPane().setBackground(new Color(64, 64, 64));
-        
-        
+        this.placeOrderTitleSeparator.setBackground(Color.red); //doesnt work. sets in settings but doesnt display on ui
+        this.placeOrderTitleSeparator.setForeground(Color.red);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -96,6 +96,7 @@ public class PlaceOrderUI extends UserInterface {
         jScrollPane2.setViewportView(quantityOfItemsInOrder);
 
         deleteSelectedItemBtn.setBackground(new java.awt.Color(102, 102, 102));
+        deleteSelectedItemBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         deleteSelectedItemBtn.setForeground(new java.awt.Color(255, 255, 255));
         deleteSelectedItemBtn.setText("Delete Selected Item");
         deleteSelectedItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +106,7 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         returnToCatalogBtn.setBackground(new java.awt.Color(102, 102, 102));
+        returnToCatalogBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         returnToCatalogBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnToCatalogBtn.setText("Return to Catalog");
         returnToCatalogBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +116,7 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         placeOrderBtn.setBackground(new java.awt.Color(102, 102, 102));
+        placeOrderBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         placeOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
         placeOrderBtn.setText("Place Order");
         placeOrderBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +134,7 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         ascendBtn.setBackground(new java.awt.Color(51, 51, 51));
+        ascendBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -140,6 +144,7 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         descendBtn.setBackground(new java.awt.Color(51, 51, 51));
+        descendBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -149,10 +154,12 @@ public class PlaceOrderUI extends UserInterface {
         });
 
         tapItemToModifyLabel.setBackground(new java.awt.Color(51, 51, 51));
+        tapItemToModifyLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tapItemToModifyLabel.setForeground(new java.awt.Color(255, 255, 255));
         tapItemToModifyLabel.setText("Tap item to modify");
 
         placeOrderTitle.setBackground(new java.awt.Color(51, 51, 51));
+        placeOrderTitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         placeOrderTitle.setForeground(new java.awt.Color(255, 255, 255));
         placeOrderTitle.setText("Order Review - Checkout");
 
@@ -165,32 +172,32 @@ public class PlaceOrderUI extends UserInterface {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(deleteSelectedItemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputValueField))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(returnToCatalogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(placeOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(tapItemToModifyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(placeOrderTitle))
-                .addContainerGap())
+                    .addComponent(placeOrderTitle)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(returnToCatalogBtn)
+                        .addGap(67, 67, 67)
+                        .addComponent(placeOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(placeOrderTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(placeOrderTitleSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -203,14 +210,14 @@ public class PlaceOrderUI extends UserInterface {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteSelectedItemBtn)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(inputValueField)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(returnToCatalogBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(placeOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(deleteSelectedItemBtn)
+                        .addGap(0, 7, Short.MAX_VALUE))
+                    .addComponent(inputValueField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(placeOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(returnToCatalogBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51))
         );
 
@@ -218,11 +225,15 @@ public class PlaceOrderUI extends UserInterface {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 37, Short.MAX_VALUE))
         );
 
         pack();
