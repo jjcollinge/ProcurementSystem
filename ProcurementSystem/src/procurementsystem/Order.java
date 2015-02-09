@@ -89,6 +89,14 @@ public class Order implements Serializable {
     public ArrayList<OrderLine> getOrderLines() {
         return this.orderLines;
     }
+
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    public String getSite() {
+        return site;
+    }
     
     /**
      * Add an Item to Order

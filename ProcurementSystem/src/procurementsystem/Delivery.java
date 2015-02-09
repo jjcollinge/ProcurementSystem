@@ -27,6 +27,12 @@ public class Delivery {
     public void approveDelivery() {
         
     }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+    
+    
     
     /**
      * Sets the order of the Delivery
@@ -35,5 +41,4 @@ public class Delivery {
     public void setOrder(Order order) {
         this.order = order;
     }
-    
 }

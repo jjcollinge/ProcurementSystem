@@ -54,235 +54,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="deliveryPanel">
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" max="32767" attributes="0"/>
-                          <Component id="deliveryPanelTitle" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="currentDateLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="currentDateText" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="currentUserLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="currentUserText" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="ascendBtn1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="descendBtn1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel6" min="-2" pref="73" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="orderNotesLabel" min="-2" pref="72" max="-2" attributes="0"/>
-                                  <Component id="orderDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ETADeliveryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="confirmBtn" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                                      <Component id="dateVerifiedLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="deliveryStatusLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="returnToDeliveriesBtn" min="-2" pref="190" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="finishBtn" pref="185" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="deliveryPanelTitle" min="-2" pref="22" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="currentUserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentUserText" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="currentDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="currentDateText" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="ascendBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="descendBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="orderNotesLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="orderDateLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ETADeliveryLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="179" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="deliveryStatusLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="confirmBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dateVerifiedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="finishBtn" pref="65" max="32767" attributes="0"/>
-                          <Component id="returnToDeliveriesBtn" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="deliveryPanelTitle">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Audit - Order Id: 00127653"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator2">
-            </Component>
-            <Component class="javax.swing.JLabel" name="currentUserLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Current User:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="currentDateLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Current Date:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tap items to confirm them"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="currentDateText">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="12/3/2015"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="currentUserText">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kumar Kalla"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Order Lines"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JToggleButton" name="ascendBtn1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ascend"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JToggleButton" name="descendBtn1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Descend"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="orderNotesLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Order Notes:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="orderDateLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Order Date:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="ETADeliveryLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="ETA of Delivery:"/>
-              </Properties>
-            </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JList" name="deliveryItemList">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Component class="javax.swing.JLabel" name="deliveryStatusLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Delivery Status:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="confirmBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Confirm"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="dateVerifiedLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Date verified:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="returnToDeliveriesBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Return to Deliveries list"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JToggleButton" name="finishBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Finish and return"/>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Container class="javax.swing.JPanel" name="deliveriesPanel">
 
           <Layout>
@@ -300,7 +71,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="ascendBtn" min="-2" pref="88" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="descendBtn" pref="91" max="32767" attributes="0"/>
+                                      <Component id="descendBtn" pref="92" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="dateTextField" max="32767" attributes="0"/>
                                   <Component id="locationTextField" max="32767" attributes="0"/>
@@ -454,6 +225,301 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descendBtnActionPerformed"/>
               </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="deliveryPanel">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                          <Component id="deliveryPanelTitle" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="currentDateLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="currentDateText" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="currentUserLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="currentUserText" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="ascendBtn1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="descendBtn1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel6" min="-2" pref="73" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="returnToDeliveriesBtn" min="-2" pref="190" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="finishBtn" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="orderNotesLabel" min="-2" pref="72" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="orderNotesValue" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="orderDateLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="orderDateValue" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="ETADeliveryLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="ETADeliveryValue" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="confirmBtn" max="32767" attributes="0"/>
+                                  <Component id="deliveryStatusLabel" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                                      <Component id="dateVerifiedLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="dateVerifiedValue" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                                      <Component id="deliveryStatusField" min="-2" pref="250" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="deliveryPanelTitle" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="currentUserLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentUserText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="currentDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="currentDateText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="ascendBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="descendBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="orderNotesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="orderNotesValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="orderDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="orderDateValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="ETADeliveryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ETADeliveryValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" pref="173" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="deliveryStatusField" alignment="3" pref="25" max="32767" attributes="0"/>
+                          <Component id="deliveryStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="confirmBtn" alignment="3" pref="30" max="32767" attributes="0"/>
+                          <Component id="dateVerifiedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dateVerifiedValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="finishBtn" pref="65" max="32767" attributes="0"/>
+                          <Component id="returnToDeliveriesBtn" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="deliveryPanelTitle">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Audit - Order Id: 00127653"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="jSeparator2">
+            </Component>
+            <Component class="javax.swing.JLabel" name="currentUserLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Current User:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="currentDateLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Current Date:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tap items to confirm them"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="currentDateText">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="12/3/2015"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="currentUserText">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Kumar Kalla"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Order Lines"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="ascendBtn1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ascend"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ascendBtn1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="descendBtn1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Descend"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descendBtn1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="orderNotesLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Order Notes:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="orderDateLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Order Date:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ETADeliveryLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ETA of Delivery:"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="deliveryItemList">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="orderModel" type="code"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="deliveryItemListValueChanged"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="deliveryStatusLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delivery Status:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="confirmBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Confirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="dateVerifiedLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Date verified:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="returnToDeliveriesBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Return to Deliveries list"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="finishBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Finish and return"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="orderNotesValue">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="orderDateValue">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ETADeliveryValue">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="deliveryStatusField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Type here"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="dateVerifiedValue">
             </Component>
           </SubComponents>
         </Container>

@@ -55,7 +55,7 @@ public class Item implements Serializable, Comparable<Item> {
      */
     @Override
     public String toString() {
-        return name;
+        return name + " : " + type;
     }
 
     @Override
