@@ -5,9 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +23,7 @@ public class DeliveryUI extends UserInterface {
     private SetOfOrders orders;
     private DefaultListModel<Order> ordersModel;
     private DefaultListModel<Item> orderModel;
+    private HashMap<Integer, JCheckBox> checkBoxes;
     
     private Delivery delivery;
     
@@ -37,9 +40,11 @@ public class DeliveryUI extends UserInterface {
         ordersModel =  new DefaultListModel();
         orderModel = new DefaultListModel();
         
-        delivery = new Delivery();
+        delivery = new Delivery();     
         
         initComponents();
+        
+        checkBoxes = new HashMap<Integer, JCheckBox>();
         
         activeOrdersOnlyBtn.setSelected(true);
         
@@ -109,12 +114,12 @@ public class DeliveryUI extends UserInterface {
         confirmBtn = new javax.swing.JButton();
         dateVerifiedLabel = new javax.swing.JLabel();
         returnToDeliveriesBtn = new javax.swing.JButton();
-        finishBtn = new javax.swing.JToggleButton();
         orderNotesValue = new javax.swing.JLabel();
         orderDateValue = new javax.swing.JLabel();
         ETADeliveryValue = new javax.swing.JLabel();
         deliveryStatusField = new javax.swing.JTextField();
         dateVerifiedValue = new javax.swing.JLabel();
+        finishBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +167,11 @@ public class DeliveryUI extends UserInterface {
         });
 
         matchingExistingOrders.setModel(ordersModel);
+        matchingExistingOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                matchingExistingOrdersMouseReleased(evt);
+            }
+        });
         matchingExistingOrders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 matchingExistingOrdersValueChanged(evt);
@@ -276,6 +286,11 @@ public class DeliveryUI extends UserInterface {
         ETADeliveryLabel.setText("ETA of Delivery:");
 
         deliveryItemList.setModel(orderModel);
+        deliveryItemList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                deliveryItemListMouseReleased(evt);
+            }
+        });
         deliveryItemList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 deliveryItemListValueChanged(evt);
@@ -295,8 +310,11 @@ public class DeliveryUI extends UserInterface {
         dateVerifiedLabel.setText("Date verified:");
 
         returnToDeliveriesBtn.setText("Return to Deliveries list");
-
-        finishBtn.setText("Finish and return");
+        returnToDeliveriesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnToDeliveriesBtnActionPerformed(evt);
+            }
+        });
 
         orderNotesValue.setText("jLabel1");
 
@@ -306,6 +324,13 @@ public class DeliveryUI extends UserInterface {
 
         deliveryStatusField.setText("Type here");
 
+        finishBtn.setText("Finish and return");
+        finishBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout deliveryPanelLayout = new javax.swing.GroupLayout(deliveryPanel);
         deliveryPanel.setLayout(deliveryPanelLayout);
         deliveryPanelLayout.setHorizontalGroup(
@@ -314,7 +339,6 @@ public class DeliveryUI extends UserInterface {
             .addGroup(deliveryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addComponent(deliveryPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(deliveryPanelLayout.createSequentialGroup()
                         .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,9 +361,19 @@ public class DeliveryUI extends UserInterface {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36))))
                     .addGroup(deliveryPanelLayout.createSequentialGroup()
-                        .addComponent(returnToDeliveriesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(finishBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deliveryStatusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(deliveryPanelLayout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addComponent(dateVerifiedLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(dateVerifiedValue)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deliveryPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addComponent(deliveryStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(deliveryPanelLayout.createSequentialGroup()
                         .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(deliveryPanelLayout.createSequentialGroup()
@@ -353,22 +387,13 @@ public class DeliveryUI extends UserInterface {
                             .addGroup(deliveryPanelLayout.createSequentialGroup()
                                 .addComponent(ETADeliveryLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ETADeliveryValue)))
+                                .addComponent(ETADeliveryValue))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(deliveryPanelLayout.createSequentialGroup()
-                        .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deliveryStatusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(deliveryPanelLayout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addComponent(dateVerifiedLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(dateVerifiedValue)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deliveryPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                                .addComponent(deliveryStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(returnToDeliveriesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(finishBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         deliveryPanelLayout.setVerticalGroup(
@@ -420,8 +445,8 @@ public class DeliveryUI extends UserInterface {
                     .addComponent(dateVerifiedValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(finishBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                    .addComponent(returnToDeliveriesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(finishBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(returnToDeliveriesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -548,7 +573,7 @@ public class DeliveryUI extends UserInterface {
     }//GEN-LAST:event_descendBtnActionPerformed
 
     private void matchingExistingOrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_matchingExistingOrdersValueChanged
-        selectOrder();
+
     }//GEN-LAST:event_matchingExistingOrdersValueChanged
 
     private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
@@ -571,16 +596,65 @@ public class DeliveryUI extends UserInterface {
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         dateVerifiedValue.setText(new SimpleDateFormat("dd/MM/YYYY").format(new Date()));
-        delivery.approveDelivery();
-        //SetOfDeliveries sod = SetOfDeliveries.getInstance();
-        //sod.addDelivery(delivery);
+        checkDeliveryContents();
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void deliveryItemListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_deliveryItemListValueChanged
-        Item selectedItem = (Item)deliveryItemList.getSelectedValue();
-        checkDeliveryContents();
+       
     }//GEN-LAST:event_deliveryItemListValueChanged
 
+    private void deliveryItemListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deliveryItemListMouseReleased
+        int si = deliveryItemList.getSelectedIndex();
+        updateCheckBoxes(si);
+        checkDeliveryContents();
+    }//GEN-LAST:event_deliveryItemListMouseReleased
+
+    private void returnToDeliveriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToDeliveriesBtnActionPerformed
+        matchingExistingOrders.clearSelection();
+        this.Run();
+    }//GEN-LAST:event_returnToDeliveriesBtnActionPerformed
+
+    private void matchingExistingOrdersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchingExistingOrdersMouseReleased
+        selectOrder();
+        initCheckBoxes();
+    }//GEN-LAST:event_matchingExistingOrdersMouseReleased
+
+    private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
+        requestSignature();
+        SetOfDeliveries sod = SetOfDeliveries.getInstance();
+        sod.addDelivery(delivery);
+        DataAccessObject.Serialize(sod.getListOdDeliveries(), "deliveries.ser");
+        MainInterface.getInstance().Run();
+    }//GEN-LAST:event_finishBtnActionPerformed
+
+    private void initCheckBoxes() {
+        for(int i = 0; i < orderModel.size(); i++) {
+            JCheckBox box = new JCheckBox();
+            box.setEnabled(false);
+            box.setSelected(true);
+            box.setBounds(345, 215 + (i * 21), 40, 40);
+            box.setVisible(false);
+            // add to array and panel
+            deliveryPanel.add(box);
+            checkBoxes.put(i, box); 
+        }
+    }
+    
+    private void updateCheckBoxes(int selectedIndex) {
+
+        if(checkBoxes.get(selectedIndex).isVisible()) {
+            // already checked so uncheck
+            System.out.println("Hiding");
+            checkBoxes.get(selectedIndex).setVisible(false);
+        } else {
+            // not checked so make it
+            System.out.println("Showing");
+            checkBoxes.get(selectedIndex).setVisible(true);
+        }      
+        deliveryPanel.revalidate();
+        deliveryPanel.repaint();
+    }
+    
     /**
      * Main execution method for UserInterface
      */
@@ -664,14 +738,15 @@ public class DeliveryUI extends UserInterface {
      * Checks the contents of the Delivery
      */
     public void checkDeliveryContents() {
-        delivery.updateDeliveryStatus();
+        final String status = deliveryStatusField.getText();
+        delivery.updateDeliveryStatus(status);
     }
     
     /**
      * Requests authentication 
      */
     public void requestSignature() {
-        //TODO
+        delivery.approveDelivery();
     }
     
     /**
@@ -683,6 +758,7 @@ public class DeliveryUI extends UserInterface {
         
         this.deliveriesPanel.setVisible(false);
         this.deliveryPanel.setVisible(true);
+        
         orderModel.clear();
         for(OrderLine orderLine : order.getOrderLines()) {
             orderModel.addElement(orderLine.getItem());
@@ -730,7 +806,7 @@ public class DeliveryUI extends UserInterface {
     private javax.swing.JToggleButton filterByDateBtn;
     private javax.swing.JToggleButton filterBySiteBtn;
     private javax.swing.JToggleButton filterBySupplierBtn;
-    private javax.swing.JToggleButton finishBtn;
+    private javax.swing.JButton finishBtn;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
