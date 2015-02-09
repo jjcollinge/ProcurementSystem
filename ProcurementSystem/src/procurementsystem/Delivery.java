@@ -30,9 +30,10 @@ public class Delivery {
     
     /**
      * Sets the order of the Delivery
+     * @param order
      */
-    public void setOrder() {
-        
+    public void setOrder(Order order) {
+        this.order = order;
     }
     
 }
