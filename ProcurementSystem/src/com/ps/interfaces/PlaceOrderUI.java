@@ -1,13 +1,13 @@
 
-package procurementsystem;
+package com.ps.interfaces;
 
+import com.ps.model.Item;
+import com.ps.model.Order;
+import com.ps.model.OrderLine;
+import com.ps.model.SetOfOrders;
 import java.awt.Color;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
@@ -77,7 +77,6 @@ public class PlaceOrderUI extends UserInterface {
         placeOrderTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
@@ -351,6 +350,7 @@ public class PlaceOrderUI extends UserInterface {
     public void clear() {
         items.clear();
         quantities.clear();
+        currentOrder = new Order();
     }
     
     /**

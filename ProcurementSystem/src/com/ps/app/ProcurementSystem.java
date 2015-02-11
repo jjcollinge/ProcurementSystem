@@ -1,4 +1,6 @@
-package procurementsystem;
+package com.ps.app;
+
+import com.ps.interfaces.MainInterface;
 
 /**
  *

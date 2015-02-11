@@ -1,10 +1,4 @@
-package procurementsystem;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+package com.ps.interfaces;
 
 /**
  * Super type for UI component. 

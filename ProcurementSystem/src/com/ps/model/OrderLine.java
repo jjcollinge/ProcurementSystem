@@ -1,4 +1,4 @@
-package procurementsystem;
+package com.ps.model;
 
 import java.io.Serializable;
 

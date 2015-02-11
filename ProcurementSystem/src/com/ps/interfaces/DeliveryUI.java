@@ -1,6 +1,9 @@
 
-package procurementsystem;
+package com.ps.interfaces;
 
+import com.ps.model.Order;
+import com.ps.model.OrderLine;
+import com.ps.model.Item;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +14,10 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import com.ps.app.DataAccessObject;
+import com.ps.model.Delivery;
+import com.ps.model.SetOfDeliveries;
+import com.ps.model.SetOfOrders;
 
 /**
  *

@@ -1,4 +1,4 @@
-package procurementsystem;
+package com.ps.model;
 
 /**
  *

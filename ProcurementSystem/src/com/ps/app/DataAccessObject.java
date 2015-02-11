@@ -1,5 +1,5 @@
 
-package procurementsystem;
+package com.ps.app;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

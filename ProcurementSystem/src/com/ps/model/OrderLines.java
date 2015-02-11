@@ -39,7 +39,7 @@
  *
  * Portions Copyrighted 2015 Sun Microsystems, Inc.
  */
-package procurementsystem;
+package com.ps.model;
 
 /**
  *

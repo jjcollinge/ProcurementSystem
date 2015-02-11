@@ -1,5 +1,8 @@
-package procurementsystem;
+package com.ps.interfaces;
 
+import com.ps.model.Order;
+import com.ps.model.OrderLine;
+import com.ps.model.Item;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import com.ps.model.SetOfOrders;
 
 /**
  *

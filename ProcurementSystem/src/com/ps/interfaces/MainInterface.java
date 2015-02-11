@@ -1,11 +1,7 @@
 
-package procurementsystem;
+package com.ps.interfaces;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 /**

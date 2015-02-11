@@ -1,5 +1,7 @@
-package procurementsystem;
+package com.ps.interfaces;
 
+import com.ps.model.Catalog;
+import com.ps.model.Item;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -19,13 +21,13 @@ import javax.swing.ListSelectionModel;
 public class CatalogUI extends UserInterface {
 
     private Catalog catalog;
-    private ArrayList<Item> selectedItems;
+    private static CatalogUI singleton;
     
+    private ArrayList<Item> selectedItems;
     private ArrayList<JCheckBox> checkBoxes;
     private DefaultListModel<Item> allItems;
     private DefaultListModel<Integer> itemQuantities;
     
-    private static CatalogUI singleton;
     private boolean ascending = true;
     private boolean ascending1 = true;
 
@@ -34,14 +36,13 @@ public class CatalogUI extends UserInterface {
      */
     private CatalogUI() {
 
-        // Member data
+        // initialise data
         selectedItems = new ArrayList<>();
-        allItems = new DefaultListModel<Item>();
-
-        //selectedItemsQuantities = new ArrayList<>();
-        itemQuantities = new DefaultListModel();
-        
         checkBoxes = new ArrayList<>();
+
+        // initialise models
+        itemQuantities = new DefaultListModel<Integer>();
+        allItems = new DefaultListModel<Item>();
 
         // Interface Settings
         this.setSize(400, 540);
@@ -54,6 +55,10 @@ public class CatalogUI extends UserInterface {
         listOfItems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
+    /**
+     * Lazy loading singleton
+     * @return 
+     */
     public static CatalogUI getInstance() {
         if (singleton == null) {
             singleton = new CatalogUI();
@@ -418,16 +423,25 @@ public class CatalogUI extends UserInterface {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void proceedToQuantityReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToQuantityReviewBtnActionPerformed
 
-        // set models
+        /**
+         * Proceed to quantity review panel
+         **/
+        
+        // grab the currently selected items
         setSelectedItem();
+        
+        // if there are no selected items stop the user proceeding
         if(selectedItems.size() == 0) {
             System.out.println("Cannot proceed without selection");
             return;
         }
         
+        // set the default values to the quantity model
         initialiseQuantities();
+        // for each of the selected value add a check box
         updateCheckBoxes();
 
         // switch panels
@@ -437,15 +451,20 @@ public class CatalogUI extends UserInterface {
         quantityPanel.repaint();
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
+    /**
+    * Add default values to the quantities model for selected items
+    **/
     private void initialiseQuantities() {
+        
         // clear the current quanities model
         itemQuantities.clear();
+        
         // for each item
         for (int i = 0; i < allItems.size(); i++) {
             Item item = (Item) allItems.get(i);
-            // if is selected
+            
+            // if the item is selected
             if (selectedItems.contains(item)) {
-                // add a deafult value of 1
                itemQuantities.addElement(1);
             } else {
                itemQuantities.addElement(0);
@@ -453,6 +472,9 @@ public class CatalogUI extends UserInterface {
         }
     }
     
+    /**
+     * Check the currently selected items and draw the checkboxes
+     */
     private void updateCheckBoxes() {
         
         // remove all checkboxes from panel and clear model
@@ -487,6 +509,9 @@ public class CatalogUI extends UserInterface {
         quantityPanel.repaint();
     }
     
+    /**
+     * User has pressed the ascend button on the catalog panel
+     */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         // reverse the list and toggle the buttons
         if(!ascending) {
@@ -497,6 +522,9 @@ public class CatalogUI extends UserInterface {
         }
     }//GEN-LAST:event_ascendBtnActionPerformed
 
+    /**
+     * User has pressed the descend button on the catalog panel
+     */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
         // reverse the list and toggle the buttons
         if(ascending) {
@@ -507,6 +535,9 @@ public class CatalogUI extends UserInterface {
         }
     }//GEN-LAST:event_descendBtnActionPerformed
 
+    /**
+     * User has pressed the sort alphabetically button
+     */
     private void alphabeticalSortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alphabeticalSortBtnActionPerformed
         // create a tmp array which matches the items array size
         Item[] items = new Item[allItems.size()];
@@ -547,8 +578,18 @@ public class CatalogUI extends UserInterface {
         categorySortBtn.setSelected(false);
         priceSortBtn.setSelected(false);
         ascendBtnActionPerformed(null);
+        defaultPanel.setVisible(true);
+        defaultPanel.revalidate();
+        defaultPanel.repaint();
+        catalogPanel.revalidate();
+        catalogPanel.repaint();
+        quantityPanel.revalidate();
+        quantityPanel.repaint();
     }//GEN-LAST:event_alphabeticalSortBtnActionPerformed
 
+    /**
+     * User has pressed the sort by category button
+     */
     private void categorySortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorySortBtnActionPerformed
         // create a tmp array which matches the items array size
         Item[] items = new Item[allItems.size()];
@@ -589,8 +630,19 @@ public class CatalogUI extends UserInterface {
         alphabeticalSortBtn.setSelected(false);
         priceSortBtn.setSelected(false);
         ascendBtnActionPerformed(null);
+        
+        defaultPanel.setVisible(true);
+        defaultPanel.revalidate();
+        defaultPanel.repaint();
+        catalogPanel.revalidate();
+        catalogPanel.repaint();
+        quantityPanel.revalidate();
+        quantityPanel.repaint();
     }//GEN-LAST:event_categorySortBtnActionPerformed
 
+    /**
+     * User has pressed the sort by price button
+     */
     private void priceSortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceSortBtnActionPerformed
         // create a tmp array which matches the items array size
         Item[] items = new Item[allItems.size()];
@@ -631,8 +683,19 @@ public class CatalogUI extends UserInterface {
         alphabeticalSortBtn.setSelected(false);
         categorySortBtn.setSelected(false);
         ascendBtnActionPerformed(null);
+        
+        defaultPanel.setVisible(true);
+        defaultPanel.revalidate();
+        defaultPanel.repaint();
+        catalogPanel.revalidate();
+        catalogPanel.repaint();
+        quantityPanel.revalidate();
+        quantityPanel.repaint();
     }//GEN-LAST:event_priceSortBtnActionPerformed
 
+    /**
+     * Key released for search field
+     */
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         String searchFieldText = searchField.getText();
         if (!searchFieldText.isEmpty()) {
@@ -655,6 +718,9 @@ public class CatalogUI extends UserInterface {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchFieldActionPerformed
 
+    /**
+     * User has pressed the ascend button on the quantity panel
+     */
     private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
         if(!ascending1) {
             reverseList();
@@ -664,6 +730,9 @@ public class CatalogUI extends UserInterface {
         }
     }//GEN-LAST:event_ascendBtn1ActionPerformed
 
+    /**
+     * Selected item quantities values have changed
+     */
     private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
         int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
         
@@ -692,6 +761,10 @@ public class CatalogUI extends UserInterface {
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
 
+    /**
+     * User pressed the proceed to order review button.
+     * Switch between the catalog panel and the quantity panel
+     */
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
         
         // stop user proceeding if no items selected
@@ -715,21 +788,34 @@ public class CatalogUI extends UserInterface {
         this.setVisible(false);
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
+    /**
+     * Canel the current order
+     */
     private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
+       
+        // clear all the data
         selectedItems.clear();
-        itemQuantities.clear();
-        allItems.clear();
         for(JCheckBox box : checkBoxes) {
             quantityPanel.remove(box);
         }
         checkBoxes.clear();
         
+        // clear all the models
+        itemQuantities.clear();
+        allItems.clear();
+        
+        // switch the panels back to default
+        catalogPanel.setVisible(true);
+        quantityPanel.setVisible(false);
+        
+        // get the place order ui and clear all the data in there
         PlaceOrderUI pui = PlaceOrderUI.getInstance();
         pui.clear();
-
-        quantityPanel.setVisible(false);
-        catalogPanel.setVisible(true);
+        
+        // hide this ui
         this.setVisible(false);
+        
+        // switch back to the main interface
         MainInterface ui = MainInterface.getInstance();
         ui.Run();
     }//GEN-LAST:event_cancelOrderBtnActionPerformed
@@ -788,12 +874,14 @@ public class CatalogUI extends UserInterface {
     /*Item getSelectedItem() {
      return someItem;
      }*/
+    
     /**
-     * Display the Catalog
+     * Display the catalog
      */
     public void displayCatalog() {
-
+        // put all items from the catalog and add them to the items model
         updateModel(allItems, catalog.getListOfItems());
+        // set initial quantities model
         initialiseQuantities();
         // alphabetic sort the list
         alphabeticalSortBtnActionPerformed(null);
@@ -803,6 +891,9 @@ public class CatalogUI extends UserInterface {
         ascendBtn.setSelected(true);
     }
     
+    /**
+     * Update a model
+     */
     private void updateModel(DefaultListModel oldList, ArrayList newList) {        
         oldList.clear();
         newList.stream().forEach((item) -> {
@@ -811,13 +902,18 @@ public class CatalogUI extends UserInterface {
     }
 
     /**
-     * Close the Catalog
+     * Close the catalog
      */
     public void closeCatalog() {
+        
+        // clear all models
         allItems.clear();
         itemQuantities.clear();
-        listOfItems.removeAll(); 
+        
+        // clear all data
         updateCheckBoxes();
+        
+        // reset panels
         this.catalogPanel.setVisible(true);
         this.quantityPanel.setVisible(false);
     }
@@ -836,10 +932,16 @@ public class CatalogUI extends UserInterface {
         }
     }
 
+    /**
+     * get the current item model
+     */
     public DefaultListModel getModel() {
         return allItems;
     }
 
+    /**
+     * Reverse the item and quantity lists
+     */
     private void reverseList() {
         // create temp list
         ArrayList<Item> reversedItemList = new ArrayList<>();

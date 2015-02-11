@@ -1,7 +1,8 @@
-package procurementsystem;
+package com.ps.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import com.ps.app.DataAccessObject;
 
 /**
  *

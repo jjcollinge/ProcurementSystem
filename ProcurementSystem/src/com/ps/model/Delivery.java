@@ -1,5 +1,6 @@
-package procurementsystem;
+package com.ps.model;
 
+import com.ps.model.Order;
 import java.io.Serializable;
 
 /**
