@@ -25,7 +25,7 @@ public class Order implements Serializable {
      * Cancels the Order
      */
     public void cancelOrder() {
-        
+        orderLines.clear();
     }
 
     public void setOrderStatus(String orderStatus) {

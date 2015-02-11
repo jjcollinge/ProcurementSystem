@@ -20,13 +20,11 @@ public class CatalogUI extends UserInterface {
 
     private Catalog catalog;
     private ArrayList<Item> selectedItems;
+    
     private ArrayList<JCheckBox> checkBoxes;
     private DefaultListModel<Item> allItems;
-    //private ArrayList<Integer> selectedItemsQuantities;
     private DefaultListModel<Integer> itemQuantities;
-    //private ArrayList<Boolean> selectedItemsIcons;
-    //private DefaultListModel<Boolean> itemIcons;
-
+    
     private static CatalogUI singleton;
     private boolean ascending = true;
     private boolean ascending1 = true;
@@ -421,21 +419,33 @@ public class CatalogUI extends UserInterface {
     }// </editor-fold>//GEN-END:initComponents
 
     private void proceedToQuantityReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToQuantityReviewBtnActionPerformed
-        
+
+        // set models
         setSelectedItem();
+        if(selectedItems.size() == 0) {
+            System.out.println("Cannot proceed without selection");
+            return;
+        }
+        
         initialiseQuantities();
         updateCheckBoxes();
 
+        // switch panels
         catalogPanel.setVisible(false);
         quantityPanel.setVisible(true);
         quantityPanel.revalidate();
+        quantityPanel.repaint();
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
     private void initialiseQuantities() {
+        // clear the current quanities model
         itemQuantities.clear();
+        // for each item
         for (int i = 0; i < allItems.size(); i++) {
             Item item = (Item) allItems.get(i);
+            // if is selected
             if (selectedItems.contains(item)) {
+                // add a deafult value of 1
                itemQuantities.addElement(1);
             } else {
                itemQuantities.addElement(0);
@@ -478,6 +488,7 @@ public class CatalogUI extends UserInterface {
     }
     
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
+        // reverse the list and toggle the buttons
         if(!ascending) {
             reverseList();
             descendBtn.setSelected(false);
@@ -487,6 +498,7 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_ascendBtnActionPerformed
 
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
+        // reverse the list and toggle the buttons
         if(ascending) {
             reverseList();
             ascendBtn.setSelected(false);
@@ -538,7 +550,6 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_alphabeticalSortBtnActionPerformed
 
     private void categorySortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorySortBtnActionPerformed
-        
         // create a tmp array which matches the items array size
         Item[] items = new Item[allItems.size()];
         Integer[] quantities = new Integer[allItems.size()];
@@ -683,13 +694,16 @@ public class CatalogUI extends UserInterface {
 
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
         
+        // stop user proceeding if no items selected
         if(selectedItems.size() < 1) {
             System.out.println("Can't proceed with an empty order!");
             return;
         }
         
+        // get the place order ui
         PlaceOrderUI ui = PlaceOrderUI.getInstance();
-
+        
+        // add all the selected items to the ui
         for (int i = 0; i < selectedItems.size(); i++) {
             Item item = selectedItems.get(i);
             int index = allItems.indexOf(item);
@@ -802,6 +816,7 @@ public class CatalogUI extends UserInterface {
     public void closeCatalog() {
         allItems.clear();
         itemQuantities.clear();
+        listOfItems.removeAll(); 
         updateCheckBoxes();
         this.catalogPanel.setVisible(true);
         this.quantityPanel.setVisible(false);

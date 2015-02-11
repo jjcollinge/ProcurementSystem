@@ -17,7 +17,7 @@ import javax.swing.JFrame;
  */
 public class PlaceOrderUI extends UserInterface {
 
-    private Order newOrder;
+    private Order currentOrder;
     private CatalogUI catalogUI;
     
     private DefaultListModel<Item> items;
@@ -32,18 +32,16 @@ public class PlaceOrderUI extends UserInterface {
      */
     private PlaceOrderUI() {
         
+        // initialise models
         items = new DefaultListModel();
         quantities = new DefaultListModel();
-        newOrder = new Order();
         
+        currentOrder = new Order();    
         initComponents();
         
         //Settings
         this.setSize(400, 540);
         getContentPane().setBackground(new Color(64, 64, 64));
-        
-        
-        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
@@ -241,11 +239,12 @@ public class PlaceOrderUI extends UserInterface {
         if(catalogUI != null) {
             catalogUI.closeCatalog();
             SetOfOrders orders = SetOfOrders.getInstance();
-            newOrder.setOrderDate(new Date());
-            newOrder.addSpecialInstructions("These are special instructions");
-            orders.addOrder(newOrder);
+            currentOrder.setOrderDate(new Date());
+            currentOrder.addSpecialInstructions("These are special instructions");
+            orders.addOrder(currentOrder);
             this.setVisible(false);
             items.clear();
+            currentOrder = null;
             MainInterface.getInstance().Run();
         } else {
             System.out.println("catalogUI is null and cannot be closed");
@@ -293,7 +292,15 @@ public class PlaceOrderUI extends UserInterface {
     }//GEN-LAST:event_inputValueFieldKeyReleased
 
     private void returnToCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToCatalogBtnActionPerformed
+
+        items.clear();
+        quantities.clear();
+        itemsInOrder.removeAll();
+        quantityOfItemsInOrder.removeAll();
+        currentOrder = new Order();
+        
         CatalogUI ui = catalogUI.getInstance();
+        ui.closeCatalog();
         catalogUI.Run();
         
         this.setVisible(false);
@@ -332,7 +339,7 @@ public class PlaceOrderUI extends UserInterface {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //that.setVisible(true);
-                newOrder = new Order();
+                currentOrder = new Order();
                 
                 catalogUI = CatalogUI.getInstance();
                 catalogUI.setPosition(that.getX(), that.getY());
@@ -360,8 +367,13 @@ public class PlaceOrderUI extends UserInterface {
         return null;
     }
     
+    /**
+     * add an item to the current order
+     * @param item
+     * @param quantity 
+     */
     public void addItem(Item item, int quantity) {
-        newOrder.addItem(item, quantity);
+        currentOrder.addItem(item, quantity);
     }
     
     /**
@@ -371,25 +383,35 @@ public class PlaceOrderUI extends UserInterface {
         return selectedItem;
     }*/
     
+    public boolean orderInProcess() {
+        if(currentOrder == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     /**
      * n.b. I have changed the name from Checkout in the design doc
      */
     public void checkout() {
         
-        ArrayList<OrderLine> orderLines = newOrder.getOrderLines();
+        ArrayList<OrderLine> orderLines = currentOrder.getOrderLines();
         
+        // for each orderline from the order and add them to the model
         for(int i = 0; i < orderLines.size(); i++) {
             OrderLine orderLine = orderLines.get(i);
             items.addElement(orderLine.getItem());
             quantities.addElement(orderLine.getQuantity());
         }
-        
+        // make visible
         this.setVisible(true);
     }
     
     private void reverseList() {
         ArrayList<Item> reversedList = new ArrayList<>();
         ArrayList<Integer> reversedQuantities = new ArrayList<>();
+        // reverse the item list and quantity list
         for(int i = items.size() - 1; i >= 0; i--) {
             reversedList.add(items.get(i));
             reversedQuantities.add(quantities.get(i));
@@ -404,8 +426,12 @@ public class PlaceOrderUI extends UserInterface {
         }
     }
     
+    /**
+     * set the current orders site field
+     * @param site 
+     */
     public void setSite(String site) {
-        newOrder.setSite(site);
+        currentOrder.setSite(site);
     }
      
     @Override
