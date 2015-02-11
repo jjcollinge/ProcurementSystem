@@ -182,6 +182,7 @@ public class MainInterface extends UserInterface {
 
     private void browseCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseCatalogBtnActionPerformed
         CatalogUI catalogUI = CatalogUI.getInstance();
+        catalogUI.setMode("browse");
         getOption(catalogUI);
     }//GEN-LAST:event_browseCatalogBtnActionPerformed
 

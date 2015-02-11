@@ -341,6 +341,7 @@ public class PlaceOrderUI extends UserInterface {
                 currentOrder = new Order();
                 
                 catalogUI = CatalogUI.getInstance();
+                catalogUI.setMode("order");
                 catalogUI.setPosition(that.getX(), that.getY());
                 catalogUI.Run();
             }

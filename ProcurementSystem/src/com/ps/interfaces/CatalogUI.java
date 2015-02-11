@@ -30,7 +30,7 @@ public class CatalogUI extends UserInterface {
     
     private boolean ascending = true;
     private boolean ascending1 = true;
-
+    
     /**
      * Creates new form CatalogUI
      */
@@ -64,6 +64,18 @@ public class CatalogUI extends UserInterface {
             singleton = new CatalogUI();
         }
         return singleton;
+    }
+    
+    /**
+     * Set the mode of this ui
+     * @param mode 
+     */
+    public void setMode(String mode) {
+        if(mode.equalsIgnoreCase("browse")) {
+            this.proceedToQuantityReviewBtn.setVisible(false);
+        } else if(mode.equalsIgnoreCase("order")) {
+            this.proceedToQuantityReviewBtn.setVisible(true);
+        }
     }
 
     /**
@@ -434,7 +446,7 @@ public class CatalogUI extends UserInterface {
         setSelectedItem();
         
         // if there are no selected items stop the user proceeding
-        if(selectedItems.size() == 0) {
+        if(selectedItems.isEmpty()) {
             System.out.println("Cannot proceed without selection");
             return;
         }
