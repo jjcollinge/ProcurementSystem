@@ -40,7 +40,7 @@ public class PlaceOrderUI extends UserInterface {
         initComponents();
         
         //Settings
-        this.setSize(400, 540);
+        jPanel1.setSize(400, 540);
         getContentPane().setBackground(new Color(64, 64, 64));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

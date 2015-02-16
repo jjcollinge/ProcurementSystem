@@ -54,8 +54,6 @@ public class CatalogUI extends UserInterface {
         initComponents();
         
         jLayeredPane1.setPreferredSize(new Dimension(400, 540));
-        catalogPanel.setPreferredSize(new Dimension(400, 540));
-        quantityPanel.setPreferredSize(new Dimension(400, 540));
 
         listOfItems.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }

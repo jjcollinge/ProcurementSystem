@@ -46,9 +46,8 @@ public class ViewOrdersUI extends UserInterface {
         activeOrdersOnlyBtn.setSelected(true);
         
         //Settings
-        this.setSize(400, 540);
+        jLayeredPane1.setSize(400, 540);
         getContentPane().setBackground(new Color(64, 64, 64));
-        
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         orderPanel.setVisible(false);

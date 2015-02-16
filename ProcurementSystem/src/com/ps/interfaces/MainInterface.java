@@ -19,7 +19,7 @@ public class MainInterface extends UserInterface {
         initComponents();
         
         // Settings
-        this.setSize(400, 540);
+        jPanel1.setSize(400, 540);
         getContentPane().setBackground(new Color(64, 64, 64));
         
         this.newOrderBtn.setBackground(new Color(51, 51, 51));
@@ -77,7 +77,6 @@ public class MainInterface extends UserInterface {
         setBackground(new java.awt.Color(102, 102, 102));
         setMaximumSize(new java.awt.Dimension(400, 540));
         setMinimumSize(new java.awt.Dimension(400, 540));
-        setPreferredSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(400, 540));
@@ -197,11 +196,11 @@ public class MainInterface extends UserInterface {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
