@@ -106,7 +106,7 @@ public class OrderTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+    @Test //tests null date
     public void testHasSameDate2() {
         System.out.println("hasSameDate");
         Date date = null;

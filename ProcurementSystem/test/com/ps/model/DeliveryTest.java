@@ -37,4 +37,19 @@ public class DeliveryTest {
         assertEquals(expectedResult, approvalSet);
     }
     
+      @Test //tests true bool
+    public void testApproveDelivery2() {
+        System.out.println("approveDelivery");
+        Delivery instance = new Delivery();
+        instance.setApproval(Boolean.TRUE); //set to true
+        instance.approveDelivery(); //sets to true within approveDelivery
+        boolean approvalSet = instance.getApproval(); //get approval
+        boolean expectedResult = true; 
+        assertEquals(expectedResult, approvalSet);
+    }
+    
+      
+   
+    
+    
 }

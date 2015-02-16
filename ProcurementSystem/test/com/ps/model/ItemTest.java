@@ -44,6 +44,25 @@ public class ItemTest {
         double result = instance.getPrice();
         assertEquals(expResult, result, 0.0);
     }
+    
+    
+      @Test //testing i2
+    public void testGetPrice2 () {
+        System.out.println("getPrice");
+        Item instance = i2;
+        double expResult = 0.0;
+        double result = instance.getPrice();
+        assertEquals(expResult, result, 0.0);
+    }
+    
+      @Test //testing for null
+    public void testGetPrice3() {
+        System.out.println("getPrice");
+        Item instance = null;
+        double expResult = 0.0;
+        double result = instance.getPrice();
+        assertEquals(expResult, result, 0.0);
+    }
 
     /**
      * Test of getType method, of class Item.
@@ -111,5 +130,17 @@ public class ItemTest {
         int result = instance.compareTo(otherItem);
         assertEquals(expResult, result);
     }
+      @Test //testing for null 
+    public void testCompareTo5() {
+        System.out.println("compareTo");
+        Item otherItem = i;
+        Item instance = null;
+        int expResult = 0;
+        int result = instance.compareTo(otherItem);
+        assertEquals(expResult, result);
+    }
+    
+    
+    
     
 }
