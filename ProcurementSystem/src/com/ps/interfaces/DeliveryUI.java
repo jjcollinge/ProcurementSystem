@@ -52,7 +52,7 @@ public class DeliveryUI extends UserInterface {
         
         initComponents();
         
-        this.setSize(400, 540); // change JFRAME size
+        //this.setSize(400, 540); // change JFRAME size
         jLayeredPane1.setPreferredSize(new Dimension(400, 540)); // change layered pane size
         
         checkBoxes = new HashMap<Integer, JCheckBox>();
@@ -647,7 +647,10 @@ public class DeliveryUI extends UserInterface {
         SetOfDeliveries sod = SetOfDeliveries.getInstance();
         sod.addDelivery(delivery);
         DataAccessObject.Serialize(sod.getListOdDeliveries(), "deliveries.ser");
-        MainInterface.getInstance().Run();
+        this.setVisible(false);
+        MainInterface ui = MainInterface.getInstance();
+        ui.setPosition(this.getX(), this.getY());
+        ui.Run();
     }//GEN-LAST:event_finishBtnActionPerformed
 
     private void initCheckBoxes() {
