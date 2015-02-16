@@ -77,10 +77,15 @@ public class PlaceOrderUI extends UserInterface {
         placeOrderTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(400, 540));
+        setMinimumSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.setMaximumSize(new java.awt.Dimension(400, 540));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 540));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 540));
 
         itemsInOrder.setBackground(new java.awt.Color(51, 51, 51));
         itemsInOrder.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,7 +208,7 @@ public class PlaceOrderUI extends UserInterface {
                     .addComponent(deleteSelectedItemBtn)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(inputValueField)))
+                        .addComponent(inputValueField, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(returnToCatalogBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
@@ -215,11 +220,11 @@ public class PlaceOrderUI extends UserInterface {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -300,6 +305,8 @@ public class PlaceOrderUI extends UserInterface {
         
         CatalogUI ui = catalogUI.getInstance();
         ui.closeCatalog();
+        
+        catalogUI.setPosition(this.getX(), this.getY());
         catalogUI.Run();
         
         this.setVisible(false);
