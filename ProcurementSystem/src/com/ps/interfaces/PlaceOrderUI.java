@@ -17,7 +17,7 @@ import javax.swing.JFrame;
  */
 public class PlaceOrderUI extends UserInterface {
 
-    private Order currentOrder;
+    private Order newOrder;
     private CatalogUI catalogUI;
     
     private DefaultListModel<Item> items;
@@ -36,7 +36,7 @@ public class PlaceOrderUI extends UserInterface {
         items = new DefaultListModel();
         quantities = new DefaultListModel();
         
-        currentOrder = new Order();    
+        newOrder = new Order();    
         initComponents();
         
         //Settings
@@ -243,12 +243,12 @@ public class PlaceOrderUI extends UserInterface {
         if(catalogUI != null) {
             catalogUI.closeCatalog();
             SetOfOrders orders = SetOfOrders.getInstance();
-            currentOrder.setOrderDate(new Date());
-            currentOrder.addSpecialInstructions("These are special instructions");
-            orders.addOrder(currentOrder);
+            newOrder.setOrderDate(new Date());
+            newOrder.addSpecialInstructions("These are special instructions");
+            orders.addOrder(newOrder);
             this.setVisible(false);
             items.clear();
-            currentOrder = null;
+            newOrder = null;
             MainInterface ui = MainInterface.getInstance();
             ui.setPosition(this.getX(), this.getY());
             ui.Run();
@@ -303,7 +303,7 @@ public class PlaceOrderUI extends UserInterface {
         quantities.clear();
         itemsInOrder.removeAll();
         quantityOfItemsInOrder.removeAll();
-        currentOrder = new Order();
+        newOrder = new Order();
         
         CatalogUI ui = catalogUI.getInstance();
         ui.closeCatalog();
@@ -347,7 +347,7 @@ public class PlaceOrderUI extends UserInterface {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //that.setVisible(true);
-                currentOrder = new Order();
+                newOrder = new Order();
                 
                 catalogUI = CatalogUI.getInstance();
                 catalogUI.setMode("order");
@@ -360,7 +360,7 @@ public class PlaceOrderUI extends UserInterface {
     public void clear() {
         items.clear();
         quantities.clear();
-        currentOrder = new Order();
+        newOrder = new Order();
     }
     
     /**
@@ -383,7 +383,7 @@ public class PlaceOrderUI extends UserInterface {
      * @param quantity 
      */
     public void addItem(Item item, int quantity) {
-        currentOrder.addItem(item, quantity);
+        newOrder.addItem(item, quantity);
     }
     
     /**
@@ -394,7 +394,7 @@ public class PlaceOrderUI extends UserInterface {
     }*/
     
     public boolean orderInProcess() {
-        if(currentOrder == null) {
+        if(newOrder == null) {
             return false;
         } else {
             return true;
@@ -406,7 +406,7 @@ public class PlaceOrderUI extends UserInterface {
      */
     public void checkout() {
         
-        ArrayList<OrderLine> orderLines = currentOrder.getOrderLines();
+        ArrayList<OrderLine> orderLines = newOrder.getOrderLines();
         
         // for each orderline from the order and add them to the model
         for(int i = 0; i < orderLines.size(); i++) {
@@ -441,7 +441,7 @@ public class PlaceOrderUI extends UserInterface {
      * @param site 
      */
     public void setSite(String site) {
-        currentOrder.setSite(site);
+        newOrder.setSite(site);
     }
      
     @Override

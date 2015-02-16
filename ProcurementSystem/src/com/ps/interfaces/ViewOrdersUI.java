@@ -41,7 +41,7 @@ public class ViewOrdersUI extends UserInterface {
         orderModel = new DefaultListModel();
         orderQuantityModel = new DefaultListModel();
         
-        refreshModel();
+        displayCurrentOrders();
         initComponents();
         
         activeOrdersOnlyBtn.setSelected(true);
@@ -60,15 +60,6 @@ public class ViewOrdersUI extends UserInterface {
             singleton = new ViewOrdersUI();
         }
         return singleton;
-    }
-    
-    public void refreshModel() {
-        orders = SetOfOrders.getInstance();
-        
-        ordersModel.clear();
-        for(Order order : orders.getAllOrders()) {
-            ordersModel.addElement(order);
-        }
     }
 
     /**
@@ -444,7 +435,7 @@ public class ViewOrdersUI extends UserInterface {
 
     private void filterBySupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySupplierBtnActionPerformed
         if(supplierFiltered) {
-            refreshModel();
+            displayCurrentOrders();
             supplierFiltered = false;
         } else {
             // set flags
@@ -462,7 +453,7 @@ public class ViewOrdersUI extends UserInterface {
 
     private void filterByDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateBtnActionPerformed
         if(dateFiltered) {
-            refreshModel();
+            displayCurrentOrders();
             dateFiltered = false;
         } else {
             // set flags
@@ -488,7 +479,7 @@ public class ViewOrdersUI extends UserInterface {
 
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
         if(siteFiltered) {
-            refreshModel();
+            displayCurrentOrders();
             siteFiltered = false;
         } else {
             // set flags
@@ -574,7 +565,7 @@ public class ViewOrdersUI extends UserInterface {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                that.refreshModel();
+                that.displayCurrentOrders();
                 that.setVisible(true);
             }
         });
@@ -596,7 +587,12 @@ public class ViewOrdersUI extends UserInterface {
      * Displays all of the current orders
      */
     public void displayCurrentOrders() {
-        //TODO
+        orders = SetOfOrders.getInstance();
+        
+        ordersModel.clear();
+        for(Order order : orders.getOpenOrders()) {
+            ordersModel.addElement(order);
+        }
     }
 
     /**

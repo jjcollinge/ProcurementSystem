@@ -226,7 +226,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="matchingExistingOrdersMouseReleased"/>
-                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="matchingExistingOrdersValueChanged"/>
                   </Events>
                 </Component>
               </SubComponents>

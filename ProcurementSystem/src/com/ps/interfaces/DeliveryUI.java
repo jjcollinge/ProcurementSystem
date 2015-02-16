@@ -190,11 +190,6 @@ public class DeliveryUI extends UserInterface {
                 matchingExistingOrdersMouseReleased(evt);
             }
         });
-        matchingExistingOrders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                matchingExistingOrdersValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(matchingExistingOrders);
 
         returnToMainMenuBtn.setText("Return to Main Menu");
@@ -595,10 +590,6 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_descendBtnActionPerformed
 
-    private void matchingExistingOrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_matchingExistingOrdersValueChanged
-
-    }//GEN-LAST:event_matchingExistingOrdersValueChanged
-
     private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
         if(ascending1) {
             reverseList(orderModel);
@@ -779,7 +770,7 @@ public class DeliveryUI extends UserInterface {
      * Select an Order
      */
     public void selectOrder() {
-        Order order = (Order)matchingExistingOrders.getSelectedValue();
+        Order order = (Order)matchingExistingOrders.getSelectedValue(); //getOrder()
         delivery.setOrder(order);
         
         this.deliveriesPanel.setVisible(false);

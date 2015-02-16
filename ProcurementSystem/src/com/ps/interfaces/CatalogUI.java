@@ -127,7 +127,6 @@ public class CatalogUI extends UserInterface {
 
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(400, 540));
         jLayeredPane1.setMinimumSize(new java.awt.Dimension(400, 540));
-        jLayeredPane1.setPreferredSize(new java.awt.Dimension(400, 540));
 
         defaultPanel.setOpaque(false);
 

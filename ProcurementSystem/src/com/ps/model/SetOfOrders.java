@@ -92,7 +92,8 @@ public class SetOfOrders implements Serializable {
     
     /**
      * Return all orders
-     * n.b. shouldn't return null - changed from returning SetOfOrders
+     * n.b. changed from returning SetOfOrders as that would return an instance 
+     * of the class not a list of orders
      * @return SetOfOrders
      */
     public ArrayList<Order> getAllOrders() {
@@ -104,7 +105,13 @@ public class SetOfOrders implements Serializable {
      * n.b. shouldn't return null
      * @return SetOfOrders
      */
-    public SetOfOrders getOpenOrders() {
-        return null;
+    public ArrayList<Order> getOpenOrders() {
+        ArrayList<Order> openOrders = new ArrayList<>();
+        for(Order order : orders) {
+            if(order.getOrderStatus().equalsIgnoreCase("Pending")) {
+                openOrders.add(order);
+            }
+        }
+        return openOrders;
     }
 }
