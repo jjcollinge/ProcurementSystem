@@ -43,4 +43,14 @@ public class Delivery implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public Boolean getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Boolean approval) {
+        this.approval = approval;
+    }
+    
+    
 }
