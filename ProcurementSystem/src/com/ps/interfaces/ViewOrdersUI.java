@@ -96,6 +96,8 @@ public class ViewOrdersUI extends UserInterface {
         deliveryStatusValue = new javax.swing.JLabel();
         printAuditTrailBtn = new javax.swing.JButton();
         returnToExistingOrdersBtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        itemsOrderedQuantities = new javax.swing.JList();
         ordersPanel = new javax.swing.JPanel();
         locationTextField = new javax.swing.JTextField();
         dateTextField = new javax.swing.JTextField();
@@ -109,8 +111,6 @@ public class ViewOrdersUI extends UserInterface {
         ascendBtn = new javax.swing.JToggleButton();
         descendBtn = new javax.swing.JToggleButton();
         activeOrdersOnlyBtn = new javax.swing.JToggleButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        itemsOrderedQuantities = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -155,6 +155,11 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
+        itemsOrderedQuantities.setBackground(new java.awt.Color(51, 51, 51));
+        itemsOrderedQuantities.setForeground(new java.awt.Color(255, 255, 255));
+        itemsOrderedQuantities.setModel(orderQuantityModel);
+        jScrollPane3.setViewportView(itemsOrderedQuantities);
+
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
@@ -173,6 +178,9 @@ public class ViewOrdersUI extends UserInterface {
                     .addGroup(orderPanelLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
                             .addGroup(orderPanelLayout.createSequentialGroup()
                                 .addComponent(deliveryStatusLabel)
                                 .addGap(18, 18, 18)
@@ -184,17 +192,16 @@ public class ViewOrdersUI extends UserInterface {
                             .addGroup(orderPanelLayout.createSequentialGroup()
                                 .addComponent(deliverDateLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(deliveryDateValue))
-                            .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))))
+                                .addComponent(deliveryDateValue))))
                     .addGroup(orderPanelLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(orderPanelTitle))
                     .addGroup(orderPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +217,9 @@ public class ViewOrdersUI extends UserInterface {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemsOrderedLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                 .addGap(12, 12, 12)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deliverDateLabel)
@@ -227,7 +236,7 @@ public class ViewOrdersUI extends UserInterface {
                 .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         ordersPanel.setBackground(new java.awt.Color(51, 51, 51));
@@ -242,9 +251,9 @@ public class ViewOrdersUI extends UserInterface {
         matchingExistingOrders.setBackground(new java.awt.Color(51, 51, 51));
         matchingExistingOrders.setForeground(new java.awt.Color(255, 255, 255));
         matchingExistingOrders.setModel(ordersModel);
-        matchingExistingOrders.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                matchingExistingOrdersValueChanged(evt);
+        matchingExistingOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                matchingExistingOrdersMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(matchingExistingOrders);
@@ -312,15 +321,6 @@ public class ViewOrdersUI extends UserInterface {
             }
         });
 
-        itemsOrderedQuantities.setBackground(new java.awt.Color(51, 51, 51));
-        itemsOrderedQuantities.setForeground(new java.awt.Color(255, 255, 255));
-        itemsOrderedQuantities.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(itemsOrderedQuantities);
-
         javax.swing.GroupLayout ordersPanelLayout = new javax.swing.GroupLayout(ordersPanel);
         ordersPanel.setLayout(ordersPanelLayout);
         ordersPanelLayout.setHorizontalGroup(
@@ -345,12 +345,9 @@ public class ViewOrdersUI extends UserInterface {
                             .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ordersPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ordersPanelLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         ordersPanelLayout.setVerticalGroup(
@@ -374,9 +371,7 @@ public class ViewOrdersUI extends UserInterface {
                     .addComponent(descendBtn)
                     .addComponent(activeOrdersOnlyBtn))
                 .addGap(36, 36, 36)
-                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -517,11 +512,11 @@ public class ViewOrdersUI extends UserInterface {
         ui.Run();
     }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
-    private void matchingExistingOrdersValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_matchingExistingOrdersValueChanged
+    private void matchingExistingOrdersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchingExistingOrdersMouseReleased
         // User has selected an order
         Order selectedOrder = (Order)matchingExistingOrders.getSelectedValue();
         initialiseOrderPanel(selectedOrder);
-    }//GEN-LAST:event_matchingExistingOrdersValueChanged
+    }//GEN-LAST:event_matchingExistingOrdersMouseReleased
 
     private void initialiseOrderPanel(Order order) {
   
