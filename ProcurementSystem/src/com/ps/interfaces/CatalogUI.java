@@ -459,8 +459,7 @@ public class CatalogUI extends UserInterface {
         // switch panels
         catalogPanel.setVisible(false);
         quantityPanel.setVisible(true);
-        quantityPanel.revalidate();
-        quantityPanel.repaint();
+        
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
     /**
@@ -513,12 +512,7 @@ public class CatalogUI extends UserInterface {
                 checkBox.setBounds(295, 190 + (i * 22), 40, 40);
             }
         }
-        defaultPanel.revalidate();
-        defaultPanel.repaint();
-        catalogPanel.revalidate();
-        catalogPanel.repaint();
-        quantityPanel.revalidate();
-        quantityPanel.repaint();
+        updateScreen();
     }
     
     /**
@@ -531,6 +525,7 @@ public class CatalogUI extends UserInterface {
             descendBtn.setSelected(false);
             ascendBtn.setSelected(true);
             ascending = true;
+            updateScreen();
         }
     }//GEN-LAST:event_ascendBtnActionPerformed
 
@@ -544,6 +539,7 @@ public class CatalogUI extends UserInterface {
             ascendBtn.setSelected(false);
             descendBtn.setSelected(true);
             ascending = false;
+            updateScreen();
         }
     }//GEN-LAST:event_descendBtnActionPerformed
 
@@ -590,13 +586,7 @@ public class CatalogUI extends UserInterface {
         categorySortBtn.setSelected(false);
         priceSortBtn.setSelected(false);
         ascendBtnActionPerformed(null);
-        defaultPanel.setVisible(true);
-        defaultPanel.revalidate();
-        defaultPanel.repaint();
-        catalogPanel.revalidate();
-        catalogPanel.repaint();
-        quantityPanel.revalidate();
-        quantityPanel.repaint();
+        ascendBtn1ActionPerformed(null);
     }//GEN-LAST:event_alphabeticalSortBtnActionPerformed
 
     /**
@@ -642,14 +632,7 @@ public class CatalogUI extends UserInterface {
         alphabeticalSortBtn.setSelected(false);
         priceSortBtn.setSelected(false);
         ascendBtnActionPerformed(null);
-        
-        defaultPanel.setVisible(true);
-        defaultPanel.revalidate();
-        defaultPanel.repaint();
-        catalogPanel.revalidate();
-        catalogPanel.repaint();
-        quantityPanel.revalidate();
-        quantityPanel.repaint();
+        ascendBtn1ActionPerformed(null);
     }//GEN-LAST:event_categorySortBtnActionPerformed
 
     /**
@@ -695,14 +678,7 @@ public class CatalogUI extends UserInterface {
         alphabeticalSortBtn.setSelected(false);
         categorySortBtn.setSelected(false);
         ascendBtnActionPerformed(null);
-        
-        defaultPanel.setVisible(true);
-        defaultPanel.revalidate();
-        defaultPanel.repaint();
-        catalogPanel.revalidate();
-        catalogPanel.repaint();
-        quantityPanel.revalidate();
-        quantityPanel.repaint();
+        ascendBtn1ActionPerformed(null);
     }//GEN-LAST:event_priceSortBtnActionPerformed
 
     /**
@@ -739,6 +715,7 @@ public class CatalogUI extends UserInterface {
             descendBtn1.setSelected(false);
             ascendBtn1.setSelected(true);
             ascending1 = true;
+            updateScreen();
         }
     }//GEN-LAST:event_ascendBtn1ActionPerformed
 
@@ -838,6 +815,7 @@ public class CatalogUI extends UserInterface {
             ascendBtn1.setSelected(false);
             descendBtn1.setSelected(true);
             ascending1 = false;
+            updateScreen();
         }
     }//GEN-LAST:event_descendBtn1ActionPerformed
 
@@ -876,11 +854,18 @@ public class CatalogUI extends UserInterface {
             @Override
             public void run() {
                 that.setVisible(true);
-
+                
                 catalog = Catalog.getCatalog();
                 displayCatalog();          
             }
         });
+    }
+    
+    private void updateScreen() {
+        System.out.println("Updating screen");
+        
+        jLayeredPane1.revalidate();
+        jLayeredPane1.repaint();
     }
 
     /*Item getSelectedItem() {
@@ -901,6 +886,10 @@ public class CatalogUI extends UserInterface {
         // put in ascending order
         ascendBtnActionPerformed(null);
         ascendBtn.setSelected(true);
+        // set panels
+        catalogPanel.setVisible(true);
+        defaultPanel.setVisible(true);
+        quantityPanel.setVisible(false);
     }
     
     /**
