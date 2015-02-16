@@ -249,7 +249,9 @@ public class PlaceOrderUI extends UserInterface {
             this.setVisible(false);
             items.clear();
             currentOrder = null;
-            MainInterface.getInstance().Run();
+            MainInterface ui = MainInterface.getInstance();
+            ui.setPosition(this.getX(), this.getY());
+            ui.Run();
         } else {
             System.out.println("catalogUI is null and cannot be closed");
         }

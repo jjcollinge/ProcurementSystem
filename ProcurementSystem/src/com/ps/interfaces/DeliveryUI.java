@@ -18,6 +18,7 @@ import com.ps.app.DataAccessObject;
 import com.ps.model.Delivery;
 import com.ps.model.SetOfDeliveries;
 import com.ps.model.SetOfOrders;
+import java.awt.Dimension;
 
 /**
  *
@@ -51,12 +52,14 @@ public class DeliveryUI extends UserInterface {
         
         initComponents();
         
+        this.setSize(400, 540); // change JFRAME size
+        jLayeredPane1.setPreferredSize(new Dimension(400, 540)); // change layered pane size
+        
         checkBoxes = new HashMap<Integer, JCheckBox>();
         
         activeOrdersOnlyBtn.setSelected(true);
         
         //Settings
-        this.setSize(400, 540);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
@@ -129,6 +132,14 @@ public class DeliveryUI extends UserInterface {
         finishBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jLayeredPane1.setMaximumSize(new java.awt.Dimension(400, 540));
+        jLayeredPane1.setPreferredSize(new java.awt.Dimension(400, 540));
+
+        deliveriesPanel.setMaximumSize(new java.awt.Dimension(400, 540));
+        deliveriesPanel.setMinimumSize(new java.awt.Dimension(400, 540));
+        deliveriesPanel.setPreferredSize(new java.awt.Dimension(400, 540));
 
         deliveriesPanelTitle.setText("Viewing Possible Orders - Filtered by");
 
@@ -216,7 +227,7 @@ public class DeliveryUI extends UserInterface {
                             .addGroup(deliveriesPanelLayout.createSequentialGroup()
                                 .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(descendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                                .addComponent(descendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                             .addComponent(dateTextField)
                             .addComponent(locationTextField)
                             .addComponent(supplierTextField))
@@ -257,6 +268,11 @@ public class DeliveryUI extends UserInterface {
                 .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        deliveryPanel.setMaximumSize(new java.awt.Dimension(400, 540));
+        deliveryPanel.setMinimumSize(new java.awt.Dimension(400, 540));
+        deliveryPanel.setName(""); // NOI18N
+        deliveryPanel.setPreferredSize(new java.awt.Dimension(400, 540));
 
         deliveryPanelTitle.setText("Audit - Order Id: 00127653");
 
@@ -379,7 +395,7 @@ public class DeliveryUI extends UserInterface {
                                 .addComponent(dateVerifiedValue)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, deliveryPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                 .addComponent(deliveryStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(deliveryPanelLayout.createSequentialGroup()
                         .addGroup(deliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,15 +477,15 @@ public class DeliveryUI extends UserInterface {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deliveriesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deliveriesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(deliveryPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(deliveryPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deliveriesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deliveriesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(deliveryPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(deliveryPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jLayeredPane1.setLayer(deliveriesPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(deliveryPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -478,11 +494,11 @@ public class DeliveryUI extends UserInterface {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

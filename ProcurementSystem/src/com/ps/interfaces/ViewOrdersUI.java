@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import com.ps.model.SetOfOrders;
+import java.awt.Dimension;
 
 /**
  *
@@ -46,7 +47,7 @@ public class ViewOrdersUI extends UserInterface {
         activeOrdersOnlyBtn.setSelected(true);
         
         //Settings
-        jLayeredPane1.setSize(400, 540);
+        jLayeredPane1.setPreferredSize(new Dimension(400, 540));
         getContentPane().setBackground(new Color(64, 64, 64));
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
