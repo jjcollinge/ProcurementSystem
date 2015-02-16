@@ -127,7 +127,6 @@ public class CatalogUI extends UserInterface {
 
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(400, 540));
         jLayeredPane1.setMinimumSize(new java.awt.Dimension(400, 540));
-        jLayeredPane1.setPreferredSize(new java.awt.Dimension(400, 540));
 
         defaultPanel.setOpaque(false);
 
@@ -422,7 +421,7 @@ public class CatalogUI extends UserInterface {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addComponent(catalogPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
