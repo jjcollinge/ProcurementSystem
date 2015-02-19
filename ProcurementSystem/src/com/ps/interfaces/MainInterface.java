@@ -19,27 +19,11 @@ public class MainInterface extends UserInterface {
      * Creates new form MainInterface
      */
     private MainInterface() {
+  
         initComponents();
-        
+       
         // Settings
-        jPanel1.setSize(400, 540);
-        getContentPane().setBackground(new Color(64, 64, 64));
-        
-        this.newOrderBtn.setBackground(new Color(51, 51, 51));
-        this.existingOrdersBtn.setBackground(new Color(51, 51, 51));
-        this.browseCatalogBtn.setBackground(new Color(51, 51, 51));
-        this.recordDeliveryBtn.setBackground(new Color(51, 51, 51));
-        
-        this.newOrderBtn.setForeground(Color.WHITE);
-        this.existingOrdersBtn.setForeground(Color.WHITE);
-        this.browseCatalogBtn.setForeground(Color.WHITE);
-        this.recordDeliveryBtn.setForeground(Color.WHITE);
-        
-        this.catalogPanelTitleSeperator.setOpaque(true);
-        this.catalogPanelTitleSeperator.setForeground(new Color(0, 255, 255).brighter());
-        this.catalogPanelTitleSeperator.setBackground(new Color(64, 64, 64));
-        
-        
+        jPanel1.setSize(400, 540);   
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
@@ -86,43 +70,59 @@ public class MainInterface extends UserInterface {
         setMinimumSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setMaximumSize(new java.awt.Dimension(400, 540));
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 540));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 540));
 
+        catalogPanelTitleSeperator.setBackground(new java.awt.Color(0, 0, 0));
+        catalogPanelTitleSeperator.setForeground(new java.awt.Color(0, 204, 255));
+
+        browseCatalogBtn.setBackground(new java.awt.Color(51, 51, 51));
+        browseCatalogBtn.setForeground(new java.awt.Color(255, 255, 255));
         browseCatalogBtn.setText("Browse Catalog");
         browseCatalogBtn.setToolTipText("Create a new order");
+        browseCatalogBtn.setBorder(null);
         browseCatalogBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 browseCatalogBtnActionPerformed(evt);
             }
         });
 
+        newOrderBtn.setBackground(new java.awt.Color(51, 51, 51));
+        newOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
         newOrderBtn.setText("New Order");
         newOrderBtn.setToolTipText("Create a new order");
+        newOrderBtn.setBorder(null);
         newOrderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newOrderBtnActionPerformed(evt);
             }
         });
 
+        existingOrdersBtn.setBackground(new java.awt.Color(51, 51, 51));
+        existingOrdersBtn.setForeground(new java.awt.Color(255, 255, 255));
         existingOrdersBtn.setText("Existing Orders");
         existingOrdersBtn.setToolTipText("Create a new order");
+        existingOrdersBtn.setBorder(null);
         existingOrdersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 existingOrdersBtnActionPerformed(evt);
             }
         });
 
+        recordDeliveryBtn.setBackground(new java.awt.Color(51, 51, 51));
+        recordDeliveryBtn.setForeground(new java.awt.Color(255, 255, 255));
         recordDeliveryBtn.setText("Record Delivery");
         recordDeliveryBtn.setToolTipText("Create a new order");
+        recordDeliveryBtn.setBorder(null);
         recordDeliveryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 recordDeliveryBtnActionPerformed(evt);
             }
         });
 
-        userComboBox.setBackground(new java.awt.Color(51, 51, 51));
+        userComboBox.setBackground(new java.awt.Color(0, 0, 0));
         userComboBox.setForeground(new java.awt.Color(255, 255, 255));
         userComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kumar Kalla", "Elizabeth Webber" }));
         userComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -139,9 +139,10 @@ public class MainInterface extends UserInterface {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Site:");
 
-        siteField.setBackground(new java.awt.Color(51, 51, 51));
+        siteField.setBackground(new java.awt.Color(0, 0, 0));
         siteField.setForeground(new java.awt.Color(255, 255, 255));
         siteField.setText("Sheffield");
+        siteField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,7 +162,7 @@ public class MainInterface extends UserInterface {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(siteField, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(userComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -179,9 +180,9 @@ public class MainInterface extends UserInterface {
                 .addComponent(userComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(siteField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(siteField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(newOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(existingOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,7 +312,7 @@ public class MainInterface extends UserInterface {
         //</editor-fold>
         
         // closure
-        MainInterface that = this;
+        MainInterface that = MainInterface.getInstance();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

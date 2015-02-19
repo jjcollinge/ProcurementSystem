@@ -112,51 +112,85 @@ public class ViewOrdersUI extends UserInterface {
         ascendBtn = new javax.swing.JToggleButton();
         descendBtn = new javax.swing.JToggleButton();
         activeOrdersOnlyBtn = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(400, 540));
 
+        orderPanel.setBackground(new java.awt.Color(0, 0, 0));
         orderPanel.setPreferredSize(new java.awt.Dimension(400, 540));
 
+        orderPanelTitle.setBackground(new java.awt.Color(0, 0, 0));
+        orderPanelTitle.setForeground(new java.awt.Color(255, 255, 255));
         orderPanelTitle.setText("Audit - Order Id: 00127653");
 
+        OrderPanelTitleSeparator.setBackground(new java.awt.Color(0, 0, 0));
+        OrderPanelTitleSeparator.setForeground(new java.awt.Color(0, 204, 255));
+
+        orderDateLabel.setBackground(new java.awt.Color(0, 0, 0));
+        orderDateLabel.setForeground(new java.awt.Color(255, 255, 255));
         orderDateLabel.setText("Order Date:");
 
+        orderDateValue.setBackground(new java.awt.Color(0, 0, 0));
+        orderDateValue.setForeground(new java.awt.Color(255, 255, 255));
         orderDateValue.setText("12/10/2013");
 
+        itemsOrderedLabel.setBackground(new java.awt.Color(0, 0, 0));
+        itemsOrderedLabel.setForeground(new java.awt.Color(255, 255, 255));
         itemsOrderedLabel.setText("Items Ordered");
 
+        itemsOrderedList.setBackground(new java.awt.Color(0, 0, 0));
+        itemsOrderedList.setForeground(new java.awt.Color(255, 255, 255));
         itemsOrderedList.setModel(orderModel);
         jScrollPane2.setViewportView(itemsOrderedList);
 
+        deliverDateLabel.setBackground(new java.awt.Color(0, 0, 0));
+        deliverDateLabel.setForeground(new java.awt.Color(255, 255, 255));
         deliverDateLabel.setText("Delivery Date:");
 
+        deliveryDateValue.setBackground(new java.awt.Color(0, 0, 0));
+        deliveryDateValue.setForeground(new java.awt.Color(255, 255, 255));
         deliveryDateValue.setText("19/10/2013");
 
+        signedForByLabel.setBackground(new java.awt.Color(0, 0, 0));
+        signedForByLabel.setForeground(new java.awt.Color(255, 255, 255));
         signedForByLabel.setText("Signed For By:");
 
+        signedForByValue.setBackground(new java.awt.Color(0, 0, 0));
+        signedForByValue.setForeground(new java.awt.Color(255, 255, 255));
         signedForByValue.setText("Kumar Kalla");
 
+        deliveryStatusLabel.setBackground(new java.awt.Color(0, 0, 0));
+        deliveryStatusLabel.setForeground(new java.awt.Color(255, 255, 255));
         deliveryStatusLabel.setText("Delivery Status:");
 
+        deliveryStatusValue.setBackground(new java.awt.Color(0, 0, 0));
+        deliveryStatusValue.setForeground(new java.awt.Color(255, 255, 255));
         deliveryStatusValue.setText("Accepted");
 
+        printAuditTrailBtn.setBackground(new java.awt.Color(51, 51, 51));
+        printAuditTrailBtn.setForeground(new java.awt.Color(255, 255, 255));
         printAuditTrailBtn.setText("Print Audit Trail");
+        printAuditTrailBtn.setBorder(null);
         printAuditTrailBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printAuditTrailBtnActionPerformed(evt);
             }
         });
 
+        returnToExistingOrdersBtn.setBackground(new java.awt.Color(51, 51, 51));
+        returnToExistingOrdersBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnToExistingOrdersBtn.setText("Return to Existing Orders");
+        returnToExistingOrdersBtn.setBorder(null);
         returnToExistingOrdersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnToExistingOrdersBtnActionPerformed(evt);
             }
         });
 
-        itemsOrderedQuantities.setBackground(new java.awt.Color(51, 51, 51));
+        itemsOrderedQuantities.setBackground(new java.awt.Color(0, 0, 0));
         itemsOrderedQuantities.setForeground(new java.awt.Color(255, 255, 255));
         itemsOrderedQuantities.setModel(orderQuantityModel);
         jScrollPane3.setViewportView(itemsOrderedQuantities);
@@ -177,32 +211,33 @@ public class ViewOrdersUI extends UserInterface {
                                 .addComponent(orderDateValue))
                             .addComponent(itemsOrderedLabel)))
                     .addGroup(orderPanelLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
-                            .addGroup(orderPanelLayout.createSequentialGroup()
-                                .addComponent(deliveryStatusLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(deliveryStatusValue))
-                            .addGroup(orderPanelLayout.createSequentialGroup()
-                                .addComponent(signedForByLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(signedForByValue))
-                            .addGroup(orderPanelLayout.createSequentialGroup()
-                                .addComponent(deliverDateLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(deliveryDateValue))))
-                    .addGroup(orderPanelLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(orderPanelTitle))
-                    .addGroup(orderPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, orderPanelLayout.createSequentialGroup()
+                            .addGap(24, 24, 24)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, orderPanelLayout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(printAuditTrailBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(returnToExistingOrdersBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+                                .addGroup(orderPanelLayout.createSequentialGroup()
+                                    .addComponent(deliveryStatusLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(deliveryStatusValue))
+                                .addGroup(orderPanelLayout.createSequentialGroup()
+                                    .addComponent(signedForByLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(signedForByValue))
+                                .addGroup(orderPanelLayout.createSequentialGroup()
+                                    .addComponent(deliverDateLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(deliveryDateValue))))))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +275,7 @@ public class ViewOrdersUI extends UserInterface {
                 .addContainerGap(78, Short.MAX_VALUE))
         );
 
-        ordersPanel.setBackground(new java.awt.Color(51, 51, 51));
+        ordersPanel.setBackground(new java.awt.Color(0, 0, 0));
         ordersPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         locationTextField.setText("Sheffield S1");
@@ -249,7 +284,7 @@ public class ViewOrdersUI extends UserInterface {
 
         supplierTextField.setText("Type here");
 
-        matchingExistingOrders.setBackground(new java.awt.Color(51, 51, 51));
+        matchingExistingOrders.setBackground(new java.awt.Color(0, 0, 0));
         matchingExistingOrders.setForeground(new java.awt.Color(255, 255, 255));
         matchingExistingOrders.setModel(ordersModel);
         matchingExistingOrders.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -259,123 +294,146 @@ public class ViewOrdersUI extends UserInterface {
         });
         jScrollPane1.setViewportView(matchingExistingOrders);
 
-        returnToMainMenuBtn.setBackground(new java.awt.Color(102, 102, 102));
+        returnToMainMenuBtn.setBackground(new java.awt.Color(51, 51, 51));
         returnToMainMenuBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnToMainMenuBtn.setText("Return to Main Menu");
+        returnToMainMenuBtn.setBorder(null);
         returnToMainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnToMainMenuBtnActionPerformed(evt);
             }
         });
 
-        filterBySiteBtn.setBackground(new java.awt.Color(102, 102, 102));
+        filterBySiteBtn.setBackground(new java.awt.Color(51, 51, 51));
         filterBySiteBtn.setForeground(new java.awt.Color(255, 255, 255));
         filterBySiteBtn.setText("Site Filtered");
+        filterBySiteBtn.setBorder(null);
         filterBySiteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterBySiteBtnActionPerformed(evt);
             }
         });
 
-        filterByDateBtn.setBackground(new java.awt.Color(102, 102, 102));
+        filterByDateBtn.setBackground(new java.awt.Color(51, 51, 51));
         filterByDateBtn.setForeground(new java.awt.Color(255, 255, 255));
         filterByDateBtn.setText("Filter by Date");
+        filterByDateBtn.setBorder(null);
         filterByDateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterByDateBtnActionPerformed(evt);
             }
         });
 
-        filterBySupplierBtn.setBackground(new java.awt.Color(102, 102, 102));
+        filterBySupplierBtn.setBackground(new java.awt.Color(51, 51, 51));
         filterBySupplierBtn.setForeground(new java.awt.Color(255, 255, 255));
         filterBySupplierBtn.setText("Filter by Supplier");
+        filterBySupplierBtn.setBorder(null);
         filterBySupplierBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterBySupplierBtnActionPerformed(evt);
             }
         });
 
-        ascendBtn.setBackground(new java.awt.Color(102, 102, 102));
+        ascendBtn.setBackground(new java.awt.Color(51, 51, 51));
         ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
+        ascendBtn.setBorder(null);
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ascendBtnActionPerformed(evt);
             }
         });
 
-        descendBtn.setBackground(new java.awt.Color(102, 102, 102));
+        descendBtn.setBackground(new java.awt.Color(51, 51, 51));
         descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
+        descendBtn.setBorder(null);
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descendBtnActionPerformed(evt);
             }
         });
 
-        activeOrdersOnlyBtn.setBackground(new java.awt.Color(102, 102, 102));
+        activeOrdersOnlyBtn.setBackground(new java.awt.Color(51, 51, 51));
         activeOrdersOnlyBtn.setForeground(new java.awt.Color(255, 255, 255));
         activeOrdersOnlyBtn.setText("Active Orders Only");
+        activeOrdersOnlyBtn.setBorder(null);
         activeOrdersOnlyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activeOrdersOnlyBtnActionPerformed(evt);
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Viewing Orders - Filtered by ");
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 204, 255));
+
         javax.swing.GroupLayout ordersPanelLayout = new javax.swing.GroupLayout(ordersPanel);
         ordersPanel.setLayout(ordersPanelLayout);
         ordersPanelLayout.setHorizontalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ordersPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ordersPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(ordersPanelLayout.createSequentialGroup()
-                                .addComponent(ascendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filterBySiteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filterByDateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(ordersPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1))
+                    .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(ordersPanelLayout.createSequentialGroup()
+                            .addComponent(ascendBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(ordersPanelLayout.createSequentialGroup()
+                            .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(dateTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(locationTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(supplierTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(15, 15, 15)
+                            .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(filterByDateBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(filterBySiteBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
         );
         ordersPanelLayout.setVerticalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ordersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterBySiteBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterByDateBtn))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ordersPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(locationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filterBySiteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterBySupplierBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                    .addComponent(filterByDateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ascendBtn)
-                    .addComponent(descendBtn)
-                    .addComponent(activeOrdersOnlyBtn))
-                .addGap(36, 36, 36)
+                    .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterBySupplierBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(activeOrdersOnlyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnToMainMenuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -735,10 +793,12 @@ public class ViewOrdersUI extends UserInterface {
     private javax.swing.JLabel itemsOrderedLabel;
     private javax.swing.JList itemsOrderedList;
     private javax.swing.JList itemsOrderedQuantities;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JList matchingExistingOrders;
     private javax.swing.JLabel orderDateLabel;

@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 
 /**
  * User interface for displaying the catalog
@@ -53,7 +54,6 @@ public class CatalogUI extends UserInterface {
         itemQuantities = new DefaultListModel<Integer>();
         allItems = new DefaultListModel<Item>();
     
-        getContentPane().setBackground(new Color(64, 64, 64));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initComponents();
@@ -142,6 +142,7 @@ public class CatalogUI extends UserInterface {
         alphabeticalSortBtn.setBackground(new java.awt.Color(51, 51, 51));
         alphabeticalSortBtn.setForeground(new java.awt.Color(255, 255, 255));
         alphabeticalSortBtn.setText("Alphabetically Ordered");
+        alphabeticalSortBtn.setBorder(null);
         alphabeticalSortBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alphabeticalSortBtnActionPerformed(evt);
@@ -151,6 +152,7 @@ public class CatalogUI extends UserInterface {
         categorySortBtn.setBackground(new java.awt.Color(51, 51, 51));
         categorySortBtn.setForeground(new java.awt.Color(255, 255, 255));
         categorySortBtn.setText("Order Categorically");
+        categorySortBtn.setBorder(null);
         categorySortBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categorySortBtnActionPerformed(evt);
@@ -160,6 +162,7 @@ public class CatalogUI extends UserInterface {
         priceSortBtn.setBackground(new java.awt.Color(51, 51, 51));
         priceSortBtn.setForeground(new java.awt.Color(255, 255, 255));
         priceSortBtn.setText("Order by Unit Price");
+        priceSortBtn.setBorder(null);
         priceSortBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceSortBtnActionPerformed(evt);
@@ -182,27 +185,28 @@ public class CatalogUI extends UserInterface {
             defaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, defaultPanelLayout.createSequentialGroup()
                 .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(alphabeticalSortBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(categorySortBtn)
-                .addGap(12, 12, 12)
-                .addComponent(priceSortBtn)
+                .addComponent(alphabeticalSortBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(categorySortBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(priceSortBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         catalogPanel.setVisible(true);
-        catalogPanel.setBackground(new java.awt.Color(51, 51, 51));
+        catalogPanel.setBackground(new java.awt.Color(0, 0, 0));
         catalogPanel.setForeground(new java.awt.Color(255, 255, 255));
         catalogPanel.setPreferredSize(new java.awt.Dimension(400, 540));
 
-        listOfItems.setBackground(new java.awt.Color(51, 51, 51));
+        listOfItems.setBackground(new java.awt.Color(0, 0, 0));
         listOfItems.setForeground(new java.awt.Color(255, 255, 255));
         listOfItems.setModel(allItems);
         jScrollPane1.setViewportView(listOfItems);
 
-        proceedToQuantityReviewBtn.setBackground(new java.awt.Color(102, 102, 102));
+        proceedToQuantityReviewBtn.setBackground(new java.awt.Color(51, 51, 51));
         proceedToQuantityReviewBtn.setForeground(new java.awt.Color(255, 255, 255));
         proceedToQuantityReviewBtn.setText("Proceed to Quantity Review");
+        proceedToQuantityReviewBtn.setBorder(null);
         proceedToQuantityReviewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 proceedToQuantityReviewBtnActionPerformed(evt);
@@ -212,6 +216,7 @@ public class CatalogUI extends UserInterface {
         ascendBtn.setBackground(new java.awt.Color(51, 51, 51));
         ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
+        ascendBtn.setBorder(null);
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ascendBtnActionPerformed(evt);
@@ -221,11 +226,15 @@ public class CatalogUI extends UserInterface {
         descendBtn.setBackground(new java.awt.Color(51, 51, 51));
         descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
+        descendBtn.setBorder(null);
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descendBtnActionPerformed(evt);
             }
         });
+
+        catalogPanelTitleSeperator.setBackground(new java.awt.Color(0, 0, 0));
+        catalogPanelTitleSeperator.setForeground(new java.awt.Color(0, 204, 255));
 
         catalogPanelTitle.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         catalogPanelTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -240,10 +249,6 @@ public class CatalogUI extends UserInterface {
             catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(catalogPanelTitleSeperator)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
-                .addGap(0, 44, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(226, 226, 226))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
@@ -253,17 +258,20 @@ public class CatalogUI extends UserInterface {
                         .addContainerGap()
                         .addComponent(catalogPanelTitle))
                     .addGroup(catalogPanelLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel1))
-                    .addGroup(catalogPanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(catalogPanelLayout.createSequentialGroup()
+                                    .addGap(23, 23, 23)
+                                    .addComponent(jLabel1)))
+                            .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catalogPanelLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         catalogPanelLayout.setVerticalGroup(
@@ -273,41 +281,52 @@ public class CatalogUI extends UserInterface {
                 .addComponent(catalogPanelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(catalogPanelTitleSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ascendBtn)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(catalogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descendBtn)
-                    .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(proceedToQuantityReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         quantityPanel.setVisible(false);
+        quantityPanel.setBackground(new java.awt.Color(0, 0, 0));
         quantityPanel.setPreferredSize(new java.awt.Dimension(400, 540));
 
+        listOfSelectedItemNames.setBackground(new java.awt.Color(0, 0, 0));
+        listOfSelectedItemNames.setForeground(new java.awt.Color(255, 255, 255));
         listOfSelectedItemNames.setModel(allItems);
         jScrollPane2.setViewportView(listOfSelectedItemNames);
 
+        cancelOrderBtn.setBackground(new java.awt.Color(51, 51, 51));
+        cancelOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
         cancelOrderBtn.setText("Cancel Order");
+        cancelOrderBtn.setBorder(null);
         cancelOrderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelOrderBtnActionPerformed(evt);
             }
         });
 
+        proceedToOrderReviewBtn.setBackground(new java.awt.Color(51, 51, 51));
+        proceedToOrderReviewBtn.setForeground(new java.awt.Color(255, 255, 255));
         proceedToOrderReviewBtn.setText("Proceed to Order Review");
+        proceedToOrderReviewBtn.setBorder(null);
         proceedToOrderReviewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 proceedToOrderReviewBtnActionPerformed(evt);
             }
         });
 
+        listOfSelectedItemQuantities.setBackground(new java.awt.Color(0, 0, 0));
+        listOfSelectedItemQuantities.setForeground(new java.awt.Color(255, 255, 255));
         listOfSelectedItemQuantities.setModel(itemQuantities);
         listOfSelectedItemQuantities.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -316,7 +335,10 @@ public class CatalogUI extends UserInterface {
         });
         jScrollPane4.setViewportView(listOfSelectedItemQuantities);
 
+        ascendBtn1.setBackground(new java.awt.Color(51, 51, 51));
+        ascendBtn1.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn1.setText("Ascend");
+        ascendBtn1.setBorder(null);
         ascendBtn1.setMaximumSize(new java.awt.Dimension(80, 25));
         ascendBtn1.setMinimumSize(new java.awt.Dimension(80, 25));
         ascendBtn1.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -338,11 +360,19 @@ public class CatalogUI extends UserInterface {
             }
         });
 
+        catalogTitle.setForeground(new java.awt.Color(255, 255, 255));
         catalogTitle.setText("Available Catalog");
 
+        quantityPanelTitleSeparator.setBackground(new java.awt.Color(0, 0, 0));
+        quantityPanelTitleSeparator.setForeground(new java.awt.Color(0, 204, 255));
+
+        quantityPanelTitle.setForeground(new java.awt.Color(255, 255, 255));
         quantityPanelTitle.setText("Creating new order - Select items");
 
+        descendBtn1.setBackground(new java.awt.Color(51, 51, 51));
+        descendBtn1.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn1.setText("Descend");
+        descendBtn1.setBorder(null);
         descendBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descendBtn1ActionPerformed(evt);
@@ -358,29 +388,30 @@ public class CatalogUI extends UserInterface {
                 .addContainerGap()
                 .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(quantityPanelLayout.createSequentialGroup()
-                        .addComponent(cancelOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(proceedToOrderReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 49, Short.MAX_VALUE))
-                    .addGroup(quantityPanelLayout.createSequentialGroup()
                         .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(catalogTitle))
-                            .addComponent(catalogTitleSeparator, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, quantityPanelLayout.createSequentialGroup()
                                     .addComponent(ascendBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(descendBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
                                 .addComponent(searchField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(quantityPanelTitle, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(quantityPanelTitle, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(catalogTitleSeparator, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(quantityPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quantityPanelLayout.createSequentialGroup()
+                        .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(quantityPanelLayout.createSequentialGroup()
+                                .addComponent(cancelOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(proceedToOrderReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(quantityPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18))))
         );
         quantityPanelLayout.setVerticalGroup(
             quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,16 +427,16 @@ public class CatalogUI extends UserInterface {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ascendBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(descendBtn1))
+                .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ascendBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(descendBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4)
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cancelOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(quantityPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(proceedToOrderReviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49))
         );
@@ -443,13 +474,13 @@ public class CatalogUI extends UserInterface {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -888,7 +919,6 @@ public class CatalogUI extends UserInterface {
             @Override
             public void run() {   
                 that.setVisible(true);
-                
                 // get latest catalog of items
                 catalog = Catalog.getCatalog();
                 displayCatalog();          

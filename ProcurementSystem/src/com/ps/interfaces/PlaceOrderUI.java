@@ -89,43 +89,46 @@ public class PlaceOrderUI extends UserInterface {
         setMinimumSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.setMaximumSize(new java.awt.Dimension(400, 540));
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 540));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 540));
 
-        itemsInOrder.setBackground(new java.awt.Color(51, 51, 51));
+        itemsInOrder.setBackground(new java.awt.Color(0, 0, 0));
         itemsInOrder.setForeground(new java.awt.Color(255, 255, 255));
         itemsInOrder.setModel(items);
         jScrollPane1.setViewportView(itemsInOrder);
 
-        quantityOfItemsInOrder.setBackground(new java.awt.Color(51, 51, 51));
+        quantityOfItemsInOrder.setBackground(new java.awt.Color(0, 0, 0));
         quantityOfItemsInOrder.setForeground(new java.awt.Color(255, 255, 255));
         quantityOfItemsInOrder.setModel(quantities);
         jScrollPane2.setViewportView(quantityOfItemsInOrder);
 
-        deleteSelectedItemBtn.setBackground(new java.awt.Color(102, 102, 102));
+        deleteSelectedItemBtn.setBackground(new java.awt.Color(51, 51, 51));
         deleteSelectedItemBtn.setForeground(new java.awt.Color(255, 255, 255));
         deleteSelectedItemBtn.setText("Delete Selected Item");
+        deleteSelectedItemBtn.setBorder(null);
         deleteSelectedItemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteSelectedItemBtnActionPerformed(evt);
             }
         });
 
-        returnToCatalogBtn.setBackground(new java.awt.Color(102, 102, 102));
+        returnToCatalogBtn.setBackground(new java.awt.Color(51, 51, 51));
         returnToCatalogBtn.setForeground(new java.awt.Color(255, 255, 255));
         returnToCatalogBtn.setText("Return to Catalog");
+        returnToCatalogBtn.setBorder(null);
         returnToCatalogBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnToCatalogBtnActionPerformed(evt);
             }
         });
 
-        placeOrderBtn.setBackground(new java.awt.Color(102, 102, 102));
+        placeOrderBtn.setBackground(new java.awt.Color(51, 51, 51));
         placeOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
         placeOrderBtn.setText("Place Order");
+        placeOrderBtn.setBorder(null);
         placeOrderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 placeOrderBtnActionPerformed(evt);
@@ -143,6 +146,7 @@ public class PlaceOrderUI extends UserInterface {
         ascendBtn.setBackground(new java.awt.Color(51, 51, 51));
         ascendBtn.setForeground(new java.awt.Color(255, 255, 255));
         ascendBtn.setText("Ascend");
+        ascendBtn.setBorder(null);
         ascendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ascendBtnActionPerformed(evt);
@@ -152,6 +156,7 @@ public class PlaceOrderUI extends UserInterface {
         descendBtn.setBackground(new java.awt.Color(51, 51, 51));
         descendBtn.setForeground(new java.awt.Color(255, 255, 255));
         descendBtn.setText("Descend");
+        descendBtn.setBorder(null);
         descendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descendBtnActionPerformed(evt);
@@ -161,6 +166,9 @@ public class PlaceOrderUI extends UserInterface {
         tapItemToModifyLabel.setBackground(new java.awt.Color(51, 51, 51));
         tapItemToModifyLabel.setForeground(new java.awt.Color(255, 255, 255));
         tapItemToModifyLabel.setText("Tap item to modify");
+
+        placeOrderTitleSeparator.setBackground(new java.awt.Color(0, 0, 0));
+        placeOrderTitleSeparator.setForeground(new java.awt.Color(0, 204, 255));
 
         placeOrderTitle.setBackground(new java.awt.Color(51, 51, 51));
         placeOrderTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,19 +212,20 @@ public class PlaceOrderUI extends UserInterface {
                 .addComponent(placeOrderTitleSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ascendBtn)
-                    .addComponent(descendBtn)
-                    .addComponent(tapItemToModifyLabel))
+                    .addComponent(descendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tapItemToModifyLabel)
+                    .addComponent(ascendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteSelectedItemBtn)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(inputValueField, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14)
+                        .addComponent(inputValueField, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteSelectedItemBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(returnToCatalogBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
@@ -379,7 +388,7 @@ public class PlaceOrderUI extends UserInterface {
         }
         //</editor-fold>
 
-        PlaceOrderUI that = this;
+        PlaceOrderUI that = PlaceOrderUI.getInstance();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
