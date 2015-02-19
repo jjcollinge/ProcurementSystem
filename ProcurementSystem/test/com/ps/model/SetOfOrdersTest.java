@@ -137,8 +137,8 @@ public class SetOfOrdersTest {
         System.out.println("getOpenOrders");
         SetOfOrders instance = null;
         SetOfOrders expResult = null;
-        SetOfOrders result = instance.getOpenOrders();
-        assertEquals(expResult, result);
+        //SetOfOrders result = instance.getOpenOrders();
+      //  assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

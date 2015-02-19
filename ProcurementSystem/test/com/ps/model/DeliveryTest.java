@@ -48,8 +48,80 @@ public class DeliveryTest {
         assertEquals(expectedResult, approvalSet);
     }
     
+
+
+    @Test
+    public void testUpdateDeliveryStatus() {
+        System.out.println("updateDeliveryStatus");
+        String deliveryStatus = "";
+        String status = "";
+     
+        Delivery instance = new Delivery();
+        instance.updateDeliveryStatus(status);
+        instance.setDeliveryStatus(deliveryStatus);
+        
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+      @Test
+    public void testUpdateDeliveryStatus2() {
+         System.out.println("updateDeliveryStatus");
+        String deliveryStatus = "fgfgf";
+        String status = "dgdgdg";
+     
+        Delivery instance = new Delivery();
+        instance.updateDeliveryStatus(status);
+        instance.setDeliveryStatus(deliveryStatus);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+  
+    /**
+     * Test of setDeliveryStatus method, of class Delivery.
+     */
+    @Test
+    public void testSetDeliveryStatus() {
+        System.out.println("setDeliveryStatus");
+        String deliveryStatus = "";
+        Delivery instance = new Delivery();
+        instance.setDeliveryStatus(deliveryStatus);
+        // TODO review the generated test code and remove the default call to fail.
+       // fail("The test case is a prototype.");
+    }
+
+  //SHOULD IT ACCEPT NULL?
+    @Test
+    public void testGetApproval() {
+        System.out.println("getApproval");
+        Delivery instance = new Delivery();
+        Boolean expResult = null;
+        Boolean result = instance.getApproval();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       // fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setApproval method, of class Delivery.
+     */
+    @Test
+    public void testSetApproval() {
+        System.out.println("setApproval");
+        Boolean approval = null;
+        Delivery instance = new Delivery();
+        instance.setApproval(approval);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+    
+        
+    }
+    
       
    
     
     
-}
+

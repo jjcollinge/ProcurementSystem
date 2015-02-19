@@ -5,7 +5,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ItemTest {
+
+public class ItemTest  {
     public static Item i, i2;
     public ItemTest() {
     }
@@ -55,13 +56,13 @@ public class ItemTest {
         assertEquals(expResult, result, 0.0);
     }
     
-      @Test //testing for null
+      @Test(expected=NullPointerException.class) //testing for null
     public void testGetPrice3() {
         System.out.println("getPrice");
         Item instance = null;
         double expResult = 0.0;
         double result = instance.getPrice();
-        assertEquals(expResult, result, 0.0);
+        //assertEquals(expResult, result, 0.0);
     }
 
     /**
@@ -91,7 +92,7 @@ public class ItemTest {
     /**
      * Test of compareTo method, of class Item.
      */
-    @Test
+    @Test(expected=NullPointerException.class)
     public void testCompareTo1() {
         System.out.println("compareTo");
         Item otherItem = null;
@@ -101,7 +102,7 @@ public class ItemTest {
         assertEquals(expResult, result);        
     }
     
-    @Test
+    @Test(expected=NullPointerException.class)
     public void testCompareTo2() {
         System.out.println("compareTo");
         Item otherItem = null;
@@ -121,25 +122,41 @@ public class ItemTest {
         assertEquals(expResult, result);
     }
     
-    @Test
+     @Test
     public void testCompareTo4() {
         System.out.println("compareTo");
-        Item otherItem = i;
+        Item otherItem = i2;
         Item instance = i2;
         int expResult = 0;
         int result = instance.compareTo(otherItem);
         assertEquals(expResult, result);
+        
     }
-      @Test //testing for null 
+    
+      @Test(expected=NullPointerException.class) //testing for null 
     public void testCompareTo5() {
         System.out.println("compareTo");
         Item otherItem = i;
         Item instance = null;
-        int expResult = 0;
+      //  int expResult = 0;
         int result = instance.compareTo(otherItem);
-        assertEquals(expResult, result);
+        //assertEquals(expResult, result);
+        
     }
     
+        @Test(expected=NumberFormatException.class) //testing for string 
+     public void testCompareTo6() {
+         
+        System.out.println("compareTo");
+        String otherItem = "agfg";
+        String instance = "3";
+       
+        int result = instance.compareTo(otherItem);
+        
+        //assertEquals(expResult, result);
+    }
+    
+
     
     
     

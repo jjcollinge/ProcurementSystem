@@ -31,7 +31,7 @@ public class OrderLineTest {
     /**
      * Test of deleteItem method, of class OrderLine.
      */
-    @Test
+    @Test (expected=NullPointerException.class)
     public void testDeleteItem() {
         System.out.println("deleteItem");
         OrderLine instance = null;
