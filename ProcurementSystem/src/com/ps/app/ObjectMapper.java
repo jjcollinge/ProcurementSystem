@@ -9,11 +9,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
- * @author SR
+ * Responsible for serializing and deserializing POJOs
+ * @author JCollinge
  */
-public class DataAccessObject {
+public class ObjectMapper {
     
+    /**
+     * Attempts to serialize a given object and store it in
+     * the provided file name.
+     * @param obj Object to serialize
+     * @param filename File path to write to
+     */
     public static void Serialize(Object obj, String filename)
     {
         try {
@@ -26,6 +32,12 @@ public class DataAccessObject {
         }
     }
   
+    /**
+     * Attempts to deserialize data from a given file and
+     * return the equivalent POJO.
+     * @param filename File path to read from
+     * @return POJO
+     */
     public static Object Deserialize(String filename)
     {
         FileInputStream in = null;

@@ -5,8 +5,11 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
- *
- * @author JC
+ * The main interface. Responsible for provided the user
+ * with a menu to access the systems main functions. Will
+ * handle the transition to the new user interface and will
+ * pass in any required data.
+ * @author JCollinge
  */
 public class MainInterface extends UserInterface {
 
@@ -40,6 +43,10 @@ public class MainInterface extends UserInterface {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    /**
+     * Lazy load and get singleton instance
+     * @return MainInterface singleton instance
+     */
     public static MainInterface getInstance() {
         if(singleton == null) {
             singleton = new MainInterface();
@@ -206,12 +213,22 @@ public class MainInterface extends UserInterface {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Called the browse catalog button has been pressed. Should setup any
+     * required data and pass the selected UI on for execution.
+     * @param evt 
+     */
     private void browseCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseCatalogBtnActionPerformed
         CatalogUI catalogUI = CatalogUI.getInstance();
         catalogUI.setMode("browse");
         getOption(catalogUI);
     }//GEN-LAST:event_browseCatalogBtnActionPerformed
 
+    /**
+     * Called the new order button has been pressed. Should setup any
+     * required data and pass the selected UI on for execution.
+     * @param evt 
+     */
     private void newOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderBtnActionPerformed
         PlaceOrderUI placeOrderUI = PlaceOrderUI.getInstance();
         String site = siteField.getText();
@@ -219,18 +236,35 @@ public class MainInterface extends UserInterface {
         getOption(placeOrderUI);
     }//GEN-LAST:event_newOrderBtnActionPerformed
 
+    /**
+     * Called the existing orders button has been pressed. Should setup any
+     * required data and pass the selected UI on for execution.
+     * @param evt 
+     */
     private void existingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingOrdersBtnActionPerformed
         ViewOrdersUI viewOrderUI = ViewOrdersUI.getInstance();
         getOption(viewOrderUI);
     }//GEN-LAST:event_existingOrdersBtnActionPerformed
 
+    /**
+     * Called the record delivery button has been pressed. Should setup any
+     * required data and pass the selected UI on for execution.
+     * @param evt 
+     */
     private void recordDeliveryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recordDeliveryBtnActionPerformed
         DeliveryUI deliveryUI = DeliveryUI.getInstance();
         getOption(deliveryUI);
     }//GEN-LAST:event_recordDeliveryBtnActionPerformed
 
+    /**
+     * Called when a user is selected from the user drop down box. This is
+     * a way of filtering what functionality is available to specific users.
+     * As no permissions or users were presented in the class diagram we cannot
+     * implement a proper profiling system.
+     * @param evt 
+     */
     private void userComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userComboBoxActionPerformed
-        // Doing this as there is no User class and therefore no way of adding user permissions
+        
         if(userComboBox.getSelectedItem() == "Kumar Kalla") {
             browseCatalogBtn.setVisible(true);
             newOrderBtn.setVisible(true);
@@ -242,6 +276,10 @@ public class MainInterface extends UserInterface {
         }
     }//GEN-LAST:event_userComboBoxActionPerformed
 
+    /**
+     * Responsible for handling the execution of a given user interface
+     * @param ui 
+     */
     public void getOption(UserInterface ui) {
         ui.setPosition(this.getX(), this.getY());
         ui.Run();
@@ -272,6 +310,7 @@ public class MainInterface extends UserInterface {
         }
         //</editor-fold>
         
+        // closure
         MainInterface that = this;
 
         /* Create and display the form */

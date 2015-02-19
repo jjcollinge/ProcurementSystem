@@ -1,8 +1,9 @@
 package com.ps.model;
 
 /**
- *
- * @author Simon
+ * This class is provided on the class diagram but has no apparent use
+ * within our implementation.
+ * @author JCollinge
  */
 public class ExternalRoutes {
     

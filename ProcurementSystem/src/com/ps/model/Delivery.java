@@ -4,8 +4,8 @@ import com.ps.model.Order;
 import java.io.Serializable;
 
 /**
- *
- * @author Simon
+ * A delivery encapsulates an order and meta data about the delivery.
+ * @author JCollinge
  */
 public class Delivery implements Serializable {
     private Order order;
@@ -13,12 +13,16 @@ public class Delivery implements Serializable {
     private Boolean approval;
     private String approvedBy;
     
+    /**
+     * Ctor
+     */
     public Delivery() {
         
     }
     
     /**
      * Updates the current deliveryStatus
+     * @param status status to set
      */
     public void updateDeliveryStatus(String status) {
         deliveryStatus = status;
@@ -32,6 +36,10 @@ public class Delivery implements Serializable {
         approvedBy = "Kumar Kalla";
     }
 
+    /**
+     * Change the delivery status
+     * @param deliveryStatus 
+     */
     public void setDeliveryStatus(String deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
     }
@@ -44,10 +52,18 @@ public class Delivery implements Serializable {
         this.order = order;
     }
 
+    /**
+     * Returns whether or no the delivery has been approved
+     * @return 
+     */
     public Boolean getApproval() {
         return approval;
     }
 
+    /**
+     * Set the approval state of this delivery
+     * @param approval 
+     */
     public void setApproval(Boolean approval) {
         this.approval = approval;
     }

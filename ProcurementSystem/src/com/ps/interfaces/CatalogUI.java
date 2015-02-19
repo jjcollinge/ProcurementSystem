@@ -16,8 +16,16 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 /**
- *
- * @author JC
+ * User interface for displaying the catalog
+ * contents and facilitating the selection,
+ * filtering and sorting of items. This UI
+ * consists of 2 separate JPanel which provides
+ * two views which will switch when the user
+ * proceeds from item selection to quantity
+ * review. This UI can also be viewed in multiple
+ * modes (browse, order). Depending on the mode
+ * different components will be visible.
+ * @author JCollinge
  */
 public class CatalogUI extends UserInterface {
 
@@ -33,7 +41,7 @@ public class CatalogUI extends UserInterface {
     private boolean ascending1 = true;
     
     /**
-     * Creates new form CatalogUI
+     * Ctor - initialise any data and/or Swing components
      */
     private CatalogUI() {
 
@@ -59,7 +67,7 @@ public class CatalogUI extends UserInterface {
 
     /**
      * Lazy loading singleton
-     * @return 
+     * @return CatalogUI singleton instance
      */
     public static CatalogUI getInstance() {
         if (singleton == null) {
@@ -69,8 +77,9 @@ public class CatalogUI extends UserInterface {
     }
     
     /**
-     * Set the mode of this ui
-     * @param mode 
+     * Set the mode of the UI. This is used to
+     * restrict which Swing components are visible
+     * @param mode Mode to set
      */
     public void setMode(String mode) {
         if(mode.equalsIgnoreCase("browse")) {
@@ -446,12 +455,13 @@ public class CatalogUI extends UserInterface {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    /**
+     * 'Proceed to quantity review' button press. Responsible for handling the
+     * transition from the catalog display panel to the quantity review panel.
+     * @param evt 
+     */
     private void proceedToQuantityReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToQuantityReviewBtnActionPerformed
 
-        /**
-         * Proceed to quantity review panel
-         **/
         
         // grab the currently selected items
         setSelectedItem();
@@ -527,7 +537,8 @@ public class CatalogUI extends UserInterface {
     }
     
     /**
-     * User has pressed the ascend button on the catalog panel
+     * User has pressed the ascend button on the catalog panel.
+     * This will list the items in ascending order
      */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         // reverse the list and toggle the buttons
@@ -541,7 +552,8 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_ascendBtnActionPerformed
 
     /**
-     * User has pressed the descend button on the catalog panel
+     * User has pressed the descend button on the catalog panel.
+     * This will list the items in descending order
      */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
         // reverse the list and toggle the buttons
@@ -693,7 +705,10 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_priceSortBtnActionPerformed
 
     /**
-     * Key released for search field
+     * Called every time a letter is typed in the search field.
+     * Should filter the items in the list dependent on the 
+     * search field.
+     * @param evt 
      */
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         String searchFieldText = searchField.getText();
@@ -789,7 +804,9 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
     /**
-     * Canel the current order
+     * Canel the current order. This should cleanup any temporary data and 
+     * reset the user interface to its default state before returning to the
+     * Main user interface
      */
     private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
        
@@ -821,7 +838,12 @@ public class CatalogUI extends UserInterface {
         ui.Run();
     }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
+    /**
+     * User has pressed the descend button on the quantity review panel
+     * @param evt 
+     */
     private void descendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtn1ActionPerformed
+        // only update if currently not ascending
         if(ascending1) {
             reverseList();
             ascendBtn1.setSelected(false);
@@ -864,25 +886,31 @@ public class CatalogUI extends UserInterface {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-            public void run() {
+            public void run() {   
                 that.setVisible(true);
                 
+                // get latest catalog of items
                 catalog = Catalog.getCatalog();
                 displayCatalog();          
             }
         });
     }
     
+    /**
+     * Called to update Swing rendering
+     */
     private void updateScreen() {
-        System.out.println("Updating screen");
-        
         jLayeredPane1.revalidate();
         jLayeredPane1.repaint();
     }
 
-    /*Item getSelectedItem() {
-     return someItem;
-     }*/
+    /**
+     * WARNING: Required by class diagram but unused.
+     * @return Item selected item
+     */
+    Item getSelectedItem() {
+        return null;
+    }
     
     /**
      * Display the catalog
@@ -947,6 +975,7 @@ public class CatalogUI extends UserInterface {
 
     /**
      * get the current item model
+     * @return DefaultListModel
      */
     public DefaultListModel getModel() {
         return allItems;

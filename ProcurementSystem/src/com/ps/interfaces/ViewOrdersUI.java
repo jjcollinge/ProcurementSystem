@@ -16,8 +16,13 @@ import com.ps.model.SetOfOrders;
 import java.awt.Dimension;
 
 /**
- *
- * @author JC
+ * User Interface for displaying a list
+ * of all current orders. Consists of 2 separate
+ * JPanel which provide 2 views. The first view
+ * is a list of all available orders. The second view
+ * is a details of a specific order based on the
+ * selection of the user.
+ * @author JCollinge
  */
 public class ViewOrdersUI extends UserInterface {
 
@@ -33,7 +38,7 @@ public class ViewOrdersUI extends UserInterface {
     private boolean ascending = true;
     
     /**
-     * Creates new form ViewOrderUI
+     * Ctor -  initialise data and Swing componenets
      */
     private ViewOrdersUI() {
         
@@ -55,6 +60,10 @@ public class ViewOrdersUI extends UserInterface {
         ordersPanel.setVisible(true);
     }
 
+    /**
+     * Lazy load and get singleton instance
+     * @return 
+     */
     public static ViewOrdersUI getInstance() {
         if (singleton == null) {
             singleton = new ViewOrdersUI();
@@ -402,19 +411,41 @@ public class ViewOrdersUI extends UserInterface {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Called when the return to existing order button is pressed. Should
+     * handle the transition from the specific order panel back to a list
+     * of all orders
+     * @param evt 
+     */
     private void returnToExistingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToExistingOrdersBtnActionPerformed
         orderPanel.setVisible(false);
         ordersPanel.setVisible(true);
     }//GEN-LAST:event_returnToExistingOrdersBtnActionPerformed
 
+    /**
+     * Prints an audit trail. The class diagram does not have any implementation or
+     * reference to an audit trail so we are unsure what this is required to do.
+     * @param evt 
+     */
     private void printAuditTrailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printAuditTrailBtnActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Audit trail: Processed(01/01/2015), Dispatched(01/01/2015), Delivered(01/01/2015)");
     }//GEN-LAST:event_printAuditTrailBtnActionPerformed
 
+    /**
+     * Called when the active orders button is pressed. There is not implementation
+     * or reference to this in the class diagram so we are unsure what this should
+     * do.
+     * @param evt 
+     */
     private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
-
+        // DO SOMETHING
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
+    /**
+     * Called when the descend button is pressed. Should sort the items into
+     * descending order.
+     * @param evt 
+     */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
         if(ascending) {
             reverseList();
@@ -424,6 +455,11 @@ public class ViewOrdersUI extends UserInterface {
         }
     }//GEN-LAST:event_descendBtnActionPerformed
 
+    /**
+     * Called when the ascend button is pressed. Should sort the items
+     * into ascending order.
+     * @param evt 
+     */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         if(!ascending) {
             reverseList();
@@ -433,7 +469,19 @@ public class ViewOrdersUI extends UserInterface {
         }
     }//GEN-LAST:event_ascendBtnActionPerformed
 
+    /**
+     * Should filter by supplier
+     * @param evt 
+     */
     private void filterBySupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySupplierBtnActionPerformed
+        
+        String filterTerm = supplierTextField.getText();
+        
+        if(filterTerm.isEmpty()) {
+            System.out.println("Filter term is empty");
+            return;
+        }
+        
         if(supplierFiltered) {
             displayCurrentOrders();
             supplierFiltered = false;
@@ -446,12 +494,24 @@ public class ViewOrdersUI extends UserInterface {
             filterBySiteBtn.setSelected(false);
             filterByDateBtn.setSelected(false);
 
-            String param = supplierTextField.getText();
+            String param = filterTerm;
             requestFilter("supplier", param);
         }
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
+    /**
+     * Should filter by date
+     * @param evt 
+     */
     private void filterByDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateBtnActionPerformed
+        
+        String filterTerm = dateTextField.getText();
+        
+        if(filterTerm.isEmpty()) {
+            System.out.println("Filter term is empty");
+            return;
+        }
+        
         if(dateFiltered) {
             displayCurrentOrders();
             dateFiltered = false;
@@ -464,7 +524,7 @@ public class ViewOrdersUI extends UserInterface {
             filterBySiteBtn.setSelected(false);
             filterBySupplierBtn.setSelected(false);
 
-            String txt = dateTextField.getText();
+            String txt = filterTerm;
             SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
             Date date = null;
             try {
@@ -477,7 +537,19 @@ public class ViewOrdersUI extends UserInterface {
         }
     }//GEN-LAST:event_filterByDateBtnActionPerformed
 
+    /**
+     * Should filter by site
+     * @param evt 
+     */
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
+        
+         String filterTerm = locationTextField.getText();
+        
+        if(filterTerm.isEmpty()) {
+            System.out.println("Filter term is empty");
+            return;
+        }
+        
         if(siteFiltered) {
             displayCurrentOrders();
             siteFiltered = false;
@@ -490,11 +562,16 @@ public class ViewOrdersUI extends UserInterface {
             filterByDateBtn.setSelected(false);
             filterBySupplierBtn.setSelected(false);
 
-            String param = locationTextField.getText();
+            String param = filterTerm;
             requestFilter("site", param);
         }
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
+    /**
+     * Called when the return to main menu button is pressed. Should clear any
+     * temporary data and handle the transition back to the main interface.
+     * @param evt 
+     */
     private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
 
         MainInterface ui = MainInterface.getInstance();
@@ -504,12 +581,20 @@ public class ViewOrdersUI extends UserInterface {
         ui.Run();
     }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
+    /**
+     * Called when an order has been selected by the user.
+     * @param evt 
+     */
     private void matchingExistingOrdersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchingExistingOrdersMouseReleased
         // User has selected an order
         Order selectedOrder = (Order)matchingExistingOrders.getSelectedValue();
         initialiseOrderPanel(selectedOrder);
     }//GEN-LAST:event_matchingExistingOrdersMouseReleased
 
+    /**
+     * Set default data and models for order panel
+     * @param order 
+     */
     private void initialiseOrderPanel(Order order) {
   
         orderModel.clear();
@@ -560,6 +645,7 @@ public class ViewOrdersUI extends UserInterface {
         //</editor-fold>
         //</editor-fold>
 
+        // closure
         ViewOrdersUI that = this;
 
         /* Create and display the form */
@@ -571,6 +657,9 @@ public class ViewOrdersUI extends UserInterface {
         });
     }
     
+    /**
+     * Should reverse the model lists
+     */
     private void reverseList() {
         ArrayList<Order> reversedList = new ArrayList<>();
         for(int i = ordersModel.size() - 1; i >= 0; i--) {
@@ -582,7 +671,6 @@ public class ViewOrdersUI extends UserInterface {
         });
     }
 
-     //private SetOfOrders orderList;
     /**
      * Displays all of the current orders
      */
@@ -596,14 +684,17 @@ public class ViewOrdersUI extends UserInterface {
     }
 
     /**
-     * Load all current orders
+     * Load all current orders. This is provided in the class diagram but
+     * was not used.
      */
     public void loadOrders() {
-        //TODO
     }
 
     /**
-     * Filter order list
+     * Will match a given filter to a filter implementation and update
+     * the model.
+     * @param filter
+     * @param param
      */
     public void requestFilter(String filter, Object param) {
 

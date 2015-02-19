@@ -14,15 +14,20 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import com.ps.app.DataAccessObject;
+import com.ps.app.ObjectMapper;
 import com.ps.model.Delivery;
 import com.ps.model.SetOfDeliveries;
 import com.ps.model.SetOfOrders;
 import java.awt.Dimension;
 
 /**
- *
- * @author JC
+ * User interface for displaying the delivery
+ * details. This is made up of 2 separate 
+ * JPanels which provide 2 views. The first
+ * view is of the current list of deliveries.
+ * The second view is a particular delivery based
+ * on the user selection. This 
+ * @author JCollinge
  */
 public class DeliveryUI extends UserInterface {
 
@@ -63,6 +68,10 @@ public class DeliveryUI extends UserInterface {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    /**
+     * Lazy load and get singleton instance
+     * @return DeliveryUI singleton instance
+     */
     public static DeliveryUI getInstance() {
         if(singleton == null) {
             singleton = new DeliveryUI();
@@ -70,7 +79,10 @@ public class DeliveryUI extends UserInterface {
         return singleton;
     }
     
-     public void refreshModel() {
+    /**
+     * Refresh the orders model
+     */
+     public void refreshOrdersModel() {
         orders = SetOfOrders.getInstance();
         
         ordersModel.clear();
@@ -144,6 +156,11 @@ public class DeliveryUI extends UserInterface {
         deliveriesPanelTitle.setText("Viewing Possible Orders - Filtered by");
 
         locationTextField.setText("Sheffield S1");
+        locationTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locationTextFieldActionPerformed(evt);
+            }
+        });
 
         supplierTextField.setText("Type here");
 
@@ -499,6 +516,11 @@ public class DeliveryUI extends UserInterface {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Clear any temporary data and reset this user interface to its
+     * default state. then invoke the main interface.
+     * @param evt 
+     */
     private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
         MainInterface ui = MainInterface.getInstance();
         ui.setPosition(this.getX(), this.getY());
@@ -507,9 +529,22 @@ public class DeliveryUI extends UserInterface {
         ui.Run();
     }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
 
+    /**
+     * Attempt to filter the current list of orders based on the provided
+     * site search term.
+     * @param evt 
+     */
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
-         if(siteFiltered) {
-            refreshModel();
+        
+        String searchTerm = locationTextField.getText();
+        
+        if(searchTerm.isEmpty()) {
+            System.out.println("Empty search term");
+            return;
+        }
+        
+        if(siteFiltered) {
+            refreshOrdersModel();
             siteFiltered = false;
         } else {
             // set flags
@@ -520,14 +555,27 @@ public class DeliveryUI extends UserInterface {
             filterByDateBtn.setSelected(false);
             filterBySupplierBtn.setSelected(false);
 
-            String param = locationTextField.getText();
+            String param = searchTerm;
             requestFilter("site", param);
         }
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
+    /**
+     * Attempt to filter the current list of orders based on the provided
+     * date search term.
+     * @param evt 
+     */
     private void filterByDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateBtnActionPerformed
+        
+        String searchTerm = dateTextField.getText();
+        
+        if(searchTerm.isEmpty()) {
+            System.out.println("Empty search term");
+            return;
+        }
+        
         if(dateFiltered) {
-            refreshModel();
+            refreshOrdersModel();
             dateFiltered = false;
         } else {
             // set flags
@@ -538,21 +586,35 @@ public class DeliveryUI extends UserInterface {
             filterBySiteBtn.setSelected(false);
             filterBySupplierBtn.setSelected(false);
 
-            String txt = dateTextField.getText();
+            String txt = searchTerm;
             SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
             Date date = null;
             try {
                 date = sdf.parse(txt);
             } catch (ParseException ex) {
                 Logger.getLogger(ViewOrdersUI.class.getName()).log(Level.SEVERE, null, ex);
+                return;
             }
             requestFilter("date", date);
         }
     }//GEN-LAST:event_filterByDateBtnActionPerformed
 
+    /**
+     * Attempt to filter the current list of orders based on the provided
+     * supplier search term.
+     * @param evt 
+     */
     private void filterBySupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySupplierBtnActionPerformed
+        
+        String searchTerm = supplierTextField.getText();
+        
+        if(searchTerm.isEmpty()) {
+            System.out.println("Empty search term");
+            return;
+        }
+        
         if(supplierFiltered) {
-            refreshModel();
+            refreshOrdersModel();
             supplierFiltered = false;
         } else {
             // set flags
@@ -563,11 +625,16 @@ public class DeliveryUI extends UserInterface {
             filterBySiteBtn.setSelected(false);
             filterByDateBtn.setSelected(false);
 
-            String param = supplierTextField.getText();
+            String param = searchTerm;
             requestFilter("supplier", param);
         }
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
+    /**
+     * Called when the ascend button is pressed. Should sort
+     * the orders into ascending order
+     * @param evt 
+     */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         if(!ascending) {
             reverseList(ordersModel);
@@ -581,6 +648,11 @@ public class DeliveryUI extends UserInterface {
 
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
+    /**
+     * Called when the descending button is pressed. Should sort the orders
+     * into descending order.
+     * @param evt 
+     */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
         if(ascending) {
             reverseList(ordersModel);
@@ -590,6 +662,11 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_descendBtnActionPerformed
 
+    /**
+     * Called when the ascending button is pressed on the delivery panel
+     * (2nd view) and should sort the orders into ascending order.
+     * @param evt 
+     */
     private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
         if(ascending1) {
             reverseList(orderModel);
@@ -599,6 +676,11 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_ascendBtn1ActionPerformed
 
+    /**
+     * Called when the descending button is pressed on the delivery panel
+     * (2nd view) and should sort the orders into ascending order.
+     * @param evt 
+     */
     private void descendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtn1ActionPerformed
        if(!ascending1) {
            reverseList(orderModel);
@@ -608,6 +690,11 @@ public class DeliveryUI extends UserInterface {
        }
     }//GEN-LAST:event_descendBtn1ActionPerformed
 
+    /**
+     * Called when the confirm button has been pressed. This should confirm that
+     * a delivery has been dealt with.
+     * @param evt 
+     */
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         dateVerifiedValue.setText(new SimpleDateFormat("dd/MM/YYYY").format(new Date()));
         checkDeliveryContents();
@@ -617,33 +704,60 @@ public class DeliveryUI extends UserInterface {
        
     }//GEN-LAST:event_deliveryItemListValueChanged
 
+    /**
+     * Called when a delivery item has been selected from the list
+     * @param evt 
+     */
     private void deliveryItemListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deliveryItemListMouseReleased
         int si = deliveryItemList.getSelectedIndex();
         updateCheckBoxes(si);
         checkDeliveryContents();
     }//GEN-LAST:event_deliveryItemListMouseReleased
 
+    /**
+     * Called when the return to deliveries button has been called. Should handle the
+     * transition between the 2nd view back to the first view. Including removing
+     * any temporary data and reseting the state of the view.
+     * @param evt 
+     */
     private void returnToDeliveriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToDeliveriesBtnActionPerformed
         matchingExistingOrders.clearSelection();
         this.Run();
     }//GEN-LAST:event_returnToDeliveriesBtnActionPerformed
 
+    /**
+     * Called when an order is selected. Should select the order and handle transitioning 
+     * to the 2nd view.
+     * @param evt 
+     */
     private void matchingExistingOrdersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchingExistingOrdersMouseReleased
         selectOrder();
         initCheckBoxes();
     }//GEN-LAST:event_matchingExistingOrdersMouseReleased
 
+    /**
+     * Called when the finish button has been pressed. Should finialize the delivery
+     * check and set any required data needed to complete a delivery.
+     * @param evt 
+     */
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
         requestSignature();
         SetOfDeliveries sod = SetOfDeliveries.getInstance();
         sod.addDelivery(delivery);
-        DataAccessObject.Serialize(sod.getListOdDeliveries(), "deliveries.ser");
+        ObjectMapper.Serialize(sod.getListOdDeliveries(), "deliveries.ser");
         this.setVisible(false);
         MainInterface ui = MainInterface.getInstance();
         ui.setPosition(this.getX(), this.getY());
         ui.Run();
     }//GEN-LAST:event_finishBtnActionPerformed
 
+    private void locationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_locationTextFieldActionPerformed
+
+    /**
+     * Initialise check boxes with default data
+     */
     private void initCheckBoxes() {
         for(int i = 0; i < orderModel.size(); i++) {
             JCheckBox box = new JCheckBox();
@@ -657,6 +771,11 @@ public class DeliveryUI extends UserInterface {
         }
     }
     
+    /**
+     * Update the check boxes based on the selected
+     * data.
+     * @param selectedIndex 
+     */
     private void updateCheckBoxes(int selectedIndex) {
 
         if(checkBoxes.get(selectedIndex).isVisible()) {
@@ -699,12 +818,15 @@ public class DeliveryUI extends UserInterface {
         }
         //</editor-fold>
 
+        // closure
         DeliveryUI that = this;
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                that.refreshModel();
+                
+                // setup default user interface state
+                that.refreshOrdersModel();
                 that.setVisible(true);
                 that.deliveriesPanel.setVisible(true);
                 that.deliveryPanel.setVisible(false);
@@ -713,6 +835,10 @@ public class DeliveryUI extends UserInterface {
         });
     }
     
+    /**
+     * Reverse the order of a model
+     * @param model 
+     */
     private void reverseList(DefaultListModel model) {
         ArrayList<Object> reversedList = new ArrayList<>();
         for(int i = model.size() - 1; i >= 0; i--) {
@@ -725,7 +851,11 @@ public class DeliveryUI extends UserInterface {
     }
     
     /**
-     * Filter order list
+     * Filter order list. This will take a filter and invoke
+     * a specific filter if it matches any of the provided
+     * filter methods.
+     * @param filter
+     * @param param
      */
     public void requestFilter(String filter, Object param) {
 
@@ -767,10 +897,17 @@ public class DeliveryUI extends UserInterface {
     }
     
     /**
-     * Select an Order
+     * Gets the selected order based on the users selection and
+     * updates the relevant Swing components and models.
      */
     public void selectOrder() {
         Order order = (Order)matchingExistingOrders.getSelectedValue(); //getOrder()
+        
+        if(order == null) {
+            System.out.println("No order selected");
+            return;
+        }
+        
         delivery.setOrder(order);
         
         this.deliveriesPanel.setVisible(false);

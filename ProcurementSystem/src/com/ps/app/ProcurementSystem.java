@@ -3,8 +3,9 @@ package com.ps.app;
 import com.ps.interfaces.MainInterface;
 
 /**
- *
- * @author Simon
+ * Main method class. Responsible for parsing any execution
+ * options and configuration prior to running the application.
+ * @author JCollinge
  */
 public class ProcurementSystem {
   

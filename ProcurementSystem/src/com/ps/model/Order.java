@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
- * @author Simon
+ * Represents an in system order. Hold data
+ * relevant to ordering a product.
+ * @author JCollinge
  */
 public class Order implements Serializable {
     private ArrayList<OrderLine> orderLines;
@@ -16,6 +17,9 @@ public class Order implements Serializable {
     private String specialInstructions;
     private String site;
     
+    /**
+     * Ctor
+     */
     public Order() {
         orderLines = new ArrayList<OrderLine>();
         this.orderStatus = "Pending";
@@ -28,14 +32,21 @@ public class Order implements Serializable {
         orderLines.clear();
     }
 
+    /**
+     * Set the order status
+     * @param orderStatus 
+     */
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
+    /**
+     * Set the order site
+     * @param site 
+     */
     public void setSite(String site) {
         this.site = site;
     }
-    
     
     /**
      * Returns the orderDate
@@ -75,6 +86,10 @@ public class Order implements Serializable {
         
     }
 
+    /**
+     * Set the order date
+     * @param orderDate 
+     */
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
@@ -86,14 +101,26 @@ public class Order implements Serializable {
         
     }
     
+    /**
+     * Get all order lines for this order
+     * @return 
+     */
     public ArrayList<OrderLine> getOrderLines() {
         return this.orderLines;
     }
 
+    /**
+     * Get the special instructions for this order
+     * @return 
+     */
     public String getSpecialInstructions() {
         return specialInstructions;
     }
 
+    /**
+     * Get the site of this order
+     * @return 
+     */
     public String getSite() {
         return site;
     }
@@ -113,6 +140,11 @@ public class Order implements Serializable {
         return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) + " - \"" + specialInstructions.substring(0, 25) + "...\" : " + orderStatus;
     }
     
+    /**
+     * Compare dates for equality
+     * @param date
+     * @return success
+     */
     public boolean hasSameDate(Date date) {
         if(this.orderDate.getYear() == date.getYear() &&
             this.orderDate.getMonth() == date.getMonth() &&

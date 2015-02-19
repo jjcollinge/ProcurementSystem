@@ -12,8 +12,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
- *
- * @author JC
+ * User interface for displaying the selected
+ * order for review. Basically implements an order
+ * review/checkout page which allows the user to
+ * view their selected items and quantities and make
+ * ammendments.
+ * @author JCollinge
  */
 public class PlaceOrderUI extends UserInterface {
 
@@ -45,6 +49,10 @@ public class PlaceOrderUI extends UserInterface {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    /**
+     * Lazy load and get the singleton instance
+     * @return 
+     */
     public static PlaceOrderUI getInstance() {
         if(singleton == null) {
             singleton = new PlaceOrderUI();
@@ -239,6 +247,11 @@ public class PlaceOrderUI extends UserInterface {
         quantities.remove(selectedItemIndex);
     }//GEN-LAST:event_deleteSelectedItemBtnActionPerformed
  
+    /**
+     * Called when the place order button has been pressed. Should finialise
+     * an order and add the order to the set of orders.
+     * @param evt 
+     */
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
         if(catalogUI != null) {
             catalogUI.closeCatalog();
@@ -257,6 +270,11 @@ public class PlaceOrderUI extends UserInterface {
         }
     }//GEN-LAST:event_placeOrderBtnActionPerformed
 
+    /**
+     * Called when the ascend button has been pressed. Should sort the model
+     * in ascending order
+     * @param evt 
+     */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         if(!ascending) {
             reverseList();
@@ -266,6 +284,11 @@ public class PlaceOrderUI extends UserInterface {
         }
     }//GEN-LAST:event_ascendBtnActionPerformed
 
+    /**
+     * Called when the descend button has been pressed. Should sort the model
+     * in descending order
+     * @param evt 
+     */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
         if(ascending) {
             reverseList();
@@ -275,12 +298,21 @@ public class PlaceOrderUI extends UserInterface {
         }
     }//GEN-LAST:event_descendBtnActionPerformed
 
+    /**
+     * Called when text is input to the input text field.
+     * @param evt 
+     */
     private void inputValueFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputValueFieldKeyReleased
          // get selected item
         int selectedItemIndex = quantityOfItemsInOrder.getSelectedIndex();
         
         // get selected value
         String txt = inputValueField.getText();
+        
+        if(txt.isEmpty()) {
+            System.out.println("Input text empty");
+            return;
+        }
         
         // parse input value
         int value;
@@ -297,6 +329,12 @@ public class PlaceOrderUI extends UserInterface {
         
     }//GEN-LAST:event_inputValueFieldKeyReleased
 
+    /**
+     * Called when the return to catalog button is pressed. Should clear any
+     * temporary data and handle the transition back to the default catalog
+     * user interface
+     * @param evt 
+     */
     private void returnToCatalogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToCatalogBtnActionPerformed
 
         items.clear();
@@ -357,6 +395,9 @@ public class PlaceOrderUI extends UserInterface {
         });
     }
     
+    /**
+     * Clear temporary data
+     */
     public void clear() {
         items.clear();
         quantities.clear();
@@ -372,6 +413,7 @@ public class PlaceOrderUI extends UserInterface {
     
     /**
      * Returns the option
+     * @return Order
      */
     public Order getOption() {
         return null;
@@ -387,12 +429,19 @@ public class PlaceOrderUI extends UserInterface {
     }
     
     /**
-     * Returns the currently selected item
+     * Returns the currently selected item.
+     * WARNING: This is in the class diagram but never used
+     * @return Item
      */
-    /* public Item getSelectedItem() {
-        return selectedItem;
-    }*/
+    public Item getSelectedItem() {
+        return null;
+    }
     
+    /**
+     * Status check to see if an order is already in process. This
+     * allows data to be sustained between UI transfers.
+     * @return boolean
+     */
     public boolean orderInProcess() {
         if(newOrder == null) {
             return false;
@@ -402,7 +451,7 @@ public class PlaceOrderUI extends UserInterface {
     }
     
     /**
-     * n.b. I have changed the name from Checkout in the design doc
+     * Add all order lines from the current order to the models.
      */
     public void checkout() {
         
@@ -418,6 +467,9 @@ public class PlaceOrderUI extends UserInterface {
         this.setVisible(true);
     }
     
+    /**
+     * Reverse the model lists
+     */
     private void reverseList() {
         ArrayList<Item> reversedList = new ArrayList<>();
         ArrayList<Integer> reversedQuantities = new ArrayList<>();

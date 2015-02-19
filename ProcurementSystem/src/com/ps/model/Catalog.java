@@ -2,11 +2,12 @@ package com.ps.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import com.ps.app.DataAccessObject;
+import com.ps.app.ObjectMapper;
 
 /**
- *
- * @author Simon
+ * A catalog stores a list of all available items.
+ * Should be persistent between runs.
+ * @author JCollinge
  */
 public class Catalog implements Serializable {
     
@@ -14,9 +15,12 @@ public class Catalog implements Serializable {
     private static Catalog singleton;
     private final String filename = "catalog.ser";
     
+    /**
+     * Ctor
+     */
     private Catalog() {
         
-        listOfItems = (ArrayList<Item>)DataAccessObject.Deserialize(filename);
+        listOfItems = (ArrayList<Item>)ObjectMapper.Deserialize(filename);
         if(listOfItems == null) {
             initCatalog();
         }
@@ -25,7 +29,7 @@ public class Catalog implements Serializable {
     /**
      * Return Catalog
      * n.b. should this be here, if its just returning the current instance? is it a singleton?
-     * @return 
+     * @return Catalog current catalog
      */
     public static Catalog getCatalog() {
         if(singleton == null) {
@@ -34,6 +38,9 @@ public class Catalog implements Serializable {
         return singleton;
     }
     
+    /**
+     * If no data can be deserialized this will set some initial data.
+     */
     public void initCatalog() {
         listOfItems = new ArrayList<>();
         
@@ -42,7 +49,7 @@ public class Catalog implements Serializable {
         listOfItems.add(new Item("Door brass handles", 5.0, "single"));
         listOfItems.add(new Item("Concrete mixed by truck", 50.0, "500kg"));
        
-        DataAccessObject.Serialize(listOfItems, filename);
+        ObjectMapper.Serialize(listOfItems, filename);
     }
     
     /**
@@ -66,6 +73,10 @@ public class Catalog implements Serializable {
         
     }
 
+    /**
+     * Get list of items
+     * @return ArrayList current item list
+     */
     public ArrayList<Item> getListOfItems() {
         return listOfItems;
     }
