@@ -19,10 +19,12 @@ public class SetOfDeliveries {
      */
     private SetOfDeliveries() {
         listOdDeliveries = (ArrayList<Delivery>) ObjectMapper.Deserialize(filename);
+        System.out.println("Attemping to load");
         if(listOdDeliveries == null) {
             System.out.println("Couldn't load deliveries file, creating a new set");
             listOdDeliveries = new ArrayList<Delivery>();
         }
+        System.out.println("Size: " + listOdDeliveries);
     }
     
     /**
@@ -42,6 +44,8 @@ public class SetOfDeliveries {
      */
     public void addDelivery(Delivery delivery) {
         listOdDeliveries.add(delivery);
+        ObjectMapper.Serialize(listOdDeliveries, filename);
+        System.out.println("Serializing deliveries");
     }
 
     /**
@@ -51,5 +55,17 @@ public class SetOfDeliveries {
     public ArrayList<Delivery> getListOdDeliveries() {
         return listOdDeliveries;
     }
-   
+    
+    /**
+     * EXTRA METHOD
+     * Get individual delivery by order
+     */
+    public Delivery getDeliveryByOrder(Order order) {
+        for(Delivery delivery : listOdDeliveries) {
+            if(delivery.getOrder() == order) {
+                return delivery;
+            }
+        }
+        return null;
+    }
 }

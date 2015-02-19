@@ -45,11 +45,11 @@ public class Delivery implements Serializable {
     }
     
     /**
-     * Sets the order of the Delivery
-     * @param order
+     * Gets the order of the delivery
+     * @return 
      */
-    public void setOrder(Order order) {
-        this.order = order;
+    public Order getOrder() {
+        return order;
     }
 
     /**
@@ -61,6 +61,22 @@ public class Delivery implements Serializable {
     }
 
     /**
+     * Get delivery status
+     * @return 
+     */
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    /**
+     * Get who the delivery was approved by
+     * @return 
+     */
+    public String getApprovedBy() {
+        return approvedBy;
+    }
+    
+    /**
      * Set the approval state of this delivery
      * @param approval 
      */
@@ -68,5 +84,12 @@ public class Delivery implements Serializable {
         this.approval = approval;
     }
     
+    /**
+     * Sets the order of the Delivery
+     * @param order
+     */
+    public void setOrder(Order order) {
+        this.order = order;
+    }
     
 }

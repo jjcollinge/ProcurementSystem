@@ -38,7 +38,7 @@ public class DeliveryUI extends UserInterface {
     private DefaultListModel<Item> orderModel;
     private HashMap<Integer, JCheckBox> checkBoxes;
     
-    private Delivery delivery;
+    private Delivery selectedDelivery;
     
     private boolean siteFiltered = false;
     private boolean dateFiltered = false;
@@ -53,7 +53,7 @@ public class DeliveryUI extends UserInterface {
         ordersModel =  new DefaultListModel();
         orderModel = new DefaultListModel();
         
-        delivery = new Delivery();     
+        selectedDelivery = new Delivery();     
         
         initComponents();
         
@@ -83,11 +83,11 @@ public class DeliveryUI extends UserInterface {
      * Refresh the orders model
      */
      public void refreshOrdersModel() {
-        orders = SetOfOrders.getInstance();
-        
+        SetOfDeliveries sod = SetOfDeliveries.getInstance();
+        ArrayList<Delivery> deliveries = sod.getListOdDeliveries();
         ordersModel.clear();
-        for(Order order : orders.getAllOrders()) {
-            ordersModel.addElement(order);
+        for(Delivery delivery : deliveries) {
+            ordersModel.addElement(delivery.getOrder());
         }
     }
 
@@ -443,6 +443,9 @@ public class DeliveryUI extends UserInterface {
         ETADeliveryValue.setText("jLabel1");
 
         deliveryStatusField.setText("Type here");
+
+        dateVerifiedValue.setBackground(new java.awt.Color(0, 0, 0));
+        dateVerifiedValue.setForeground(new java.awt.Color(255, 255, 255));
 
         finishBtn.setBackground(new java.awt.Color(51, 51, 51));
         finishBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -831,9 +834,8 @@ public class DeliveryUI extends UserInterface {
      */
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
         requestSignature();
-        SetOfDeliveries sod = SetOfDeliveries.getInstance();
-        sod.addDelivery(delivery);
-        ObjectMapper.Serialize(sod.getListOdDeliveries(), "deliveries.ser");
+        SetOfDeliveries sod = SetOfDeliveries.getInstance();  
+        sod.addDelivery(selectedDelivery);
         this.setVisible(false);
         MainInterface ui = MainInterface.getInstance();
         ui.setPosition(this.getX(), this.getY());
@@ -975,14 +977,14 @@ public class DeliveryUI extends UserInterface {
      */
     public void checkDeliveryContents() {
         final String status = deliveryStatusField.getText();
-        delivery.updateDeliveryStatus(status);
+        selectedDelivery.updateDeliveryStatus(status);
     }
     
     /**
      * Requests authentication 
      */
     public void requestSignature() {
-        delivery.approveDelivery();
+        selectedDelivery.approveDelivery();
     }
     
     /**
@@ -997,7 +999,7 @@ public class DeliveryUI extends UserInterface {
             return;
         }
         
-        delivery.setOrder(order);
+        selectedDelivery = SetOfDeliveries.getInstance().getDeliveryByOrder(order);
         
         this.deliveriesPanel.setVisible(false);
         this.deliveryPanel.setVisible(true);

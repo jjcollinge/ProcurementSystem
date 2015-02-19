@@ -1,9 +1,13 @@
 package com.ps.interfaces;
 
+import com.ps.model.Delivery;
+import com.ps.model.Item;
 import com.ps.model.Order;
 import com.ps.model.OrderLine;
-import com.ps.model.Item;
+import com.ps.model.SetOfDeliveries;
+import com.ps.model.SetOfOrders;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,8 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import com.ps.model.SetOfOrders;
-import java.awt.Dimension;
 
 /**
  * User Interface for displaying a list
@@ -496,7 +498,7 @@ public class ViewOrdersUI extends UserInterface {
      * @param evt 
      */
     private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
-        // DO SOMETHING
+        // DO SOMETHING 
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
     /**
@@ -658,10 +660,28 @@ public class ViewOrdersUI extends UserInterface {
         orderModel.clear();
         orderQuantityModel.clear();
         
+        SetOfDeliveries setOfDeliveries = SetOfDeliveries.getInstance();
+        Delivery delivery = setOfDeliveries.getDeliveryByOrder(order);
+        
+        String date = null;
+        String deliveryDate = null;
+        String signedForBy = null;
+        String deliveryStatus = null;
+        
+        if(delivery == null) {
+            deliveryDate = "";
+            signedForBy = "-";
+            deliveryStatus = "Pending";
+        } else {
+            deliveryDate = "Not stored in delivery";
+            signedForBy = delivery.getApprovedBy();
+            deliveryStatus = delivery.getDeliveryStatus();
+        }
+        
         orderDateValue.setText(new SimpleDateFormat("dd/MM/yyyy").format(order.getOrderDate()));
-        deliveryDateValue.setText("This doesn't exist");
-        signedForByValue.setText("Not implemented yet");
-        deliveryStatusValue.setText("Not implemented yet");
+        deliveryDateValue.setText(deliveryDate);
+        signedForByValue.setText(signedForBy);
+        deliveryStatusValue.setText(deliveryStatus);
         
         ArrayList<OrderLine> orderLines = order.getOrderLines();
         for(OrderLine orderLine : orderLines) {
