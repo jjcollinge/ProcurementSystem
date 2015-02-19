@@ -131,7 +131,6 @@ public class CatalogUI extends UserInterface {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 540));
         setMinimumSize(new java.awt.Dimension(400, 540));
-        setPreferredSize(new java.awt.Dimension(400, 540));
         setResizable(false);
 
         jLayeredPane1.setMaximumSize(new java.awt.Dimension(400, 540));
@@ -492,8 +491,7 @@ public class CatalogUI extends UserInterface {
      * @param evt 
      */
     private void proceedToQuantityReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToQuantityReviewBtnActionPerformed
-
-        
+   
         // grab the currently selected items
         setSelectedItem();
         
@@ -511,6 +509,8 @@ public class CatalogUI extends UserInterface {
         // switch panels
         catalogPanel.setVisible(false);
         quantityPanel.setVisible(true);
+        ascending1 = true;
+        ascendBtn1.setSelected(true);
         
     }//GEN-LAST:event_proceedToQuantityReviewBtnActionPerformed
 
@@ -912,7 +912,7 @@ public class CatalogUI extends UserInterface {
         }
         //</editor-fold>
 
-        CatalogUI that = this;
+        CatalogUI that = CatalogUI.getInstance();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
