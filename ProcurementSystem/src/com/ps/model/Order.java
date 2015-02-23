@@ -1,5 +1,6 @@
 package com.ps.model;
 
+import com.ps.app.ObjectMapper;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class Order implements Serializable {
      */
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+        
     }
 
     /**

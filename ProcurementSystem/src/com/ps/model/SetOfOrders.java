@@ -104,6 +104,10 @@ public class SetOfOrders implements Serializable {
         return null;
     }
     
+    public void onUpdate() {
+        ObjectMapper.Serialize(orders, filename);
+    }
+    
     /**
      * Return all orders
      * n.b. changed from returning SetOfOrders as that would return an instance 

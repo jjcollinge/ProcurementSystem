@@ -83,11 +83,10 @@ public class DeliveryUI extends UserInterface {
      * Refresh the orders model
      */
      public void refreshOrdersModel() {
-        SetOfDeliveries sod = SetOfDeliveries.getInstance();
-        ArrayList<Delivery> deliveries = sod.getListOdDeliveries();
+        ArrayList<Order> orders = SetOfOrders.getInstance().getOpenOrders();
         ordersModel.clear();
-        for(Delivery delivery : deliveries) {
-            ordersModel.addElement(delivery.getOrder());
+        for(Order order : orders) {
+            ordersModel.addElement(order);
         }
     }
 
@@ -833,13 +832,15 @@ public class DeliveryUI extends UserInterface {
      * @param evt 
      */
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
-        requestSignature();
-        SetOfDeliveries sod = SetOfDeliveries.getInstance();  
-        sod.addDelivery(selectedDelivery);
-        this.setVisible(false);
-        MainInterface ui = MainInterface.getInstance();
-        ui.setPosition(this.getX(), this.getY());
-        ui.Run();
+        if(selectedDelivery != null) {
+            requestSignature();
+            SetOfDeliveries sod = SetOfDeliveries.getInstance();  
+            sod.addDelivery(selectedDelivery);
+            this.setVisible(false);
+            MainInterface ui = MainInterface.getInstance();
+            ui.setPosition(this.getX(), this.getY());
+            ui.Run();
+        }
     }//GEN-LAST:event_finishBtnActionPerformed
 
     private void locationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationTextFieldActionPerformed
@@ -976,8 +977,15 @@ public class DeliveryUI extends UserInterface {
      * Checks the contents of the Delivery
      */
     public void checkDeliveryContents() {
-        final String status = deliveryStatusField.getText();
-        selectedDelivery.updateDeliveryStatus(status);
+        if(selectedDelivery != null) {
+            String status = deliveryStatusField.getText();
+            if(status.isEmpty() || status.equalsIgnoreCase("type here")) {
+                status = "CONFIRMED";
+            }
+            selectedDelivery.updateDeliveryStatus(status);
+            selectedDelivery.getOrder().setOrderStatus("DELIVERED");
+            SetOfOrders.getInstance().onUpdate();
+        }
     }
     
     /**
@@ -999,7 +1007,8 @@ public class DeliveryUI extends UserInterface {
             return;
         }
         
-        selectedDelivery = SetOfDeliveries.getInstance().getDeliveryByOrder(order);
+        //selectedDelivery = SetOfDeliveries.getInstance().getDeliveryByOrder(order);
+        selectedDelivery.setOrder(order);
         
         this.deliveriesPanel.setVisible(false);
         this.deliveryPanel.setVisible(true);

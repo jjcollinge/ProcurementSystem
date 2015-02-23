@@ -38,6 +38,7 @@ public class ViewOrdersUI extends UserInterface {
     private boolean dateFiltered = false;
     private boolean supplierFiltered = false;
     private boolean ascending = true;
+    private boolean openOrders = true;
     
     /**
      * Ctor -  initialise data and Swing componenets
@@ -47,10 +48,9 @@ public class ViewOrdersUI extends UserInterface {
         ordersModel =  new DefaultListModel();
         orderModel = new DefaultListModel();
         orderQuantityModel = new DefaultListModel();
-        
-        displayCurrentOrders();
+       
         initComponents();
-        
+        //displayCurrentOrders();
         activeOrdersOnlyBtn.setSelected(true);
         
         //Settings
@@ -498,7 +498,25 @@ public class ViewOrdersUI extends UserInterface {
      * @param evt 
      */
     private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
-        // DO SOMETHING 
+        if(openOrders) {
+            orders = SetOfOrders.getInstance();
+        
+            ordersModel.clear();
+            for(Order order : orders.getAllOrders()) {
+                ordersModel.addElement(order);
+            }
+            activeOrdersOnlyBtn.setSelected(false);
+            openOrders = false;
+        } else {  
+            orders = SetOfOrders.getInstance();
+        
+            ordersModel.clear();
+            for(Order order : orders.getOpenOrders()) {
+                ordersModel.addElement(order);
+            }
+            activeOrdersOnlyBtn.setSelected(true);
+            openOrders = true;
+        }
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
     /**
@@ -636,7 +654,7 @@ public class ViewOrdersUI extends UserInterface {
 
         MainInterface ui = MainInterface.getInstance();
         ui.setPosition(this.getX(), this.getY());
-
+        
         this.setVisible(false);
         ui.Run();
     }//GEN-LAST:event_returnToMainMenuBtnActionPerformed
@@ -648,7 +666,9 @@ public class ViewOrdersUI extends UserInterface {
     private void matchingExistingOrdersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchingExistingOrdersMouseReleased
         // User has selected an order
         Order selectedOrder = (Order)matchingExistingOrders.getSelectedValue();
-        initialiseOrderPanel(selectedOrder);
+        if(selectedOrder != null) {
+            initialiseOrderPanel(selectedOrder);
+        }       
     }//GEN-LAST:event_matchingExistingOrdersMouseReleased
 
     /**
@@ -753,12 +773,8 @@ public class ViewOrdersUI extends UserInterface {
      * Displays all of the current orders
      */
     public void displayCurrentOrders() {
-        orders = SetOfOrders.getInstance();
-        
-        ordersModel.clear();
-        for(Order order : orders.getOpenOrders()) {
-            ordersModel.addElement(order);
-        }
+        openOrders = false;
+        activeOrdersOnlyBtnActionPerformed(null);
     }
 
     /**
