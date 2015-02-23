@@ -104,7 +104,7 @@ public class OrderTest {
     public void testGetOrderStatus() {
         System.out.println("getOrderStatus");
         Order instance = new Order();
-        String expResult = "";
+        String expResult = "Pending";
         String result = instance.getOrderStatus();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -145,7 +145,17 @@ public class OrderTest {
         // TODO review the generated test code and remove the default call to fail.
       //  fail("The test case is a prototype.");
     }
-
+    
+    //testing for null
+    @Test(expected=NullPointerException.class)
+    public void testPrintInvoice2() {
+        System.out.println("printInvoice");
+        Order instance = null;
+        instance.printInvoice();
+        // TODO review the generated test code and remove the default call to fail.
+      //  fail("The test case is a prototype.");
+    }
+    
     /**
      * Test of getOrderLines method, of class Order.
      */
@@ -174,6 +184,16 @@ public class OrderTest {
        // fail("The test case is a prototype.");
     }
 
+      @Test
+    public void testGetSpecialInstructions2() {
+        System.out.println("getSpecialInstructions");
+        Order instance = new Order();
+        String expResult = "fgdgdgd";
+        String result = instance.getSpecialInstructions();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       // fail("The test case is a prototype.");
+    }
     /**
      * Test of getSite method, of class Order.
      */
@@ -202,6 +222,7 @@ public class OrderTest {
        // fail("The test case is a prototype.");
     }
 
+ 
     /**
      * Test of toString method, of class Order.
      */

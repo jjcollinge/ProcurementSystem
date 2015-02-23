@@ -103,13 +103,51 @@ public class DeliveryTest {
        // fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of setApproval method, of class Delivery.
-     */
+    @Test
+    public void testGetApproval2() {
+        System.out.println("getApproval");
+        Delivery instance = new Delivery();
+        Boolean expResult = true;
+        Boolean result = instance.getApproval();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       // fail("The test case is a prototype.");
+    }
+     
+    @Test
+    public void testGetApproval3() {
+        System.out.println("getApproval");
+        Delivery instance = new Delivery();
+        Boolean expResult = false;
+        Boolean result = instance.getApproval();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       // fail("The test case is a prototype.");
+    }
     @Test
     public void testSetApproval() {
         System.out.println("setApproval");
         Boolean approval = null;
+        Delivery instance = new Delivery();
+        instance.setApproval(approval);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+     @Test
+    public void testSetApproval2() {
+        System.out.println("setApproval");
+        Boolean approval = true;
+        Delivery instance = new Delivery();
+        instance.setApproval(approval);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+         @Test
+    public void testSetApproval3() {
+        System.out.println("setApproval");
+        Boolean approval = false;
         Delivery instance = new Delivery();
         instance.setApproval(approval);
         // TODO review the generated test code and remove the default call to fail.
