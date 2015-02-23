@@ -33,6 +33,15 @@ public class ItemTest  {
         String result = instance.getName();
         assertEquals(expResult, result);        
     }
+    
+     @Test(expected=NullPointerException.class)
+    public void testGetName2() {
+        System.out.println("getName");
+        Item instance = null;
+        String expResult = "";
+        String result = instance.getName();
+        //assertEquals(expResult, result);        
+    }
 
     /**
      * Test of getPrice method, of class Item.
@@ -76,6 +85,25 @@ public class ItemTest  {
         String result = instance.getType();
         assertEquals(expResult, result);
     }
+    
+     @Test
+    public void testGetType2() {
+        System.out.println("getType");
+        Item instance = i2;
+        String expResult = "TestType";
+        String result = instance.getType();
+        assertEquals(expResult, result);
+    }
+    
+    //testing for null
+      @Test(expected=NullPointerException.class)
+    public void testGetType3() {
+        System.out.println("getType");
+        Item instance = null;
+        String expResult = "";
+        String result = instance.getType();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Test of toString method, of class Item.
@@ -84,6 +112,15 @@ public class ItemTest  {
     public void testToString() {
         System.out.println("toString");
         Item instance = i;
+        String expResult = "TestItem : TestType";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+    
+     @Test(expected=IllegalArgumentException.class)
+    public void testToString2() {
+        System.out.println("toString");
+        String instance = "g";
         String expResult = "TestItem : TestType";
         String result = instance.toString();
         assertEquals(expResult, result);
@@ -144,7 +181,7 @@ public class ItemTest  {
         
     }
     
-        @Test(expected=NumberFormatException.class) //testing for string 
+        @Test(expected=IllegalArgumentException.class) //testing for string 
      public void testCompareTo6() {
          
         System.out.println("compareTo");
