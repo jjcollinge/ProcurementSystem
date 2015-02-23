@@ -106,27 +106,6 @@ public class ItemTest  {
     }
 
     /**
-     * Test of toString method, of class Item.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Item instance = i;
-        String expResult = "TestItem : TestType";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-    }
-    
-     @Test(expected=IllegalArgumentException.class)
-    public void testToString2() {
-        System.out.println("toString");
-        String instance = "g";
-        String expResult = "TestItem : TestType";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of compareTo method, of class Item.
      */
     @Test(expected=NullPointerException.class)
@@ -139,7 +118,7 @@ public class ItemTest  {
         assertEquals(expResult, result);        
     }
     
-    @Test(expected=NullPointerException.class)
+    @Test
     public void testCompareTo2() {
         System.out.println("compareTo");
         Item otherItem = null;
@@ -175,26 +154,9 @@ public class ItemTest  {
         System.out.println("compareTo");
         Item otherItem = i;
         Item instance = null;
-      //  int expResult = 0;
+        int expResult = 0;
         int result = instance.compareTo(otherItem);
-        //assertEquals(expResult, result);
+        assertEquals(expResult, result);
         
     }
-    
-        @Test(expected=IllegalArgumentException.class) //testing for string 
-     public void testCompareTo6() {
-         
-        System.out.println("compareTo");
-        String otherItem = "agfg";
-        String instance = "3";
-       
-        int result = instance.compareTo(otherItem);
-        
-        //assertEquals(expResult, result);
-    }
-    
-
-    
-    
-    
 }

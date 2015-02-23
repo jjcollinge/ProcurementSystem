@@ -47,8 +47,12 @@ public class SetOfOrders implements Serializable {
     public ArrayList<Order> filterByDate(Date date) {
         ArrayList<Order> tmp = new ArrayList<Order>();
         for(Order order : orders) {
-            if(order.hasSameDate(date)){
-                tmp.add(order);
+            if(order != null) {
+                if(order.getOrderDate() != null) {
+                    if(order.hasSameDate(date)){
+                        tmp.add(order);
+                    }
+                }
             }
         }
         return tmp;
@@ -62,9 +66,15 @@ public class SetOfOrders implements Serializable {
      */
     public ArrayList<Order>  filterBySite(String site) {
         ArrayList<Order> tmp = new ArrayList<Order>();
-        for(Order order : orders) {
-            if(order.getOrderDate().equals(site)) {
-                tmp.add(order);
+        if(site != null) { 
+            for(Order order : orders) {
+                if(order != null) {
+                    if(order.getSite() != null) {
+                        if(order.getSite().equalsIgnoreCase(site)) {
+                            tmp.add(order);
+                        }
+                    } 
+                }
             }
         }
         return tmp;
@@ -79,9 +89,7 @@ public class SetOfOrders implements Serializable {
     public ArrayList<Order>  filterBySupplier(String supplier) {
         ArrayList<Order> tmp = new ArrayList<Order>();
         for(Order order : orders) {
-            if(order.getOrderDate().equals(supplier)) {
-                tmp.add(order);
-            }
+            // filter by supplier doesnt exist
         }
         return tmp;
     }
@@ -91,8 +99,10 @@ public class SetOfOrders implements Serializable {
      * n.b. unspecified parameters 
      */
     public void addOrder(Order order) {
-        orders.add(order);
-        ObjectMapper.Serialize(orders, filename);
+        if(order != null) {
+            orders.add(order);
+            ObjectMapper.Serialize(orders, filename);
+        }
     }
     
     /**

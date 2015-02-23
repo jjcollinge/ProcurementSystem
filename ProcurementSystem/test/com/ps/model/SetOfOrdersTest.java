@@ -85,32 +85,34 @@ public class SetOfOrdersTest {
     /**
      * Test of filterBySite method, of class SetOfOrders.
      */
-    @Test // method not implemented
+    @Test
     public void testFilterBySite1() {
         System.out.println("filterBySite");
         String site = "testSite";
         SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = instance.filterBySite(site);
-        assertNotNull(expResult);
-        }
+        ArrayList<Order> expResult = new ArrayList<Order>();
+        ArrayList<Order> result = instance.filterBySite(site);
+        assertEquals(expResult, result);
+    }
     
-    @Test (expected = NullPointerException.class)// method not implemented
+    @Test
     public void testFilterBySite2() {
         System.out.println("filterBySite");
         String site = null;
         SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = instance.filterBySite(site);
-        assertNull(expResult);
-        }
+        ArrayList<Order> expResult = new ArrayList<Order>();
+        ArrayList<Order> result = instance.filterBySite(site);
+        assertEquals(expResult, result);
+    }
     
-    @Test (expected = NullPointerException.class)// method not implemented
+    @Test
     public void testFilterBySite3() {
         System.out.println("filterBySite");
         String site = "123";
         SetOfOrders instance = setOfOrders;
         ArrayList<Order> expResult = instance.filterBySite(site);
         assertNotNull(expResult);
-        }
+    }
 
     /**
      * Test of filterBySupplier method, of class SetOfOrders.
@@ -120,17 +122,17 @@ public class SetOfOrdersTest {
         System.out.println("filterBySupplier");
         String supplier = "testSupplier";
         SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = null;
+        ArrayList<Order> expResult = new ArrayList<Order>();
         ArrayList<Order> result = instance.filterBySupplier(supplier);
         assertEquals(expResult, result);
     }
     
-    @Test (expected = NullPointerException.class)//method not implemented
+    @Test 
     public void testFilterBySupplier2() {
         System.out.println("filterBySupplier");
         String supplier = null;
         SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = null;
+        ArrayList<Order> expResult = new ArrayList<Order>();
         ArrayList<Order> result = instance.filterBySupplier(supplier);
         assertEquals(expResult, result);
     }
@@ -146,15 +148,6 @@ public class SetOfOrdersTest {
         boolean expectedAdd = true;
         boolean actuallyAdd = setOfOrders.getAllOrders().contains(order);
         assertEquals(expectedAdd, actuallyAdd);
-    }
-    
-    @Test //test add null order
-    public void testAddOrder2() {
-        System.out.println("addOrder");
-        order = null;
-        setOfOrders.addOrder(order);
-        boolean expResult = setOfOrders.getAllOrders().contains(order);
-        assertFalse(expResult); //shouldn't be able to add null order?
     }
 
     /**

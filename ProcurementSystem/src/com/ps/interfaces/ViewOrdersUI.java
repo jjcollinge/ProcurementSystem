@@ -791,19 +791,20 @@ public class ViewOrdersUI extends UserInterface {
      * @param param
      */
     public void requestFilter(String filter, Object param) {
-
-        ArrayList<Order> matching = null;
-        if(filter.equalsIgnoreCase("site")) {
-            matching = orders.filterBySite((String)param);
-        } else if(filter.equalsIgnoreCase("date")) {
-            matching = orders.filterByDate((Date)param);
-        } else if(filter.equalsIgnoreCase("supplier")) {
-            matching = orders.filterBySupplier((String)param);
-        }
-        
-        ordersModel.clear();
-        for(Order order : matching) {
-            ordersModel.addElement(order);
+        if(param != null) {
+            ArrayList<Order> matching = null;
+            if(filter.equalsIgnoreCase("site")) {
+                matching = orders.filterBySite((String)param);
+            } else if(filter.equalsIgnoreCase("date")) {
+                matching = orders.filterByDate((Date)param);
+            } else if(filter.equalsIgnoreCase("supplier")) {
+                matching = orders.filterBySupplier((String)param);
+            }
+            
+            ordersModel.clear();
+            for(Order order : matching) {
+                ordersModel.addElement(order);
+            } 
         }
     }
 

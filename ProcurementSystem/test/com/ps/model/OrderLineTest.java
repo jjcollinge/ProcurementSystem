@@ -57,7 +57,7 @@ public class OrderLineTest {
         Item expResult = item;
         Item result = instance.getItem();
         assertEquals(expResult, result);
-            }
+    }
 
     /**
      * Test of getQuantity method, of class OrderLine.

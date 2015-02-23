@@ -163,7 +163,7 @@ public class OrderTest {
     public void testGetOrderLines() {
         System.out.println("getOrderLines");
         Order instance = new Order();
-        ArrayList<OrderLine> expResult = null;
+        ArrayList<OrderLine> expResult = new ArrayList<OrderLine>();
         ArrayList<OrderLine> result = instance.getOrderLines();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -188,7 +188,9 @@ public class OrderTest {
     public void testGetSpecialInstructions2() {
         System.out.println("getSpecialInstructions");
         Order instance = new Order();
-        String expResult = "fgdgdgd";
+        String specialInst = "I am special";
+        instance.addSpecialInstructions(specialInst);
+        String expResult = specialInst;
         String result = instance.getSpecialInstructions();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

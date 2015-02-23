@@ -85,8 +85,11 @@ public class Item implements Serializable, Comparable<Item> {
 
     @Override
     public int compareTo(Item otherItem) {
-        int nameDiff = name.compareToIgnoreCase(otherItem.name);
-        return nameDiff;
+        if(otherItem != null) {
+            int nameDiff = name.compareToIgnoreCase(otherItem.name);
+            return nameDiff;
+        }
+        return 0;
     }
     
 }

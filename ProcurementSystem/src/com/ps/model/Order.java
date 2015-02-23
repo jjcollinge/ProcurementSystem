@@ -24,6 +24,9 @@ public class Order implements Serializable {
     public Order() {
         orderLines = new ArrayList<OrderLine>();
         this.orderStatus = "Pending";
+        this.specialInstructions = "";
+        this.site = "";
+        this.orderDate = new Date();
     }
     
     /**

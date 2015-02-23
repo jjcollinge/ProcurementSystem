@@ -1,10 +1,11 @@
 
 package com.ps.model;
 
+import static org.hamcrest.CoreMatchers.not;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -96,7 +97,7 @@ public class DeliveryTest {
     public void testGetApproval() {
         System.out.println("getApproval");
         Delivery instance = new Delivery();
-        Boolean expResult = null;
+        Boolean expResult = false;
         Boolean result = instance.getApproval();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -109,7 +110,7 @@ public class DeliveryTest {
         Delivery instance = new Delivery();
         Boolean expResult = true;
         Boolean result = instance.getApproval();
-        assertEquals(expResult, result);
+        assertThat(expResult, not(result));
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }

@@ -17,7 +17,7 @@ public class Delivery implements Serializable {
      * Ctor
      */
     public Delivery() {
-        
+        approval = false;
     }
     
     /**

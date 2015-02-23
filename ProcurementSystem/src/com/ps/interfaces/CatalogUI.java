@@ -835,7 +835,7 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
     /**
-     * Canel the current order. This should cleanup any temporary data and 
+     * Cancel the current order. This should cleanup any temporary data and 
      * reset the user interface to its default state before returning to the
      * Main user interface
      */
