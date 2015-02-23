@@ -811,6 +811,16 @@ public class ViewOrdersUI extends UserInterface {
     public void setPosition(int x, int y) {
         this.setLocation(x, y);
     }
+    
+    public int getPositionX()
+    {
+        return this.getX();
+    }
+    
+    public int getPositionY()
+    {
+        return this.getY();
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

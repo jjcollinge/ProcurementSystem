@@ -1,6 +1,7 @@
 
 package com.ps.model;
 
+import com.ps.app.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Date;
 import org.junit.AfterClass;
@@ -14,8 +15,10 @@ import static org.junit.Assert.*;
  */
 public class SetOfOrdersTest {
     
+    public static String filename = "setOfTestOrders.ser";
     public static Order order;
     public static SetOfOrders setOfOrders;
+    public static ArrayList<Order> orders;
     
     public SetOfOrdersTest() {
         
@@ -23,8 +26,19 @@ public class SetOfOrdersTest {
     
     @BeforeClass
     public static void setUpClass() {
-        order = new Order();
+        //get test orders
+        orders = (ArrayList<Order>)ObjectMapper.Deserialize(filename);
+        if(orders == null) {
+            System.out.println("Couldn't load orders file, creating a new set");
+            orders = new ArrayList<Order>();
+        }
+        //get instance of setOfOrders
         setOfOrders = SetOfOrders.getInstance();
+        //add test orders to setOfOrders
+        for (Order o : orders)
+        {
+            setOfOrders.addOrder(order);
+        } 
     }
     
     @AfterClass
@@ -34,85 +48,124 @@ public class SetOfOrdersTest {
     /**
      * Test of getInstance method, of class SetOfOrders.
      */
-    @Test
+    @Test //test singleton
     public void testGetInstance() {
         System.out.println("getInstance");
-        SetOfOrders expResult = null;
-        SetOfOrders result = SetOfOrders.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        SetOfOrders expResult = SetOfOrders.getInstance();
+        assertNotNull(expResult);
     }
 
     /**
      * Test of filterByDate method, of class SetOfOrders.
      */
     @Test
-    public void testFilterByDate() {
+    public void testFilterByDate1() {
+        System.out.println("filterByDate");
+        Date date = new Date();
+        System.out.println(date);
+        for (Order o : setOfOrders.getAllOrders())
+        {
+            System.out.println(order);
+        }
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = instance.filterByDate(date); //doesn't work when values are null
+        assertNotNull(expResult);
+    }
+    
+    @Test (expected = NullPointerException.class)
+    public void testFilterByDate2() {
         System.out.println("filterByDate");
         Date date = null;
-        SetOfOrders instance = null;
-        ArrayList<Order> expResult = null;
-        ArrayList<Order> result = instance.filterByDate(date);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println(date);
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = instance.filterByDate(date); //doesn't work when values are null
+        assertNotNull(expResult);
     }
-
+    
     /**
      * Test of filterBySite method, of class SetOfOrders.
      */
-    @Test
-    public void testFilterBySite() {
+    @Test // method not implemented
+    public void testFilterBySite1() {
         System.out.println("filterBySite");
-        String site = "";
-        SetOfOrders instance = null;
-        ArrayList<Order> expResult = null;
-        ArrayList<Order> result = instance.filterBySite(site);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        String site = "testSite";
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = instance.filterBySite(site);
+        assertNotNull(expResult);
+        }
+    
+    @Test (expected = NullPointerException.class)// method not implemented
+    public void testFilterBySite2() {
+        System.out.println("filterBySite");
+        String site = null;
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = instance.filterBySite(site);
+        assertNull(expResult);
+        }
+    
+    @Test (expected = NullPointerException.class)// method not implemented
+    public void testFilterBySite3() {
+        System.out.println("filterBySite");
+        String site = "123";
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = instance.filterBySite(site);
+        assertNotNull(expResult);
+        }
 
     /**
      * Test of filterBySupplier method, of class SetOfOrders.
      */
-    @Test
-    public void testFilterBySupplier() {
+    @Test //method not implemented
+    public void testFilterBySupplier1() {
         System.out.println("filterBySupplier");
-        String supplier = "";
-        SetOfOrders instance = null;
+        String supplier = "testSupplier";
+        SetOfOrders instance = setOfOrders;
         ArrayList<Order> expResult = null;
         ArrayList<Order> result = instance.filterBySupplier(supplier);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    @Test (expected = NullPointerException.class)//method not implemented
+    public void testFilterBySupplier2() {
+        System.out.println("filterBySupplier");
+        String supplier = null;
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = null;
+        ArrayList<Order> result = instance.filterBySupplier(supplier);
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of addOrder method, of class SetOfOrders.
      */
     @Test
-    public void testAddOrder() {
-        System.out.println("addDelivery");
+    public void testAddOrder1() {
+        System.out.println("addOrder");
+        order = new Order();
         setOfOrders.addOrder(order);
         boolean expectedAdd = true;
         boolean actuallyAdd = setOfOrders.getAllOrders().contains(order);
         assertEquals(expectedAdd, actuallyAdd);
     }
+    
+    @Test //test add null order
+    public void testAddOrder2() {
+        System.out.println("addOrder");
+        order = null;
+        setOfOrders.addOrder(order);
+        boolean expResult = setOfOrders.getAllOrders().contains(order);
+        assertFalse(expResult); //shouldn't be able to add null order?
+    }
 
     /**
      * Test of getOrder method, of class SetOfOrders.
      */
-    @Test
+    @Test//method returns null
     public void testGetOrder() {
         System.out.println("getOrder");
-        SetOfOrders instance = null;
-        Order expResult = null;
-        Order result = instance.getOrder();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        SetOfOrders instance = setOfOrders;
+        Order expResult = instance.getOrder();
+        assertNull(expResult);
     }
 
     /**
@@ -121,12 +174,9 @@ public class SetOfOrdersTest {
     @Test
     public void testGetAllOrders() {
         System.out.println("getAllOrders");
-        SetOfOrders instance = null;
-        ArrayList<Order> expResult = null;
-        ArrayList<Order> result = instance.getAllOrders();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        SetOfOrders instance = setOfOrders;
+        ArrayList<Order> expResult = instance.getAllOrders();
+        assertNotNull(expResult);
     }
 
     /**
@@ -135,12 +185,8 @@ public class SetOfOrdersTest {
     @Test
     public void testGetOpenOrders() {
         System.out.println("getOpenOrders");
-        SetOfOrders instance = null;
-        SetOfOrders expResult = null;
-        //SetOfOrders result = instance.getOpenOrders();
-      //  assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ArrayList<Order> expResult = setOfOrders.getOpenOrders(); //doesn't work when values are null
+        assertNotNull(expResult);
     }
     
 }

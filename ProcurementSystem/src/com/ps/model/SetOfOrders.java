@@ -126,8 +126,11 @@ public class SetOfOrders implements Serializable {
     public ArrayList<Order> getOpenOrders() {
         ArrayList<Order> openOrders = new ArrayList<>();
         for(Order order : orders) {
+            if (order != null)
+            {
             if(order.getOrderStatus().equalsIgnoreCase("Pending")) {
                 openOrders.add(order);
+            }
             }
         }
         return openOrders;
