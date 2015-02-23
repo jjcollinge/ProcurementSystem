@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * @author b0015911
  */
 public class SetOfOrdersTest {
-    
+    //setofOrders
     public static String filename = "setOfTestOrders.ser";
     public static Order order;
     public static SetOfOrders setOfOrders;
