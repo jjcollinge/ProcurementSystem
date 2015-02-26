@@ -1,6 +1,5 @@
 package com.ps.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import com.ps.app.ObjectMapper;
 
@@ -59,6 +58,8 @@ public class SetOfDeliveries {
     /**
      * EXTRA METHOD
      * Get individual delivery by order
+     * @param order
+     * @return 
      */
     public Delivery getDeliveryByOrder(Order order) {
         for(Delivery delivery : listOdDeliveries) {
