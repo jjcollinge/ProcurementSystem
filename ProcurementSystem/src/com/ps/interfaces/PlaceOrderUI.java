@@ -252,9 +252,14 @@ public class PlaceOrderUI extends UserInterface {
         // get selected item
         int selectedItemIndex = itemsInOrder.getSelectedIndex();
         
+        int qty = quantities.get(selectedItemIndex);
+        Item item = items.get(selectedItemIndex);
+        newOrder.removeItem(item, qty);
+        
         // remove from items
         items.remove(selectedItemIndex);
-        quantities.remove(selectedItemIndex);
+        quantities.remove(selectedItemIndex); 
+               
     }//GEN-LAST:event_deleteSelectedItemBtnActionPerformed
  
     /**
@@ -506,6 +511,9 @@ public class PlaceOrderUI extends UserInterface {
      * @param site 
      */
     public void setSite(String site) {
+        if(newOrder == null) {
+            newOrder = new Order();
+        }
         newOrder.setSite(site);
     }
      

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Represents an in system order. Hold data
@@ -77,6 +78,24 @@ public class Order implements Serializable {
     }
     
     /**
+     * Remove an item from the order
+     */
+    public void removeItem(Item item, int qty) {
+        Iterator iter = orderLines.iterator();
+        while(iter.hasNext()) {
+            OrderLine ol = (OrderLine) iter.next();
+            if(ol.getItem().equals(item)) {
+                if(this.orderLines.remove(ol)) {
+                    System.out.println("Successfully delete item from order");
+                    return;
+                } else {
+                    System.out.println("Couldn't delete item from order");
+                }
+            }
+        }
+    }
+    
+    /**
      * Return orderStatus
      * @return String
      */
@@ -142,11 +161,6 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        if(orderDate == null) {
-            orderDate = new Date();
-        } if(specialInstructions == null) {
-            specialInstructions = "These is a special instruction";
-        }
         return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) + " - \"" + specialInstructions.substring(0, 25) + "...\" : " + orderStatus;
     }
     
