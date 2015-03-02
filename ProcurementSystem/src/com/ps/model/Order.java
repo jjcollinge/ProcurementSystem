@@ -142,6 +142,11 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
+        if(orderDate == null) {
+            orderDate = new Date();
+        } if(specialInstructions == null) {
+            specialInstructions = "These is a special instruction";
+        }
         return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) + " - \"" + specialInstructions.substring(0, 25) + "...\" : " + orderStatus;
     }
     
