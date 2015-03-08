@@ -35,14 +35,6 @@ public class Delivery implements Serializable {
         approval = true;
         approvedBy = "Kumar Kalla";
     }
-
-    /**
-     * Change the delivery status
-     * @param deliveryStatus 
-     */
-    public void setDeliveryStatus(String deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
-    }
     
     /**
      * Gets the order of the delivery

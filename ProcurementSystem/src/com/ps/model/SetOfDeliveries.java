@@ -11,7 +11,7 @@ import com.ps.app.ObjectMapper;
 public class SetOfDeliveries {
     private ArrayList<Delivery> listOdDeliveries;   //changed this to an array list of deliveries
     private static SetOfDeliveries singleton;
-    private final String filename = "deliveries.ser";
+    private static String filename = "deliveries.ser";
     
     /**
      * private Ctor
@@ -35,6 +35,10 @@ public class SetOfDeliveries {
             singleton = new SetOfDeliveries();
         }
         return singleton;
+    }
+    
+    public static void setOutput(String fname) {
+        filename = fname;
     }
     
     /**

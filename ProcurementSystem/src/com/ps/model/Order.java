@@ -43,7 +43,6 @@ public class Order implements Serializable {
      */
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
-        
     }
 
     /**

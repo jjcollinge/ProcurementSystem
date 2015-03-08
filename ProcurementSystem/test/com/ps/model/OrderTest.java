@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.*;
 import java.text.*;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,6 +30,11 @@ public class OrderTest {
     @AfterClass
     public static void tearDownClass() {
     }
+    
+    @After
+    public void tearDownTest() {
+        order.cancelOrder();
+    }
 
     @Test
     public void testHasSameDate1() {
@@ -48,26 +54,12 @@ public class OrderTest {
         assertEquals(expResult, result);
     }
 
- 
-
     @Test
     public void testSetOrderStatus() {
         System.out.println("setOrderStatus");
         String orderStatus = "";
         Order instance = new Order();
         instance.setOrderStatus(orderStatus);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
-
-    @Test
-    public void testGetOrderDate() {
-        System.out.println("getOrderDate");
-        Order instance = new Order();
-        Date expResult =null;
-        Date result = instance.getOrderDate();
-        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
@@ -216,29 +208,19 @@ public class OrderTest {
     @Test
     public void testAddItem() {
         System.out.println("addItem");
-        Item item = null;
-        int quantity = 0;
-        Order instance = new Order();
-        instance.addItem(item, quantity);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        Item concrete = new Item("Concrete", 3.00, "Bag");
+        int quantity = 1;
+        order.addItem(concrete, quantity);
+        assertTrue(order.getOrderLines().get(0).getItem().equals(concrete));
     }
-
- 
-    /**
-     * Test of toString method, of class Order.
-     */
-    @Test(expected=NullPointerException.class)
-    public void testToString() {
-        System.out.println("toString");
-        Order instance = new Order();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
-    }
-
-   
     
+    @Test
+    public void testAddItemToFail() {
+        System.out.println("addItemToFail");
+        Item concrete = new Item("Concrete", 3.00, "Bag");
+        Item bolts = new Item("Bolts", 4.50, "Sack"); 
+        int quantity = 1;
+        order.addItem(concrete, quantity);
+        assertFalse(order.getOrderLines().get(0).getItem().equals(bolts));
+    }
 }

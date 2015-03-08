@@ -54,15 +54,11 @@ public class DeliveryTest {
     @Test
     public void testUpdateDeliveryStatus() {
         System.out.println("updateDeliveryStatus");
-        String deliveryStatus = "";
-        String status = "";
+        String status = "Delivered";
      
         Delivery instance = new Delivery();
         instance.updateDeliveryStatus(status);
-        instance.setDeliveryStatus(deliveryStatus);
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        assertEquals(instance.getDeliveryStatus(), "Delivered");
     }
     
       @Test
@@ -73,7 +69,6 @@ public class DeliveryTest {
      
         Delivery instance = new Delivery();
         instance.updateDeliveryStatus(status);
-        instance.setDeliveryStatus(deliveryStatus);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -87,7 +82,6 @@ public class DeliveryTest {
         System.out.println("setDeliveryStatus");
         String deliveryStatus = "";
         Delivery instance = new Delivery();
-        instance.setDeliveryStatus(deliveryStatus);
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }
@@ -155,9 +149,7 @@ public class DeliveryTest {
         //fail("The test case is a prototype.");
     }
     
-    
-        
-    }
+}
     
       
    

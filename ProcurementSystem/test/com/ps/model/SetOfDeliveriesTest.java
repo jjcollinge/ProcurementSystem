@@ -1,6 +1,7 @@
 
 package com.ps.model;
 
+import static com.ps.model.OrderTest.order;
 import java.util.ArrayList;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -22,6 +23,7 @@ public class SetOfDeliveriesTest {
     @BeforeClass
     public static void setUpClass() {
         delivery = new Delivery();
+        SetOfDeliveries.setOutput("testSetOfDeliveries.ser");
         setOfDeliveries = SetOfDeliveries.getInstance();
     }
     
@@ -36,9 +38,20 @@ public class SetOfDeliveriesTest {
     public void testAddDelivery() {
         System.out.println("addDelivery");
         setOfDeliveries.addDelivery(delivery);
-        boolean expectedAdded = true;
-        boolean actuallyAdded = setOfDeliveries.getListOdDeliveries().contains(delivery);
-        assertEquals(expectedAdded, actuallyAdded);
+        assertTrue(setOfDeliveries.getListOdDeliveries().contains(delivery));
     }
 
+    @Test
+    public void testOrderInDelivery() {
+        System.out.println("addDelivery");
+        Order order = new Order();
+        Item concrete = new Item("Concrete", 3.00, "Bag");
+        Item bolts = new Item("Bolts", 4.50, "Sack"); 
+        order.addItem(concrete, 2);
+        order.addItem(bolts, 10);
+        
+        delivery.setOrder(order);
+        assertTrue(delivery.getOrder().equals(order));
+    }
+  
 }

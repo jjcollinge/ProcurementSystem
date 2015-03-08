@@ -145,4 +145,8 @@ public class SetOfOrders implements Serializable {
         }
         return openOrders;
     }
+    
+    public void clear() {
+        orders.clear();
+    }
 }

@@ -4,6 +4,7 @@ package com.ps.model;
 import com.ps.app.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Date;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,10 +16,11 @@ import static org.junit.Assert.*;
  */
 public class SetOfOrdersTest {
     //setofOrders
-    public static String filename = "setOfTestOrders.ser";
-    public static Order order;
     public static SetOfOrders setOfOrders;
     public static ArrayList<Order> orders;
+    public static Item concrete;
+    public static Item bolts;
+    public static Item bricks;
     
     public SetOfOrdersTest() {
         
@@ -26,23 +28,32 @@ public class SetOfOrdersTest {
     
     @BeforeClass
     public static void setUpClass() {
-        //get test orders
-        orders = (ArrayList<Order>)ObjectMapper.Deserialize(filename);
-        if(orders == null) {
-            System.out.println("Couldn't load orders file, creating a new set");
-            orders = new ArrayList<Order>();
-        }
         //get instance of setOfOrders
         setOfOrders = SetOfOrders.getInstance();
         //add test orders to setOfOrders
-        for (Order o : orders)
-        {
-            setOfOrders.addOrder(order);
-        } 
+        concrete = new Item("Concrete", 3.00, "Bag");
+        bolts = new Item("Bolts", 4.50, "Sack"); 
+        bricks = new Item("Bricks", 10.00, "Pallet");
+        
+        Order order1 = new Order();
+        order1.addItem(bricks, 2);
+        order1.addItem(concrete, 10);
+        
+        Order order2 = new Order();
+        order2.addItem(bolts, 1);
+        order2.addItem(bricks, 10);
+        
+        setOfOrders.addOrder(order1);
+        setOfOrders.addOrder(order2);
     }
     
     @AfterClass
     public static void tearDownClass() {
+    }
+    
+    @After
+    public void tearDownTest() {
+        setOfOrders.clear();
     }
 
     /**
@@ -65,7 +76,7 @@ public class SetOfOrdersTest {
         System.out.println(date);
         for (Order o : setOfOrders.getAllOrders())
         {
-            System.out.println(order);
+            System.out.println(o);
         }
         SetOfOrders instance = setOfOrders;
         ArrayList<Order> expResult = instance.filterByDate(date); //doesn't work when values are null
@@ -141,13 +152,13 @@ public class SetOfOrdersTest {
      * Test of addOrder method, of class SetOfOrders.
      */
     @Test
-    public void testAddOrder1() {
+    public void testAddOrder() {
         System.out.println("addOrder");
-        order = new Order();
+        Order order = new Order();
+        order.addItem(bolts, 1);
+        order.addItem(bricks, 10);
         setOfOrders.addOrder(order);
-        boolean expectedAdd = true;
-        boolean actuallyAdd = setOfOrders.getAllOrders().contains(order);
-        assertEquals(expectedAdd, actuallyAdd);
+        assertTrue(setOfOrders.getAllOrders().contains(order));
     }
 
     /**
@@ -182,4 +193,33 @@ public class SetOfOrdersTest {
         assertNotNull(expResult);
     }
     
+    /**
+     * Test find existing orders
+     */
+    @Test
+    public void testViewExistingOrders() {
+        System.out.println("viewExistingOrders");
+        
+        // Add some orders to set of orders
+        Order order1 = new Order();
+        order1.addItem(bolts, 1);
+        order1.addItem(bricks, 10);
+        setOfOrders.addOrder(order1);
+        
+        Order order2 = new Order();
+        order2.addItem(bolts, 1);
+        order2.addItem(concrete, 20);
+        setOfOrders.addOrder(order2);
+        
+        Order order3 = new Order();
+        order3.addItem(bricks, 10);
+        order3.addItem(concrete, 20);
+        setOfOrders.addOrder(order3);
+        
+        assertTrue(setOfOrders.getAllOrders().size() == 3);
+        assertTrue(setOfOrders.getAllOrders().contains(order1));
+        assertTrue(setOfOrders.getAllOrders().contains(order2));
+        assertTrue(setOfOrders.getAllOrders().contains(order3));
+        assertTrue(setOfOrders.getAllOrders().get(0).getOrderLines().get(0).getItem().equals(bolts));
+    }
 }
