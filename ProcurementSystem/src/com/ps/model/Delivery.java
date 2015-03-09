@@ -12,12 +12,15 @@ public class Delivery implements Serializable {
     private String deliveryStatus;
     private Boolean approval;
     private String approvedBy;
+    private final int maxSize = 32;
+    private final int minSize = 3;
     
     /**
      * Ctor
      */
     public Delivery() {
         approval = false;
+        deliveryStatus = "Pending";
     }
     
     /**
@@ -25,7 +28,9 @@ public class Delivery implements Serializable {
      * @param status status to set
      */
     public void updateDeliveryStatus(String status) {
-        deliveryStatus = status;
+        if(status != null && status.matches("[a-zA-Z]+") && status.length() <= maxSize && status.length() > minSize) {
+            deliveryStatus = status;
+        }
     }
     
     /**
@@ -34,6 +39,14 @@ public class Delivery implements Serializable {
     public void approveDelivery() {
         approval = true;
         approvedBy = "Kumar Kalla";
+    }
+    
+    /**
+     * Rest the delivery status
+     */
+    public void resetDelivery() {
+        approval = false;
+        deliveryStatus = "Pending";
     }
     
     /**
@@ -66,14 +79,6 @@ public class Delivery implements Serializable {
      */
     public String getApprovedBy() {
         return approvedBy;
-    }
-    
-    /**
-     * Set the approval state of this delivery
-     * @param approval 
-     */
-    public void setApproval(Boolean approval) {
-        this.approval = approval;
     }
     
     /**

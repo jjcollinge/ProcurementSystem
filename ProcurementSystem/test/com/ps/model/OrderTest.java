@@ -20,6 +20,9 @@ public class OrderTest {
     public static Order order;
     public Item concrete;
     public Item bolts;
+    public String exampleSite = "Test Site";
+    public String exampleOrderStatus = "Pending";
+    public String exampleSpecialInstructions = "Some Instructions";
             
     public OrderTest() {
     }
@@ -39,9 +42,9 @@ public class OrderTest {
         bolts = new Item("Bolts", 4.50, "Sack"); 
         Date dNow = new Date( );
         order.setOrderDate(dNow);
-        order.setSite("Test Site");
-        order.setOrderStatus("Pending");
-        order.addSpecialInstructions("Some instructions");
+        order.setSite(exampleSite);
+        order.setOrderStatus(exampleOrderStatus);
+        order.addSpecialInstructions(exampleSpecialInstructions);
     }
     
     @After
@@ -125,7 +128,7 @@ public class OrderTest {
         System.out.println("setOrderStatusToNull");
         String orderStatus = null;
         order.setOrderStatus(orderStatus);
-        assertTrue(order.getOrderStatus().equals("Pending"));
+        assertTrue(order.getOrderStatus().equals(exampleOrderStatus));
     }
 
     /**
@@ -144,7 +147,7 @@ public class OrderTest {
         System.out.println("testAddSpecialInstructionsNull");
         String instructions = null;
         order.addSpecialInstructions(instructions);
-        assertTrue(order.getSpecialInstructions().equals("Some instructions"));
+        assertTrue(order.getSpecialInstructions().equals(exampleSpecialInstructions));
     }
 
     @Test
@@ -178,7 +181,7 @@ public class OrderTest {
     public void testSetSiteToNull() {
         System.out.println("setSiteToNull");
         String site = null;
-        order.setSite(null);
-        assertTrue(order.getSite().equals("Test Site"));
+        order.setSite(site);
+        assertTrue(order.getSite().equals(exampleSite));
     }
 }

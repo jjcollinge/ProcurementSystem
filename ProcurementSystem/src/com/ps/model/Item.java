@@ -31,7 +31,9 @@ public class Item implements Serializable, Comparable<Item> {
      * @param price 
      */
     public void setPrice(double price) {
-        
+        if(price > 0) {
+            this.price = price;
+        }
     }
 
     /**
@@ -39,7 +41,9 @@ public class Item implements Serializable, Comparable<Item> {
      * @param name 
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null) {
+            this.name = name;
+        }
     }
 
     /**
@@ -47,7 +51,9 @@ public class Item implements Serializable, Comparable<Item> {
      * @param type 
      */
     public void setType(String type) {
-        this.type = type;
+        if(type != null) {
+            this.type = type;
+        }
     }
 
     /**

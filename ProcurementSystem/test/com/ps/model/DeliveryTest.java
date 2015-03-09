@@ -1,9 +1,10 @@
 
 package com.ps.model;
 
-import static org.hamcrest.CoreMatchers.not;
+import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,143 +13,117 @@ import org.junit.Test;
  * @author b0015911
  */
 public class DeliveryTest {
+    private static Delivery delivery;
+    private final String deliveryStatus = "Delivered";
     
     public DeliveryTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+        delivery = new Delivery();
     }
     
     @AfterClass
     public static void tearDownClass() {
-    }
-
-    /**
-     * Test of approveDelivery method, of class Delivery.
-     */
-    @Test
-    public void testApproveDelivery() {
-        System.out.println("approveDelivery");
-        Delivery instance = new Delivery();
-        instance.setApproval(Boolean.FALSE); //set to false
-        instance.approveDelivery(); //sets to true within approveDelivery
-        boolean approvalSet = instance.getApproval(); //get approval
-        boolean expectedResult = true; 
-        assertEquals(expectedResult, approvalSet);
+        
     }
     
-      @Test //tests true bool
-    public void testApproveDelivery2() {
-        System.out.println("approveDelivery");
-        Delivery instance = new Delivery();
-        instance.setApproval(Boolean.TRUE); //set to true
-        instance.approveDelivery(); //sets to true within approveDelivery
-        boolean approvalSet = instance.getApproval(); //get approval
-        boolean expectedResult = true; 
-        assertEquals(expectedResult, approvalSet);
+    @Before
+    public void beforeTest() {
+        delivery.updateDeliveryStatus(deliveryStatus);
     }
     
-
-
+    @After
+    public void afterTest() {
+        delivery.resetDelivery();
+    }
+    
     @Test
     public void testUpdateDeliveryStatus() {
         System.out.println("updateDeliveryStatus");
-        String status = "Delivered";
-     
-        Delivery instance = new Delivery();
-        instance.updateDeliveryStatus(status);
-        assertEquals(instance.getDeliveryStatus(), "Delivered");
+        String newStatus = "Confirmed";
+        delivery.updateDeliveryStatus(newStatus);
+        assertTrue(delivery.getDeliveryStatus().equals(newStatus));
     }
     
-      @Test
-    public void testUpdateDeliveryStatus2() {
-         System.out.println("updateDeliveryStatus");
-        String deliveryStatus = "fgfgf";
-        String status = "dgdgdg";
-     
-        Delivery instance = new Delivery();
-        instance.updateDeliveryStatus(status);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-    
-  
-    /**
-     * Test of setDeliveryStatus method, of class Delivery.
-     */
     @Test
-    public void testSetDeliveryStatus() {
-        System.out.println("setDeliveryStatus");
-        String deliveryStatus = "";
-        Delivery instance = new Delivery();
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+    public void testUpdateDeliveryStatusNull() {
+        System.out.println("updateDeliveryStatusNull");
+        String nullStatus = null;
+        delivery.updateDeliveryStatus(nullStatus);
+        assertTrue(delivery.getDeliveryStatus().equals(deliveryStatus));
+    }
+    
+    @Test
+    public void testUpdateDeliveryStatusSpace() {
+        System.out.println("updateDeliveryStatusTest");
+        String spaceStatus = " ";
+        delivery.updateDeliveryStatus(spaceStatus);
+        assertTrue(delivery.getDeliveryStatus().equals(deliveryStatus));
+    }
+    
+    @Test
+    public void testUpdateDeliveryStatusOverMaxString() {
+        System.out.println("updateDeliveryStatusOverMaxString");
+        String maxString = "";
+        int size = 33;
+        for(int i = 0; i < size; i++) {
+            maxString += "w";
+        }
+        delivery.updateDeliveryStatus(maxString);
+        assertTrue(delivery.getDeliveryStatus().equals(deliveryStatus));
+    }
+    
+    @Test
+    public void testUpdateDeliveryStatusUnderMaxString() {
+        System.out.println("updateDeliveryStatusUnderMaxString");
+        String maxString = "";
+        int size = 32;
+        for(int i = 0; i < size; i++) {
+            maxString += "w";
+        }
+        delivery.updateDeliveryStatus(maxString);
+        assertTrue(delivery.getDeliveryStatus().equals(maxString));
+    }
+    
+    @Test
+    public void testUpdateDeliveryStatusUnderMinString() {
+        System.out.println("updateDeliveryStatusUnderMinString");
+        String minString = "a";
+        delivery.updateDeliveryStatus(minString);
+        assertTrue(delivery.getDeliveryStatus().equals(deliveryStatus));
+    }
+    
+    @Test
+    public void testUpdateDeliveryStatusWithAlphaNumerical() {
+        System.out.println("updateDeliveryStatusUnderMaxString");
+        String alphaNumStatus = "t357st4tus";
+        delivery.updateDeliveryStatus(alphaNumStatus);
+        assertTrue(delivery.getDeliveryStatus().equals(deliveryStatus));
     }
 
-  //SHOULD IT ACCEPT NULL?
     @Test
-    public void testGetApproval() {
-        System.out.println("getApproval");
-        Delivery instance = new Delivery();
-        Boolean expResult = false;
-        Boolean result = instance.getApproval();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+    public void testGetDefaultApproval() {
+        System.out.println("getDefaultApproval");
+        assertFalse(delivery.getApproval());
     }
 
     @Test
-    public void testGetApproval2() {
-        System.out.println("getApproval");
-        Delivery instance = new Delivery();
-        Boolean expResult = true;
-        Boolean result = instance.getApproval();
-        assertThat(expResult, not(result));
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+    public void testGetApprovedDelivery() {
+        System.out.println("getApprovedDelivery");
+        delivery.approveDelivery();
+        assertTrue(delivery.getApproval());
     }
-     
+    
     @Test
-    public void testGetApproval3() {
-        System.out.println("getApproval");
-        Delivery instance = new Delivery();
-        Boolean expResult = false;
-        Boolean result = instance.getApproval();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+    public void testResetDelivery() {
+        System.out.println("resetDelivery");
+        delivery.approveDelivery();
+        assertTrue(delivery.getApproval());
+        delivery.resetDelivery();
+        assertFalse(delivery.getApproval());
     }
-    @Test
-    public void testSetApproval() {
-        System.out.println("setApproval");
-        Boolean approval = null;
-        Delivery instance = new Delivery();
-        instance.setApproval(approval);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-    
-     @Test
-    public void testSetApproval2() {
-        System.out.println("setApproval");
-        Boolean approval = true;
-        Delivery instance = new Delivery();
-        instance.setApproval(approval);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-    
-         @Test
-    public void testSetApproval3() {
-        System.out.println("setApproval");
-        Boolean approval = false;
-        Delivery instance = new Delivery();
-        instance.setApproval(approval);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-    
 }
     
       
