@@ -42,7 +42,9 @@ public class Order implements Serializable {
      * @param orderStatus 
      */
     public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+        if(orderStatus != null) {
+            this.orderStatus = orderStatus;
+        }
     }
 
     /**
@@ -50,7 +52,9 @@ public class Order implements Serializable {
      * @param site 
      */
     public void setSite(String site) {
-        this.site = site;
+        if(site != null) {
+            this.site = site;
+        }
     }
     
     /**
@@ -66,7 +70,9 @@ public class Order implements Serializable {
      * @param instructions 
      */
     public void addSpecialInstructions(String instructions) {
-        this.specialInstructions = instructions;
+        if(instructions != null) {
+           this.specialInstructions = instructions;
+        }
     }
     
     /**
@@ -114,7 +120,10 @@ public class Order implements Serializable {
      * @param orderDate 
      */
     public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+        if(orderDate != null) {
+            this.orderDate = orderDate;
+        }
+
     }
     
     /**
@@ -154,8 +163,19 @@ public class Order implements Serializable {
      * @param quantity 
      */
     public void addItem(Item item, int quantity) {
-        OrderLine orderLine = new OrderLine(item, quantity);
-        orderLines.add(orderLine);
+        if(item != null && quantity > 0) {
+            boolean itemExists = false;
+            for (OrderLine oL : orderLines) {
+                if (oL.getItem().getName().equals(item.getName())) {
+                    itemExists = true;
+                }
+            }
+            
+            if(!itemExists) {
+                OrderLine orderLine = new OrderLine(item, quantity);
+                orderLines.add(orderLine);
+            }
+        }
     }
 
     @Override
@@ -169,11 +189,13 @@ public class Order implements Serializable {
      * @return success
      */
     public boolean hasSameDate(Date date) {
-        if(this.orderDate.getYear() == date.getYear() &&
+        if(date != null) {
+            if(this.orderDate.getYear() == date.getYear() &&
             this.orderDate.getMonth() == date.getMonth() &&
                 this.orderDate.getDay() == date.getDay()) {
                     return true;
                 }
+        }
         return false;
     }
 }

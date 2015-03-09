@@ -9,35 +9,93 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
- * @author Lucy
+ * @author Simon
  */
 public class OrderTest {
     
     public static Order order;
+    public Item concrete;
+    public Item bolts;
+            
     public OrderTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
         order = new Order();
-        Date dNow = new Date( );
-        order.setOrderDate(dNow);
     }
     
     @AfterClass
     public static void tearDownClass() {
     }
     
+    @Before
+    public void setupTest() {
+        concrete = new Item("Concrete", 3.00, "Bag");
+        bolts = new Item("Bolts", 4.50, "Sack"); 
+        Date dNow = new Date( );
+        order.setOrderDate(dNow);
+        order.setSite("Test Site");
+        order.setOrderStatus("Pending");
+        order.addSpecialInstructions("Some instructions");
+    }
+    
     @After
     public void tearDownTest() {
         order.cancelOrder();
     }
+    
+    /**
+     * Test of addItem method, of class Order.
+     */
+    @Test
+    public void testAddItem() {
+        System.out.println("addItem");
+        order.addItem(concrete, 1);
+        assertTrue(order.getOrderLines().get(0).getItem().equals(concrete));
+    }
+    
+    /**
+     * Test of addItem method, that it inserts the correct order
+     */
+    @Test
+    public void testAddItemToFail() {
+        System.out.println("addItemToFail");
+        order.addItem(concrete, 1);
+        assertFalse(order.getOrderLines().get(0).getItem().equals(bolts));
+    }
+    
+    /**
+     * Test that addItem method handles null items
+     */
+    @Test
+    public void testAddNullItem() {
+        System.out.println("addNullItem");
+        int previousSize = order.getOrderLines().size();
+        order.addItem(null, 2);
+        assertTrue(order.getOrderLines().size() == previousSize);
+    }
+    
+    /**
+     * Test that addItem method handles duplicate items
+     */
+    @Test
+    public void testAddDuplicateItem() {
+        System.out.println("addDuplicateItem");
+        int quantity = 3;
+        order.addItem(bolts, quantity);
+        int sizeAfterOneItem = order.getOrderLines().size();
+        order.addItem(bolts, 4);
+        assertTrue(order.getOrderLines().size() == sizeAfterOneItem);
+        assertTrue(order.getOrderLines().get(0).getQuantity() == quantity);
+    }
 
     @Test
-    public void testHasSameDate1() {
+    public void testHasSameDate() {
         System.out.println("hasSameDate");
         Date date = new Date();
         boolean expResult = true;
@@ -45,23 +103,29 @@ public class OrderTest {
         assertEquals(expResult, result);
     }
     
-    @Test(expected=NullPointerException.class) //tests null date
-    public void testHasSameDate2() {
-        System.out.println("hasSameDate");
+    @Test
+    public void testHasSameDateWithNull() {
+        System.out.println("hasSameDateWithNull");
         Date date = null;
         boolean expResult = false;
         boolean result = order.hasSameDate(date);
-        assertEquals(expResult, result);
+        assertTrue(result == false);
     }
 
     @Test
     public void testSetOrderStatus() {
         System.out.println("setOrderStatus");
-        String orderStatus = "";
-        Order instance = new Order();
-        instance.setOrderStatus(orderStatus);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        String orderStatus = "Delivered";
+        order.setOrderStatus(orderStatus);
+        assertTrue(order.getOrderStatus().equals(orderStatus));
+    }
+    
+    @Test
+    public void testSetOrderStatusToNull() {
+        System.out.println("setOrderStatusToNull");
+        String orderStatus = null;
+        order.setOrderStatus(orderStatus);
+        assertTrue(order.getOrderStatus().equals("Pending"));
     }
 
     /**
@@ -70,157 +134,51 @@ public class OrderTest {
     @Test
     public void testAddSpecialInstructions() {
         System.out.println("addSpecialInstructions");
-        String instructions = "";
-        Order instance = new Order();
-        instance.addSpecialInstructions(instructions);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        String instructions = "I am a special instruction";
+        order.addSpecialInstructions(instructions);
+        assertTrue(order.getSpecialInstructions().equals(instructions));
     }
-
-    /**
-     * Test of amendOrder method, of class Order.
-     */
+    
     @Test
-    public void testAmendOrder() {
-        System.out.println("amendOrder");
-        Order instance = new Order();
-        instance.amendOrder();
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
+    public void testAddSpecialInstructionsNull() {
+        System.out.println("testAddSpecialInstructionsNull");
+        String instructions = null;
+        order.addSpecialInstructions(instructions);
+        assertTrue(order.getSpecialInstructions().equals("Some instructions"));
     }
 
-    /**
-     * Test of getOrderStatus method, of class Order.
-     */
-    @Test
-    public void testGetOrderStatus() {
-        System.out.println("getOrderStatus");
-        Order instance = new Order();
-        String expResult = "Pending";
-        String result = instance.getOrderStatus();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAuditTrail method, of class Order.
-     */
-    @Test
-    public void testGetAuditTrail() {
-        System.out.println("getAuditTrail");
-        Order instance = new Order();
-        instance.getAuditTrail();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-  //ULL
     @Test
     public void testSetOrderDate() {
         System.out.println("setOrderDate");
-        Date orderDate = null;
-        Order instance = new Order();
-        instance.setOrderDate(orderDate);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of printInvoice method, of class Order.
-     */
-    @Test
-    public void testPrintInvoice() {
-        System.out.println("printInvoice");
-        Order instance = new Order();
-        instance.printInvoice();
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
+        Date yesterday = new Date(System.currentTimeMillis()-24*60*60*1000);
+        order.setOrderDate(yesterday);
+        assertEquals(order.getOrderDate(), yesterday);
     }
     
-    //testing for null
-    @Test(expected=NullPointerException.class)
-    public void testPrintInvoice2() {
-        System.out.println("printInvoice");
-        Order instance = null;
-        instance.printInvoice();
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
+    @Test
+    public void testSetOrderDateToNull() {
+        System.out.println("setOrderDateToNull");
+        Date nullDate = null;
+        order.setOrderDate(nullDate);
+        assertEquals(order.getOrderDate(), new Date());
     }
     
-    /**
-     * Test of getOrderLines method, of class Order.
-     */
-    @Test
-    public void testGetOrderLines() {
-        System.out.println("getOrderLines");
-        Order instance = new Order();
-        ArrayList<OrderLine> expResult = new ArrayList<OrderLine>();
-        ArrayList<OrderLine> result = instance.getOrderLines();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getSpecialInstructions method, of class Order.
-     */
-    @Test
-    public void testGetSpecialInstructions() {
-        System.out.println("getSpecialInstructions");
-        Order instance = new Order();
-        String expResult = "";
-        String result = instance.getSpecialInstructions();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
-    }
-
-      @Test
-    public void testGetSpecialInstructions2() {
-        System.out.println("getSpecialInstructions");
-        Order instance = new Order();
-        String specialInst = "I am special";
-        instance.addSpecialInstructions(specialInst);
-        String expResult = specialInst;
-        String result = instance.getSpecialInstructions();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
-    }
     /**
      * Test of getSite method, of class Order.
      */
     @Test
-    public void testGetSite() {
-        System.out.println("getSite");
-        Order instance = new Order();
-        String expResult = "";
-        String result = instance.getSite();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addItem method, of class Order.
-     */
-    @Test
-    public void testAddItem() {
-        System.out.println("addItem");
-        Item concrete = new Item("Concrete", 3.00, "Bag");
-        int quantity = 1;
-        order.addItem(concrete, quantity);
-        assertTrue(order.getOrderLines().get(0).getItem().equals(concrete));
+    public void testSetSite() {
+        System.out.println("setSite");
+        String site = "Sheffield";
+        order.setSite(site);
+        assertEquals(order.getSite(), site);
     }
     
     @Test
-    public void testAddItemToFail() {
-        System.out.println("addItemToFail");
-        Item concrete = new Item("Concrete", 3.00, "Bag");
-        Item bolts = new Item("Bolts", 4.50, "Sack"); 
-        int quantity = 1;
-        order.addItem(concrete, quantity);
-        assertFalse(order.getOrderLines().get(0).getItem().equals(bolts));
+    public void testSetSiteToNull() {
+        System.out.println("setSiteToNull");
+        String site = null;
+        order.setSite(null);
+        assertTrue(order.getSite().equals("Test Site"));
     }
 }

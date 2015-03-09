@@ -14,7 +14,7 @@ import com.ps.app.ObjectMapper;
 public class SetOfOrders implements Serializable {
     private ArrayList<Order> orders;
     private static SetOfOrders singleton;
-    private final String filename = "setOfOrders.ser";
+    private static String filename = "setOfOrders.ser";
     
     /**
      * private Ctor
@@ -36,6 +36,13 @@ public class SetOfOrders implements Serializable {
             singleton = new SetOfOrders();     
         }
         return singleton;
+    }
+    
+    /**
+     * Set the output for serialization
+     */
+    public static void setOutput(String fname) {
+        filename = fname;
     }
     
     /**
@@ -100,18 +107,19 @@ public class SetOfOrders implements Serializable {
      */
     public void addOrder(Order order) {
         if(order != null) {
-            orders.add(order);
-            ObjectMapper.Serialize(orders, filename);
+            if(!orders.contains(order)) {
+                orders.add(order);
+                ObjectMapper.Serialize(orders, filename);
+            }
         }
     }
     
     /**
      * Get Order
-     * n.b. shouldn't return null
      * @return Order
      */
-    public Order getOrder() {
-        return null;
+    public Order getOrder(int index) {
+        return orders.get(index);
     }
     
     public void onUpdate() {

@@ -9,10 +9,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
- * @author b0015911
+ * @author JC
  */
 public class SetOfOrdersTest {
     //setofOrders
@@ -28,16 +29,30 @@ public class SetOfOrdersTest {
     
     @BeforeClass
     public static void setUpClass() {
-        //get instance of setOfOrders
+        SetOfOrders.setOutput("testSetOfOrders.ser");
+        
+        // get instance of setOfOrders
         setOfOrders = SetOfOrders.getInstance();
-        //add test orders to setOfOrders
+        
+        // define some items
         concrete = new Item("Concrete", 3.00, "Bag");
         bolts = new Item("Bolts", 4.50, "Sack"); 
         bricks = new Item("Bricks", 10.00, "Pallet");
-        
+      
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUpTest() {        
         Order order1 = new Order();
         order1.addItem(bricks, 2);
         order1.addItem(concrete, 10);
+        Date yesterday = new Date(System.currentTimeMillis()-24*60*60*1000);
+        order1.setOrderDate(yesterday);
+        order1.setSite("testSite");
         
         Order order2 = new Order();
         order2.addItem(bolts, 1);
@@ -45,10 +60,6 @@ public class SetOfOrdersTest {
         
         setOfOrders.addOrder(order1);
         setOfOrders.addOrder(order2);
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @After
@@ -62,114 +73,159 @@ public class SetOfOrdersTest {
     @Test //test singleton
     public void testGetInstance() {
         System.out.println("getInstance");
-        SetOfOrders expResult = SetOfOrders.getInstance();
-        assertNotNull(expResult);
+        SetOfOrders singleton = SetOfOrders.getInstance();             
+        assertTrue(singleton.getClass().toString().equalsIgnoreCase(com.ps.model.SetOfOrders.class.toString()));
     }
 
     /**
      * Test of filterByDate method, of class SetOfOrders.
      */
     @Test
-    public void testFilterByDate1() {
+    public void testFilterByDate() {
         System.out.println("filterByDate");
         Date date = new Date();
-        System.out.println(date);
-        for (Order o : setOfOrders.getAllOrders())
-        {
-            System.out.println(o);
-        }
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = instance.filterByDate(date); //doesn't work when values are null
-        assertNotNull(expResult);
+        ArrayList<Order> filteredOrders = setOfOrders.filterByDate(date);
+        assertTrue(filteredOrders.size() == 1);
     }
     
+    /**
+     * Test of testFilterByNullDate method, of class SetOfOrders.
+     */
     @Test (expected = NullPointerException.class)
-    public void testFilterByDate2() {
-        System.out.println("filterByDate");
+    public void testFilterByNullDate() {
+        System.out.println("testFilterByNullDate");
         Date date = null;
-        System.out.println(date);
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = instance.filterByDate(date); //doesn't work when values are null
-        assertNotNull(expResult);
+        ArrayList<Order> filteredOrders = setOfOrders.filterByDate(date);
+        assertNotNull(filteredOrders);
     }
     
     /**
      * Test of filterBySite method, of class SetOfOrders.
      */
     @Test
-    public void testFilterBySite1() {
+    public void testFilterBySite() {
         System.out.println("filterBySite");
         String site = "testSite";
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = new ArrayList<Order>();
-        ArrayList<Order> result = instance.filterBySite(site);
-        assertEquals(expResult, result);
+        ArrayList<Order> filteredOrders = setOfOrders.filterBySite(site);
+        assertTrue(filteredOrders.size() == 1);
     }
     
-    @Test
-    public void testFilterBySite2() {
-        System.out.println("filterBySite");
-        String site = null;
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = new ArrayList<Order>();
-        ArrayList<Order> result = instance.filterBySite(site);
-        assertEquals(expResult, result);
-    }
-    
-    @Test
-    public void testFilterBySite3() {
-        System.out.println("filterBySite");
-        String site = "123";
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = instance.filterBySite(site);
-        assertNotNull(expResult);
-    }
-
     /**
-     * Test of filterBySupplier method, of class SetOfOrders.
+     * Test of filterBySite method with null operand, of class SetOfOrders.
      */
-    @Test //method not implemented
-    public void testFilterBySupplier1() {
-        System.out.println("filterBySupplier");
-        String supplier = "testSupplier";
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = new ArrayList<Order>();
-        ArrayList<Order> result = instance.filterBySupplier(supplier);
-        assertEquals(expResult, result);
+    @Test
+    public void testFilterByNullSite() {
+        System.out.println("testFilterByNullSite");
+        String site = null;
+        ArrayList<Order> emptyArray = new ArrayList<Order>();
+        ArrayList<Order> filteredOrders = setOfOrders.filterBySite(site);
+        assertEquals(emptyArray, filteredOrders);
     }
     
-    @Test 
-    public void testFilterBySupplier2() {
-        System.out.println("filterBySupplier");
-        String supplier = null;
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = new ArrayList<Order>();
-        ArrayList<Order> result = instance.filterBySupplier(supplier);
-        assertEquals(expResult, result);
+    /**
+     * Test of filterBySite method with non matching site, of class SetOfOrders.
+     */
+    @Test
+    public void testFilterByNonMatchingSite() {
+        System.out.println("testFilterByNonMatchingSite");
+        String site = "123";
+        ArrayList<Order> filteredOrders = setOfOrders.filterBySite(site);
+        ArrayList<Order> emptyArray = new ArrayList<Order>();
+        assertEquals(emptyArray, filteredOrders);
     }
 
     /**
      * Test of addOrder method, of class SetOfOrders.
      */
     @Test
-    public void testAddOrder() {
-        System.out.println("addOrder");
+    public void testPlaceOrder() {
+        System.out.println("addPlaceOrder");
         Order order = new Order();
         order.addItem(bolts, 1);
         order.addItem(bricks, 10);
         setOfOrders.addOrder(order);
         assertTrue(setOfOrders.getAllOrders().contains(order));
     }
+    
+    /**
+     * Test of addOrder method with operand of an order with no items, of class SetOfOrders.
+     */
+    @Test
+    public void testPlaceOrderWithNoItems() {
+        System.out.println("placeOrderWithNoItems");
+        Order order = new Order();
+        setOfOrders.addOrder(order);
+        assertTrue(setOfOrders.getAllOrders().contains(order));
+    }
+    
+    /**
+     * Test of addOrder method with null order, of class SetOfOrders.
+     */
+    @Test
+    public void testPlaceNullOrder() {
+        System.out.println("placeNullOrder");
+        Order order = null;
+        setOfOrders.addOrder(order);
+        assertFalse(setOfOrders.getAllOrders().contains(order));
+    }
+    
+    /**
+     * Test of addOrder method with duplicate order, of class SetOfOrders.
+     */
+    @Test
+    public void testPlaceDuplicateOrder() {
+        System.out.println("placeDuplicateOrder");
+        Order order = new Order();
+        order.addItem(bolts, 1);
+        order.addItem(bricks, 10);
+        setOfOrders.addOrder(order);
+        assertTrue(setOfOrders.getAllOrders().contains(order));
+        int size = setOfOrders.getAllOrders().size();
+        setOfOrders.addOrder(order);
+        assertTrue(setOfOrders.getAllOrders().size() == size);
+    }  
+    
+    /**
+     * Test of addOrder method with multiple identical orders, of class SetOfOrders.
+     */
+    @Test
+    public void testPlaceMultipleIdenticalOrders() {
+        System.out.println("placeMultipleIdenticalOrders");
+        Order order = new Order();
+        order.addItem(bolts, 1);
+        order.addItem(bricks, 10);
+        setOfOrders.addOrder(order);
+        assertTrue(setOfOrders.getAllOrders().contains(order));
+        int size = setOfOrders.getAllOrders().size();
+        Order order1 = new Order();
+        order1.addItem(bolts, 1);
+        order1.addItem(bricks, 10);
+        setOfOrders.addOrder(order1);
+        assertTrue(setOfOrders.getAllOrders().size() == size + 1);
+    }  
+    
+    /**
+     * Test of addOrder method with cancelled order, of class SetOfOrders.
+     */
+    @Test
+    public void testPlaceCancelledOrder() {
+        System.out.println("placeCancelledOrder");
+        Order order = new Order();
+        order.addItem(bolts, 1);
+        order.addItem(bricks, 10);
+        order.cancelOrder();
+        setOfOrders.addOrder(order);
+        assertTrue(setOfOrders.getAllOrders().contains(order));
+    }  
 
     /**
      * Test of getOrder method, of class SetOfOrders.
      */
-    @Test//method returns null
+    @Test
     public void testGetOrder() {
         System.out.println("getOrder");
-        SetOfOrders instance = setOfOrders;
-        Order expResult = instance.getOrder();
-        assertNull(expResult);
+        Order order = setOfOrders.getOrder(0);
+        assertNotNull(order);
     }
 
     /**
@@ -178,21 +234,10 @@ public class SetOfOrdersTest {
     @Test
     public void testGetAllOrders() {
         System.out.println("getAllOrders");
-        SetOfOrders instance = setOfOrders;
-        ArrayList<Order> expResult = instance.getAllOrders();
-        assertNotNull(expResult);
+        ArrayList<Order> allOrders = setOfOrders.getAllOrders();
+        assertTrue(allOrders.size() == 2);
     }
 
-    /**
-     * Test of getOpenOrders method, of class SetOfOrders.
-     */
-    @Test
-    public void testGetOpenOrders() {
-        System.out.println("getOpenOrders");
-        ArrayList<Order> expResult = setOfOrders.getOpenOrders(); //doesn't work when values are null
-        assertNotNull(expResult);
-    }
-    
     /**
      * Test find existing orders
      */
@@ -200,26 +245,28 @@ public class SetOfOrdersTest {
     public void testViewExistingOrders() {
         System.out.println("viewExistingOrders");
         
+        assertTrue(setOfOrders.getAllOrders().size() == 2);
+        
         // Add some orders to set of orders
-        Order order1 = new Order();
-        order1.addItem(bolts, 1);
-        order1.addItem(bricks, 10);
-        setOfOrders.addOrder(order1);
-        
-        Order order2 = new Order();
-        order2.addItem(bolts, 1);
-        order2.addItem(concrete, 20);
-        setOfOrders.addOrder(order2);
-        
         Order order3 = new Order();
+        order3.addItem(bolts, 1);
         order3.addItem(bricks, 10);
-        order3.addItem(concrete, 20);
         setOfOrders.addOrder(order3);
         
-        assertTrue(setOfOrders.getAllOrders().size() == 3);
-        assertTrue(setOfOrders.getAllOrders().contains(order1));
-        assertTrue(setOfOrders.getAllOrders().contains(order2));
+        Order order4 = new Order();
+        order4.addItem(bolts, 1);
+        order4.addItem(concrete, 20);
+        setOfOrders.addOrder(order4);
+        
+        Order order5 = new Order();
+        order5.addItem(bricks, 10);
+        order5.addItem(concrete, 20);
+        setOfOrders.addOrder(order5);
+        
+        assertTrue(setOfOrders.getAllOrders().size() == 5);
         assertTrue(setOfOrders.getAllOrders().contains(order3));
-        assertTrue(setOfOrders.getAllOrders().get(0).getOrderLines().get(0).getItem().equals(bolts));
+        assertTrue(setOfOrders.getAllOrders().contains(order4));
+        assertTrue(setOfOrders.getAllOrders().contains(order5));
+        assertTrue(setOfOrders.getOrder(2).getOrderLines().get(0).getItem().equals(bolts));
     }
 }
