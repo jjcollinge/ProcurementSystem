@@ -37,6 +37,8 @@ public class CatalogUI extends UserInterface {
     private ArrayList<JCheckBox> checkBoxes;
     private DefaultListModel<Item> allItems;
     private DefaultListModel<Integer> itemQuantities;
+    private ArrayList<Item> itemCache;
+    private ArrayList<Integer> quantitiesCache;
     
     private boolean ascending = true;
     private boolean ascending1 = true;
@@ -53,6 +55,9 @@ public class CatalogUI extends UserInterface {
         // initialise models
         itemQuantities = new DefaultListModel<Integer>();
         allItems = new DefaultListModel<Item>();
+        
+        itemCache = new ArrayList<Item>();
+        quantitiesCache = new ArrayList<Integer>();
     
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -533,6 +538,12 @@ public class CatalogUI extends UserInterface {
                itemQuantities.addElement(0);
             }
         }
+        
+        Object[] tmp = itemQuantities.toArray();
+        quantitiesCache.clear();
+        for(int i = 0; i < tmp.length; i++) {
+            quantitiesCache.add((Integer) tmp[i]);
+        }
     }
     
     /**
@@ -546,7 +557,7 @@ public class CatalogUI extends UserInterface {
         }
         checkBoxes.clear();
         
-        /* for each item check if it is selected and create
+    /* for each item check if it is selected and create
            a checkbox and incremenet the quantity if it is */
         for (int i = 0; i < allItems.size(); i++) {
 
@@ -745,17 +756,25 @@ public class CatalogUI extends UserInterface {
         String searchFieldText = searchField.getText();
         if (!searchFieldText.isEmpty()) {
             ArrayList<Item> searchedItems = new ArrayList<>();
+            ArrayList<Integer> searchedQuantities = new ArrayList<>();
             for(int i = 0; i < allItems.size(); i++) {
                 if(allItems.get(i).getName().toLowerCase().contains(searchFieldText.toLowerCase())) {
                     searchedItems.add(allItems.get(i));
+                    searchedQuantities.add(itemQuantities.get(i));
                 }
             }
             allItems.clear();
-            searchedItems.stream().forEach((item) -> {
-                allItems.addElement(item);
-            });
+            updateModel(allItems, searchedItems);
+            updateModel(itemQuantities, searchedQuantities);
+            updateCheckBoxes();
+//            searchedItems.stream().forEach((item) -> {
+//                allItems.addElement(item);
+//            });
         } else {
-            displayCatalog();
+            updateModel(allItems, itemCache);
+            updateModel(itemQuantities, quantitiesCache);
+            updateCheckBoxes();
+            //displayCatalog();
         }
     }//GEN-LAST:event_searchFieldKeyReleased
 
@@ -803,6 +822,11 @@ public class CatalogUI extends UserInterface {
                 if(selectedIndex >= 0 && selectedIndex < itemQuantities.size()) {
                     itemQuantities.set(selectedIndex, value);
                 }
+            }
+            Object[] tmp = itemQuantities.toArray();
+            quantitiesCache.clear();
+            for(int i = 0; i < tmp.length; i++) {
+                quantitiesCache.add((Integer) tmp[i]);
             }
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
@@ -960,6 +984,13 @@ public class CatalogUI extends UserInterface {
         catalogPanel.setVisible(true);
         defaultPanel.setVisible(true);
         quantityPanel.setVisible(false);
+        
+        Object[] tmp = allItems.toArray();
+        itemCache.clear();
+        for(int i = 0; i < tmp.length; i++) {
+            itemCache.add((Item) tmp[i]);
+        }
+        
     }
     
     /**

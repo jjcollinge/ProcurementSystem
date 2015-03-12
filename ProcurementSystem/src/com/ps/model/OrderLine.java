@@ -20,10 +20,6 @@ public class OrderLine implements Serializable {
         this.item = item;
         this.quantity = quantity;
     }
-
-    OrderLine() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     /**
      * Delete Item from OrderLine
