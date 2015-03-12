@@ -863,6 +863,7 @@ public class ViewOrdersUI extends UserInterface {
             } else if(filter.equalsIgnoreCase("supplier")) {
                 matching = orders.filterBySupplier((String)param);
             }
+            System.out.println("filtered: " + matching);
             
             ordersModel.clear();
             for(Order order : matching) {
