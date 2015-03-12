@@ -30,6 +30,7 @@ public class PlaceOrderUI extends UserInterface {
     private static PlaceOrderUI singleton;
     
     private boolean ascending = true;
+    private final int MAX_QTY = 1000;
     
     /**
      * Creates new form PlaceOrderUI
@@ -268,6 +269,7 @@ public class PlaceOrderUI extends UserInterface {
      * @param evt 
      */
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
+        
         if(catalogUI != null) {
             catalogUI.closeCatalog();
             SetOfOrders orders = SetOfOrders.getInstance();
@@ -338,9 +340,15 @@ public class PlaceOrderUI extends UserInterface {
             return;
         }
         
-        // alter item quantity
-        if(selectedItemIndex >= 0 && selectedItemIndex < quantities.size())
-            quantities.set(selectedItemIndex, value);
+        // validate value
+        if(value > 0 && value < MAX_QTY) {
+            // alter item quantity
+            if(selectedItemIndex >= 0 && selectedItemIndex < quantities.size()) {
+                quantities.set(selectedItemIndex, value);
+            }
+        } else {
+            System.out.println("Illegal quantity value " + value + " entered");
+        }
         
     }//GEN-LAST:event_inputValueFieldKeyReleased
 
