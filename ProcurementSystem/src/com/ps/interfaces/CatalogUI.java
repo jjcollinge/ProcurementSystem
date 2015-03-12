@@ -43,6 +43,8 @@ public class CatalogUI extends UserInterface {
     private boolean ascending = true;
     private boolean ascending1 = true;
     
+    private final int MAX_QTY = 1000;
+    
     /**
      * Ctor - initialise any data and/or Swing components
      */
@@ -819,8 +821,15 @@ public class CatalogUI extends UserInterface {
                     System.out.println("Couldn't convert input to Integer");
                     return;
                 }
-                if(selectedIndex >= 0 && selectedIndex < itemQuantities.size()) {
-                    itemQuantities.set(selectedIndex, value);
+                
+                //validate input
+                if(value > 0 && value < MAX_QTY) {
+                    if(selectedIndex >= 0 && selectedIndex < itemQuantities.size()) {
+                        itemQuantities.set(selectedIndex, value);
+                    }
+                } else {
+                    System.out.println("Illegal quantities value " + value + " was entered.");
+                    return;
                 }
             }
             Object[] tmp = itemQuantities.toArray();
