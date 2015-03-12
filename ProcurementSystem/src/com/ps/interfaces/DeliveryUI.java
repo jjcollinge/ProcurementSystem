@@ -216,6 +216,7 @@ public class DeliveryUI extends UserInterface {
         activeOrdersOnlyBtn.setForeground(new java.awt.Color(255, 255, 255));
         activeOrdersOnlyBtn.setText("Active Orders Only");
         activeOrdersOnlyBtn.setBorder(null);
+        activeOrdersOnlyBtn.setEnabled(false);
         activeOrdersOnlyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activeOrdersOnlyBtnActionPerformed(evt);
@@ -802,7 +803,7 @@ public class DeliveryUI extends UserInterface {
     private void deliveryItemListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deliveryItemListMouseReleased
         int si = deliveryItemList.getSelectedIndex();
         updateCheckBoxes(si);
-        checkDeliveryContents();
+        //checkDeliveryContents();
     }//GEN-LAST:event_deliveryItemListMouseReleased
 
     /**
@@ -812,6 +813,9 @@ public class DeliveryUI extends UserInterface {
      * @param evt 
      */
     private void returnToDeliveriesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToDeliveriesBtnActionPerformed
+        for(JCheckBox box : checkBoxes.values()) {
+            box.setVisible(false);
+        }
         matchingExistingOrders.clearSelection();
         this.Run();
     }//GEN-LAST:event_returnToDeliveriesBtnActionPerformed
