@@ -539,6 +539,8 @@ public class CatalogUI extends UserInterface {
         for(int i = 0; i < tmp.length; i++) {
             quantitiesCache.add((Integer) tmp[i]);
         }
+        System.out.println("Initilaise quantities: " + itemQuantities);
+        System.out.println("Updating quantities cache: " + quantitiesCache);
     }
     
     /**
@@ -800,7 +802,6 @@ public class CatalogUI extends UserInterface {
         int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
         
         if(selectedIndex >= 0 && selectedIndex < allItems.size()) {
-        
             if (selectedItems.contains(allItems.get(selectedIndex))) {
                 
                 JTextField quantity = new JTextField();
@@ -821,17 +822,15 @@ public class CatalogUI extends UserInterface {
                 //validate input
                 if(value > 0 && value < MAX_QTY) {
                     if(selectedIndex >= 0 && selectedIndex < itemQuantities.size()) {
-                        itemQuantities.set(selectedIndex, value);
+                        itemQuantities.set(selectedIndex, value); 
+                        System.out.println("Updating quantities: " + itemQuantities);
+                        quantitiesCache.set(selectedIndex, value);
+                        System.out.println("Updating quantities cache: " + quantitiesCache);
                     }
                 } else {
                     System.out.println("Illegal quantities value " + value + " was entered.");
                     return;
                 }
-            }
-            Object[] tmp = itemQuantities.toArray();
-            quantitiesCache.clear();
-            for(int i = 0; i < tmp.length; i++) {
-                quantitiesCache.add((Integer) tmp[i]);
             }
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
@@ -849,6 +848,11 @@ public class CatalogUI extends UserInterface {
             return;
         }
         
+        if(selectedItems.size() != allItems.size()) {
+            System.out.println("Can't proceed with an order until search field is reset!");
+            return;
+        }
+        
         // get the place order ui
         PlaceOrderUI ui = PlaceOrderUI.getInstance();
         
@@ -858,6 +862,8 @@ public class CatalogUI extends UserInterface {
             int index = allItems.indexOf(item);
             ui.addItem(item, (Integer) itemQuantities.get(index));
         }
+        
+        searchField.setText("Search Here");
         
         ui.setPosition(this.getX(), this.getY());
         ui.checkout();
@@ -886,6 +892,8 @@ public class CatalogUI extends UserInterface {
         // switch the panels back to default
         catalogPanel.setVisible(true);
         quantityPanel.setVisible(false);
+        
+        searchField.setText("Search Here");
         
         // get the place order ui and clear all the data in there
         PlaceOrderUI pui = PlaceOrderUI.getInstance();
@@ -944,7 +952,7 @@ public class CatalogUI extends UserInterface {
         }
         //</editor-fold>
 
-        CatalogUI that = CatalogUI.getInstance();
+        final CatalogUI that = CatalogUI.getInstance();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1007,9 +1015,9 @@ public class CatalogUI extends UserInterface {
      */
     private void updateModel(DefaultListModel oldList, ArrayList newList) {        
         oldList.clear();
-        newList.stream().forEach((item) -> {
+        for(Object item : newList) {
             oldList.addElement(item);
-        });
+        }
     }
 
     /**

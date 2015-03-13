@@ -39,7 +39,7 @@ public class ViewOrdersUI extends UserInterface {
     private boolean dateFiltered = false;
     private boolean supplierFiltered = false;
     private boolean ascending = true;
-    private boolean openOrders = true;
+    private boolean activeOrdersOnly = true;
     
     /**
      * Creates new form ViewOrdersUI
@@ -50,7 +50,8 @@ public class ViewOrdersUI extends UserInterface {
         orderQuantityModel = new DefaultListModel();
        
         initComponents();
-        activeOrdersOnlyBtn.setSelected(true);
+        activeOrdersOnlyBtn.setSelected(false);
+        activeOrdersOnly = false;
         
         //Settings
         jLayeredPane1.setPreferredSize(new Dimension(400, 540));
@@ -131,6 +132,11 @@ public class ViewOrdersUI extends UserInterface {
         });
 
         dateTextField.setText(new SimpleDateFormat("dd/M/yyyy").format(new Date()));
+        dateTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateTextFieldActionPerformed(evt);
+            }
+        });
         dateTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 dateTextFieldKeyReleased(evt);
@@ -492,6 +498,9 @@ public class ViewOrdersUI extends UserInterface {
      * @param evt 
      */
     private void returnToExistingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToExistingOrdersBtnActionPerformed
+        dateTextField.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        supplierTextField.setText("Type here");
+        locationTextField.setText("Sheffield S1");
         orderPanel.setVisible(false);
         ordersPanel.setVisible(true);
     }//GEN-LAST:event_returnToExistingOrdersBtnActionPerformed
@@ -517,24 +526,30 @@ public class ViewOrdersUI extends UserInterface {
      * @param evt 
      */
     private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
-        if(openOrders) {
-            orders = SetOfOrders.getInstance();
-        
-            ordersModel.clear();
-            for(Order order : orders.getAllOrders()) {
-                ordersModel.addElement(order);
+        activeOrdersOnly = !activeOrdersOnly;
+        System.out.println("Active only: " + activeOrdersOnly);
+        activeOrdersOnlyBtn.setSelected(activeOrdersOnly);
+        if(dateFiltered) {
+            dateFiltered = false;
+            filterByDateBtnActionPerformed(null);
+        } else if(siteFiltered) {
+            siteFiltered = false;
+            filterBySiteBtnActionPerformed(null);
+        } else if(supplierFiltered) {
+            supplierFiltered = false;
+            filterBySupplierBtnActionPerformed(null);
+        } else {
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
             }
-            activeOrdersOnlyBtn.setSelected(false);
-            openOrders = false;
-        } else {  
-            orders = SetOfOrders.getInstance();
-        
-            ordersModel.clear();
-            for(Order order : orders.getOpenOrders()) {
-                ordersModel.addElement(order);
-            }
-            activeOrdersOnlyBtn.setSelected(true);
-            openOrders = true;
         }
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
@@ -599,9 +614,17 @@ public class ViewOrdersUI extends UserInterface {
         
         if(!supplierFiltered && !dateFiltered && !siteFiltered) {
             System.out.println("no filter selected");
-            openOrders = true;
-            activeOrdersOnlyBtn.setSelected(false);
-            activeOrdersOnlyBtnActionPerformed(null);
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
+            }
         }
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
@@ -644,11 +667,19 @@ public class ViewOrdersUI extends UserInterface {
 
         }
         
-        if(!supplierFiltered && !dateFiltered && !siteFiltered) {
+       if(!supplierFiltered && !dateFiltered && !siteFiltered) {
             System.out.println("no filter selected");
-            openOrders = true;
-            activeOrdersOnlyBtn.setSelected(false);
-            activeOrdersOnlyBtnActionPerformed(null);
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
+            }
         }
     }//GEN-LAST:event_filterByDateBtnActionPerformed
 
@@ -685,9 +716,17 @@ public class ViewOrdersUI extends UserInterface {
         
         if(!supplierFiltered && !dateFiltered && !siteFiltered) {
             System.out.println("no filter selected");
-            openOrders = true;
-            activeOrdersOnlyBtn.setSelected(false);
-            activeOrdersOnlyBtnActionPerformed(null);
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
+            }
         }
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
@@ -699,6 +738,10 @@ public class ViewOrdersUI extends UserInterface {
      */
     private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
 
+        dateTextField.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        supplierTextField.setText("Type here");
+        locationTextField.setText("Sheffield S1");
+        
         MainInterface ui = MainInterface.getInstance();
         ui.setPosition(this.getX(), this.getY());
         
@@ -756,6 +799,10 @@ public class ViewOrdersUI extends UserInterface {
             filterBySupplierBtnActionPerformed(null);
         }
     }//GEN-LAST:event_supplierTextFieldKeyReleased
+
+    private void dateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateTextFieldActionPerformed
 
     /**
      * Set default data and models for order panel
@@ -829,7 +876,7 @@ public class ViewOrdersUI extends UserInterface {
         //</editor-fold>
 
         // closure
-        ViewOrdersUI that = this;
+        final  ViewOrdersUI that = this;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -849,17 +896,27 @@ public class ViewOrdersUI extends UserInterface {
             reversedList.add(ordersModel.get(i));
         }
         ordersModel.clear();
-        reversedList.stream().forEach((item) -> {
-            ordersModel.addElement(item);
-        });
+        for(Order item : reversedList) {
+            ordersModel.addElement((Order)item);
+        }
     }
 
     /**
      * Displays all of the current orders
      */
     public void displayCurrentOrders() {
-        openOrders = false;
-        activeOrdersOnlyBtnActionPerformed(null);
+        orders = SetOfOrders.getInstance();
+        if(activeOrdersOnly) {
+            ordersModel.clear();
+            for(Order order : orders.getOpenOrders()) {
+                ordersModel.addElement(order);
+            }
+        } else {
+            ordersModel.clear();
+            for(Order order : orders.getAllOrders()) {
+                ordersModel.addElement(order);
+            }
+        }
     }
 
     /**
@@ -885,11 +942,17 @@ public class ViewOrdersUI extends UserInterface {
             } else if(filter.equalsIgnoreCase("supplier")) {
                 matching = orders.filterBySupplier((String)param);
             }
-            System.out.println("filtered: " + matching);
+            System.out.println("filtered:\n " + matching);
             
             ordersModel.clear();
             for(Order order : matching) {
-                ordersModel.addElement(order);
+                if(activeOrdersOnly) {
+                    if(order.getOrderStatus().equals("Pending")) {
+                        ordersModel.addElement(order);
+                    }
+                } else {
+                    ordersModel.addElement(order);
+                }
             } 
         }
     }
