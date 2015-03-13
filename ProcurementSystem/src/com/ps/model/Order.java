@@ -1,6 +1,5 @@
 package com.ps.model;
 
-import com.ps.app.ObjectMapper;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,9 +9,10 @@ import java.util.Iterator;
 /**
  * Represents an in system order. Hold data
  * relevant to ordering a product.
- * @author JCollinge
+ * @author Group B
  */
 public class Order implements Serializable {
+    
     private ArrayList<OrderLine> orderLines;
     private Date orderDate;
     private String orderStatus;
@@ -20,7 +20,7 @@ public class Order implements Serializable {
     private String site;
     
     /**
-     * Ctor
+     * Constructor
      */
     public Order() {
         orderLines = new ArrayList<OrderLine>();
@@ -31,7 +31,7 @@ public class Order implements Serializable {
     }
     
     /**
-     * Cancels the Order
+     * Cancel the Order
      */
     public void cancelOrder() {
         orderLines.clear();
@@ -39,7 +39,7 @@ public class Order implements Serializable {
 
     /**
      * Set the order status
-     * @param orderStatus 
+     * @param orderStatus a new order status for the order
      */
     public void setOrderStatus(String orderStatus) {
         if(orderStatus != null) {
@@ -49,25 +49,27 @@ public class Order implements Serializable {
 
     /**
      * Set the order site
-     * @param site 
+     * @param site a new site for the order
      */
     public void setSite(String site) {
         if(site != null) {
             this.site = site;
         }
     }
-    
+
     /**
-     * Returns the orderDate
-     * @return Date
+     * Set the order date
+     * @param orderDate a new order date for the order
      */
-    public Date getOrderDate() {
-        return this.orderDate;
+    public void setOrderDate(Date orderDate) {
+        if(orderDate != null) {
+            this.orderDate = orderDate;
+        }
     }
     
     /**
      * Set specialInstructions String
-     * @param instructions 
+     * @param instructions new instructions for the order
      */
     public void addSpecialInstructions(String instructions) {
         if(instructions != null) {
@@ -76,6 +78,15 @@ public class Order implements Serializable {
     }
     
     /**
+     * Returns the orderDate
+     * @return Date the order date of the order
+     */
+    public Date getOrderDate() {
+        return this.orderDate;
+    }
+    
+    /**
+     * WARNING: In Class diagram but use not clear.
      * Update any of the Order variables
      */
     public void amendOrder() {
@@ -109,24 +120,15 @@ public class Order implements Serializable {
     }
     
     /**
-     * Return audit trail
+     * WARNING: In class diagram but we didn't know what needed to be
+     * included in the audit trail
      */
     public void getAuditTrail() {
         
     }
-
-    /**
-     * Set the order date
-     * @param orderDate 
-     */
-    public void setOrderDate(Date orderDate) {
-        if(orderDate != null) {
-            this.orderDate = orderDate;
-        }
-
-    }
     
     /**
+     * WARNING: In Class diagram but use not clear.
      * Print the invoice of the Order
      */
     public void printInvoice() {
@@ -135,7 +137,7 @@ public class Order implements Serializable {
     
     /**
      * Get all order lines for this order
-     * @return 
+     * @return ArrayList a list of orders orderlines
      */
     public ArrayList<OrderLine> getOrderLines() {
         return this.orderLines;
@@ -143,7 +145,7 @@ public class Order implements Serializable {
 
     /**
      * Get the special instructions for this order
-     * @return 
+     * @return String special instructions
      */
     public String getSpecialInstructions() {
         return specialInstructions;
@@ -151,7 +153,7 @@ public class Order implements Serializable {
 
     /**
      * Get the site of this order
-     * @return 
+     * @return String order site
      */
     public String getSite() {
         return site;
@@ -159,8 +161,8 @@ public class Order implements Serializable {
     
     /**
      * Add an Item to Order
-     * @param item
-     * @param quantity 
+     * @param item an instance of the item class
+     * @param quantity a quantity attached to this item
      */
     public void addItem(Item item, int quantity) {
         if(item != null && quantity > 0) {
@@ -178,15 +180,22 @@ public class Order implements Serializable {
         }
     }
 
+    /**
+     * Override toString method to output the date of the order
+     * @return String formatted date
+     */
     @Override
     public String toString() {
-        return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) + " - \"" + specialInstructions.substring(0, 25) + "...\" : " + orderStatus;
+        return new SimpleDateFormat("HH:mm dd/M/yyyy").format(orderDate) 
+                + " - \"" 
+                + specialInstructions.substring(0, 25) 
+                + "...\" : " + orderStatus;
     }
     
     /**
      * Compare dates for equality
-     * @param date
-     * @return success
+     * @param date a different instance of the date class
+     * @return boolean indicating success
      */
     public boolean hasSameDate(Date date) {
         if(date != null) {
@@ -198,4 +207,5 @@ public class Order implements Serializable {
         }
         return false;
     }
+    
 }

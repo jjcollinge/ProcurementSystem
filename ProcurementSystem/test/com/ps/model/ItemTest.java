@@ -1,12 +1,13 @@
 package com.ps.model;
 
-import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-
+/**
+ * Test suite to test the methods in the item class
+ * @author Group B
+ */
 public class ItemTest  {
     private static Item concrete;
     private static Item bolts;
@@ -17,19 +18,9 @@ public class ItemTest  {
     private static final String bag = "Bag";
     private static final String sack = "Sack";
     
-    public ItemTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-        
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-        
-    }
-    
+    /**
+     * Set up objects needed for each test.
+     */
     @Before
     public void beforeTest() {
         concrete = new Item(concreteName, concretePrice, bag);
@@ -37,7 +28,7 @@ public class ItemTest  {
     }
     
     /**
-     * Test of getName method, of class Item.
+     * Test the set name method with a string that fits criteria.
      */
     @Test
     public void testSetName() {
@@ -47,6 +38,9 @@ public class ItemTest  {
         assertTrue(concrete.getName().equals(newName));        
     }
     
+    /**
+     * Test the set name method with a string that is null.
+     */
     @Test
     public void testSetNameIsNull() {
         System.out.println("setNameIsNull");
@@ -56,7 +50,7 @@ public class ItemTest  {
     }
 
     /**
-     * Test of getPrice method, of class Item.
+     * Test the get price method to check if it is set in constructor.
      */
     @Test
     public void testGetPrice() {
@@ -64,6 +58,9 @@ public class ItemTest  {
         assertTrue(bolts.getPrice() == boltsPrice);
     }
     
+    /**
+     * Test the set price method can handle a minus price.
+     */
     @Test 
     public void testSetPriceMinusValue () {
         System.out.println("setPriceMinusValue");
@@ -73,7 +70,7 @@ public class ItemTest  {
     }
 
     /**
-     * Test of getType method, of class Item.
+     * Test the set type method can handle a new type that fits the criteria.
      */
     @Test
     public void testSetType() {
@@ -83,6 +80,9 @@ public class ItemTest  {
         assertTrue(concrete.getType().equals(newType));        
     }
     
+    /**
+     * Test the set type method can handle a type that is null.
+     */
     @Test
     public void testSetTypeIsNull() {
         System.out.println("setTypeIsNull");
@@ -92,7 +92,7 @@ public class ItemTest  {
     }
 
     /**
-     * Test of compareTo method, of class Item.
+     * Test the compare to of item with two instances of the same item.
      */
     @Test
     public void testCompareTo() {
@@ -104,6 +104,9 @@ public class ItemTest  {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test the compare to of item can handle a null item.
+     */
     @Test
     public void testCompareToNull() {
         System.out.println("compareToNull");

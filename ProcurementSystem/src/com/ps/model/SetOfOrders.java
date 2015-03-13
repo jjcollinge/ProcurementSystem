@@ -1,6 +1,5 @@
 package com.ps.model;
 
-import com.ps.model.Order;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,15 +8,16 @@ import com.ps.app.ObjectMapper;
 /**
  * Collection class for orders. Holds all orders
  * currently in the system.
- * @author JCollinge
+ * @author Group B
  */
 public class SetOfOrders implements Serializable {
+    
     private ArrayList<Order> orders;
     private static SetOfOrders singleton;
     private static String filename = "setOfOrders.ser";
     
     /**
-     * private Ctor
+     * private Constructor
      */
     private SetOfOrders() {
         orders = (ArrayList<Order>)ObjectMapper.Deserialize(filename);
@@ -40,6 +40,7 @@ public class SetOfOrders implements Serializable {
     
     /**
      * Set the output for serialization
+     * @param fname a new filename
      */
     public static void setOutput(String fname) {
         filename = fname;
@@ -122,6 +123,9 @@ public class SetOfOrders implements Serializable {
         return orders.get(index);
     }
     
+    /**
+     * Serialize data when updating the orders
+     */
     public void onUpdate() {
         ObjectMapper.Serialize(orders, filename);
     }
@@ -154,7 +158,11 @@ public class SetOfOrders implements Serializable {
         return openOrders;
     }
     
+    /**
+     * Clear the orders in set of orders
+     */
     public void clear() {
         orders.clear();
     }
+    
 }

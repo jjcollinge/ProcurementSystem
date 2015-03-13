@@ -5,12 +5,11 @@ import com.ps.interfaces.DeliveryUI;
 import com.ps.interfaces.MainInterface;
 import com.ps.interfaces.PlaceOrderUI;
 import com.ps.interfaces.ViewOrdersUI;
-import com.ps.model.Delivery;
 
 /**
  * Main method class. Responsible for parsing any execution
  * options and configuration prior to running the application.
- * @author JCollinge
+ * @author Group B
  */
 public class ProcurementSystem {
   
@@ -25,7 +24,7 @@ public class ProcurementSystem {
          */
         @Override
         public void run() {
-            // Application logic goes here...
+            // Initialise starting interface
             final MainInterface mainInterfaceUI = MainInterface.getInstance();
             
             // Forcing these to initialise here as theme doesn't work without it
@@ -41,9 +40,6 @@ public class ProcurementSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-   
-        // Parse any command line arguments here
-        
         // Start application thread
         new Thread(new Application()).start();
     }

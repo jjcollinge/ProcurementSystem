@@ -1,22 +1,23 @@
 package com.ps.model;
 
-import com.ps.model.Order;
 import java.io.Serializable;
 
 /**
  * A delivery encapsulates an order and meta data about the delivery.
- * @author JCollinge
+ * @author Group B
  */
 public class Delivery implements Serializable {
     private Order order;
     private String deliveryStatus;
     private Boolean approval;
     private String approvedBy;
+    
+    // max and min deliverys status sizes
     private final int maxSize = 32;
     private final int minSize = 3;
     
     /**
-     * Ctor
+     * Constructor
      */
     public Delivery() {
         approval = false;
@@ -34,7 +35,7 @@ public class Delivery implements Serializable {
     }
     
     /**
-     * Sets the approval boolean to true
+     * Sets the approval boolean to true.
      */
     public void approveDelivery() {
         approval = true;
@@ -42,7 +43,7 @@ public class Delivery implements Serializable {
     }
     
     /**
-     * Rest the delivery status
+     * Rest the delivery status.
      */
     public void resetDelivery() {
         approval = false;
@@ -51,7 +52,7 @@ public class Delivery implements Serializable {
     
     /**
      * Gets the order of the delivery
-     * @return 
+     * @return Order an instance of the order class
      */
     public Order getOrder() {
         return order;
@@ -59,7 +60,7 @@ public class Delivery implements Serializable {
 
     /**
      * Returns whether or no the delivery has been approved
-     * @return 
+     * @return Boolean approval
      */
     public Boolean getApproval() {
         return approval;
@@ -67,7 +68,7 @@ public class Delivery implements Serializable {
 
     /**
      * Get delivery status
-     * @return 
+     * @return String delivery status
      */
     public String getDeliveryStatus() {
         return deliveryStatus;
@@ -75,7 +76,7 @@ public class Delivery implements Serializable {
 
     /**
      * Get who the delivery was approved by
-     * @return 
+     * @return String approved by
      */
     public String getApprovedBy() {
         return approvedBy;
@@ -83,7 +84,7 @@ public class Delivery implements Serializable {
     
     /**
      * Sets the order of the Delivery
-     * @param order
+     * @param order an instance of the order class
      */
     public void setOrder(Order order) {
         this.order = order;

@@ -1,7 +1,5 @@
-
 package com.ps.interfaces;
 
-import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -9,7 +7,7 @@ import javax.swing.JFrame;
  * with a menu to access the systems main functions. Will
  * handle the transition to the new user interface and will
  * pass in any required data.
- * @author JCollinge
+ * @author Group B
  */
 public class MainInterface extends UserInterface {
 
@@ -19,7 +17,6 @@ public class MainInterface extends UserInterface {
      * Creates new form MainInterface
      */
     private MainInterface() {
-  
         initComponents();
        
         // Settings
@@ -265,7 +262,6 @@ public class MainInterface extends UserInterface {
      * @param evt 
      */
     private void userComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userComboBoxActionPerformed
-        
         if(userComboBox.getSelectedItem() == "Kumar Kalla") {
             browseCatalogBtn.setVisible(true);
             newOrderBtn.setVisible(true);

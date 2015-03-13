@@ -1,25 +1,21 @@
-
 package com.ps.model;
 
-import static com.ps.model.OrderTest.order;
-import java.util.ArrayList;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author b0015911
+ * Test suite to test the methods in the setOfDeliveries class
+ * @author Group B
  */
 public class SetOfDeliveriesTest {
-    
-    public SetOfDeliveriesTest() {
-    }
     
     public static Delivery delivery;
     public static SetOfDeliveries setOfDeliveries;
     
+    /**
+     * Set up objects needed for the test suite to run.
+     */
     @BeforeClass
     public static void setUpClass() {
         delivery = new Delivery();
@@ -27,12 +23,8 @@ public class SetOfDeliveriesTest {
         setOfDeliveries = SetOfDeliveries.getInstance();
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     /**
-     * Test of addDelivery method, of class SetOfDeliveries.
+     * Test that deliveries can be added to a set of deliveries
      */
     @Test
     public void testAddDelivery() {
@@ -41,6 +33,10 @@ public class SetOfDeliveriesTest {
         assertTrue(setOfDeliveries.getListOdDeliveries().contains(delivery));
     }
 
+    /**
+     * Test that the getOrder method of delivery returns values
+     * correctly.
+     */
     @Test
     public void testOrderInDelivery() {
         System.out.println("addDelivery");

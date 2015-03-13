@@ -1,4 +1,3 @@
-
 package com.ps.interfaces;
 
 import com.ps.model.Order;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import com.ps.app.ObjectMapper;
 import com.ps.model.Delivery;
 import com.ps.model.SetOfDeliveries;
 import com.ps.model.SetOfOrders;
@@ -27,7 +25,7 @@ import java.awt.Dimension;
  * view is of the current list of deliveries.
  * The second view is a particular delivery based
  * on the user selection. This 
- * @author JCollinge
+ * @author Group B
  */
 public class DeliveryUI extends UserInterface {
 
@@ -39,7 +37,6 @@ public class DeliveryUI extends UserInterface {
     private HashMap<Integer, JCheckBox> checkBoxes;
     
     private ArrayList<Integer> confirmedItems;
-    
     private Delivery selectedDelivery;
     
     private boolean siteFiltered = false;
@@ -52,15 +49,15 @@ public class DeliveryUI extends UserInterface {
      * Creates new form DeliveryUI
      */
     private DeliveryUI() {
+        // set up objects
         ordersModel =  new DefaultListModel();
         orderModel = new DefaultListModel();
-        
         selectedDelivery = new Delivery();     
         
         initComponents();
         
-        //this.setSize(400, 540); // change JFRAME size
-        jLayeredPane1.setPreferredSize(new Dimension(400, 540)); // change layered pane size
+        // set size of pane
+        jLayeredPane1.setPreferredSize(new Dimension(400, 540));
         
         checkBoxes = new HashMap<Integer, JCheckBox>();
         
@@ -81,17 +78,6 @@ public class DeliveryUI extends UserInterface {
             singleton = new DeliveryUI();
         }
         return singleton;
-    }
-    
-    /**
-     * Refresh the orders model
-     */
-     public void refreshOrdersModel() {
-        ArrayList<Order> orders = SetOfOrders.getInstance().getOpenOrders();
-        ordersModel.clear();
-        for(Order order : orders) {
-            ordersModel.addElement(order);
-        }
     }
 
     /**
@@ -166,11 +152,6 @@ public class DeliveryUI extends UserInterface {
         jSeparator1.setForeground(new java.awt.Color(0, 204, 255));
 
         locationTextField.setText("Sheffield S1");
-        locationTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                locationTextFieldActionPerformed(evt);
-            }
-        });
         locationTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 locationTextFieldKeyReleased(evt);
@@ -236,11 +217,6 @@ public class DeliveryUI extends UserInterface {
         activeOrdersOnlyBtn.setText("Active Orders Only");
         activeOrdersOnlyBtn.setBorder(null);
         activeOrdersOnlyBtn.setEnabled(false);
-        activeOrdersOnlyBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                activeOrdersOnlyBtnActionPerformed(evt);
-            }
-        });
 
         matchingExistingOrders.setBackground(new java.awt.Color(0, 0, 0));
         matchingExistingOrders.setForeground(new java.awt.Color(255, 255, 255));
@@ -646,7 +622,6 @@ public class DeliveryUI extends UserInterface {
      * @param evt 
      */
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
-        
         String searchTerm = locationTextField.getText();
         
         if(searchTerm.isEmpty()) {
@@ -755,10 +730,6 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_ascendBtnActionPerformed
 
-    private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
-
-    }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
-
     /**
      * Called when the descending button is pressed. Should sort the orders
      * into descending order.
@@ -852,8 +823,8 @@ public class DeliveryUI extends UserInterface {
     }//GEN-LAST:event_returnToDeliveriesBtnActionPerformed
 
     /**
-     * Called when an order is selected. Should select the order and handle transitioning 
-     * to the 2nd view.
+     * Called when an order is selected. Should select the order and handle 
+     * transitioning to the 2nd view.
      * @param evt 
      */
     private void matchingExistingOrdersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matchingExistingOrdersMouseReleased
@@ -862,8 +833,8 @@ public class DeliveryUI extends UserInterface {
     }//GEN-LAST:event_matchingExistingOrdersMouseReleased
 
     /**
-     * Called when the finish button has been pressed. Should finialize the delivery
-     * check and set any required data needed to complete a delivery.
+     * Called when the finish button has been pressed. Should finialize the
+     * delivery check and set any required data needed to complete a delivery.
      * @param evt 
      */
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
@@ -878,10 +849,11 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_finishBtnActionPerformed
 
-    private void locationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_locationTextFieldActionPerformed
-
+    /**
+     * Called when used is typing in location text field.
+     * Unfilters the by site until the user has finished typing
+     * @param evt 
+     */
     private void locationTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_locationTextFieldKeyReleased
         System.out.println("Typing site filtered");
         if(siteFiltered) {
@@ -890,6 +862,11 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_locationTextFieldKeyReleased
 
+    /**
+     * Called when used is typing in date text field.
+     * Unfilters the by date until the user has finished typing
+     * @param evt 
+     */
     private void dateTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateTextFieldKeyReleased
         System.out.println("Typing date filtered");
         if(dateFiltered) {
@@ -898,6 +875,11 @@ public class DeliveryUI extends UserInterface {
         }
     }//GEN-LAST:event_dateTextFieldKeyReleased
 
+    /**
+     * Called when used is typing in supplier text field.
+     * Unfilters the by supplier until the user has finished typing
+     * @param evt 
+     */
     private void supplierTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_supplierTextFieldKeyReleased
         System.out.println("Typing supplier filtered");
         if(supplierFiltered) {
@@ -905,7 +887,18 @@ public class DeliveryUI extends UserInterface {
             filterBySupplierBtnActionPerformed(null);
         }
     }//GEN-LAST:event_supplierTextFieldKeyReleased
-
+    
+    /**
+     * Refresh the orders model
+     */
+     public void refreshOrdersModel() {
+        ArrayList<Order> orders = SetOfOrders.getInstance().getOpenOrders();
+        ordersModel.clear();
+        for(Order order : orders) {
+            ordersModel.addElement(order);
+        }
+    }
+    
     /**
      * Initialise check boxes with default data
      */
@@ -928,7 +921,6 @@ public class DeliveryUI extends UserInterface {
      * @param selectedIndex 
      */
     private void toggleCheckBoxes(int selectedIndex) {
-
         if(checkBoxes.get(selectedIndex).isVisible()) {
             // already checked so uncheck
             System.out.println("Hiding");
@@ -1048,6 +1040,7 @@ public class DeliveryUI extends UserInterface {
     }
     
     /**
+    * WARNING: In Class diagram but use not clear.
     * Open Delivery
     */
     public void openDelivery() {
@@ -1104,6 +1097,7 @@ public class DeliveryUI extends UserInterface {
     }
     
     /**
+     * WARNING: In Class diagram but not implemented.
      * Request an Order
      */
     public void requestOrder() {

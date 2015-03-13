@@ -6,15 +6,16 @@ import com.ps.app.ObjectMapper;
 /**
  * A collection of deliveries. Holds all deliveries 
  * currently stored in the system.
- * @author JCollinge
+ * @author Group B
  */
 public class SetOfDeliveries {
-    private ArrayList<Delivery> listOdDeliveries;   //changed this to an array list of deliveries
+    
+    private ArrayList<Delivery> listOdDeliveries;
     private static SetOfDeliveries singleton;
     private static String filename = "deliveries.ser";
     
     /**
-     * private Ctor
+     * private Constructor
      */
     private SetOfDeliveries() {
         listOdDeliveries = (ArrayList<Delivery>) ObjectMapper.Deserialize(filename);
@@ -37,13 +38,17 @@ public class SetOfDeliveries {
         return singleton;
     }
     
+    /**
+     * Set the serialization output so it can be changed during unit testing
+     * @param fname a new filename
+     */
     public static void setOutput(String fname) {
         filename = fname;
     }
     
     /**
      * Add Delivery to listOfDeliveries
-     * @param delivery 
+     * @param delivery a new delivery
      */
     public void addDelivery(Delivery delivery) {
         listOdDeliveries.add(delivery);
@@ -52,8 +57,8 @@ public class SetOfDeliveries {
     }
 
     /**
-     * Get the list od deliveries
-     * @return 
+     * Get the list of deliveries
+     * @return ArrayList a list of deliveries
      */
     public ArrayList<Delivery> getListOdDeliveries() {
         return listOdDeliveries;
@@ -73,4 +78,5 @@ public class SetOfDeliveries {
         }
         return null;
     }
+    
 }

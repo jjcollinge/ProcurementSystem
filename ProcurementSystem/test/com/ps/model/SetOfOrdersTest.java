@@ -1,32 +1,27 @@
-
 package com.ps.model;
 
-import com.ps.app.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Date;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
 /**
- *
- * @author JC
+ * Test suite to test the methods in the setOfOrders class
+ * @author Group B
  */
 public class SetOfOrdersTest {
-    //setofOrders
     public static SetOfOrders setOfOrders;
     public static ArrayList<Order> orders;
     public static Item concrete;
     public static Item bolts;
     public static Item bricks;
     
-    public SetOfOrdersTest() {
-        
-    }
-    
+    /**
+     * Set up objects needed for the test suite to run.
+     */
     @BeforeClass
     public static void setUpClass() {
         SetOfOrders.setOutput("testSetOfOrders.ser");
@@ -41,10 +36,9 @@ public class SetOfOrdersTest {
       
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+    /**
+     * Set up objects needed for each test.
+     */
     @Before
     public void setUpTest() {        
         Order order1 = new Order();
@@ -62,23 +56,27 @@ public class SetOfOrdersTest {
         setOfOrders.addOrder(order2);
     }
     
+    /**
+     * Clean up objects after each test.
+     */
     @After
     public void tearDownTest() {
         setOfOrders.clear();
     }
 
     /**
-     * Test of getInstance method, of class SetOfOrders.
+     * Test that the singleton method returns the correct instance.
      */
-    @Test //test singleton
+    @Test
     public void testGetInstance() {
         System.out.println("getInstance");
         SetOfOrders singleton = SetOfOrders.getInstance();             
-        assertTrue(singleton.getClass().toString().equalsIgnoreCase(com.ps.model.SetOfOrders.class.toString()));
+        assertTrue(singleton.getClass().toString()
+                .equalsIgnoreCase(com.ps.model.SetOfOrders.class.toString()));
     }
 
     /**
-     * Test of filterByDate method, of class SetOfOrders.
+     * Test that the filterByDate method filters orders correctly.
      */
     @Test
     public void testFilterByDate() {
@@ -89,9 +87,9 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of testFilterByNullDate method, of class SetOfOrders.
+     * test that filterByDate can handle a null value.
      */
-    @Test (expected = NullPointerException.class)
+    @Test
     public void testFilterByNullDate() {
         System.out.println("testFilterByNullDate");
         Date date = null;
@@ -100,7 +98,7 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of filterBySite method, of class SetOfOrders.
+     * Test that filterBySite can handle correct values.
      */
     @Test
     public void testFilterBySite() {
@@ -111,7 +109,7 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of filterBySite method with null operand, of class SetOfOrders.
+     * Test that filterBySite can handle a null value.
      */
     @Test
     public void testFilterByNullSite() {
@@ -123,7 +121,8 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of filterBySite method with non matching site, of class SetOfOrders.
+     * Test that filterBySite works correctly using a site that returns
+     * no values.
      */
     @Test
     public void testFilterByNonMatchingSite() {
@@ -135,11 +134,11 @@ public class SetOfOrdersTest {
     }
 
     /**
-     * Test of addOrder method, of class SetOfOrders.
+     * Test that addOrder adds orders correctly.
      */
     @Test
-    public void testPlaceOrder() {
-        System.out.println("addPlaceOrder");
+    public void testAddOrder() {
+        System.out.println("addOrder");
         Order order = new Order();
         order.addItem(bolts, 1);
         order.addItem(bricks, 10);
@@ -148,7 +147,7 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of addOrder method with operand of an order with no items, of class SetOfOrders.
+     * Test that addOrder works even if the order has no items.
      */
     @Test
     public void testPlaceOrderWithNoItems() {
@@ -159,7 +158,7 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of addOrder method with null order, of class SetOfOrders.
+     * Test that addOrder can handle nulls orders.
      */
     @Test
     public void testPlaceNullOrder() {
@@ -170,7 +169,7 @@ public class SetOfOrdersTest {
     }
     
     /**
-     * Test of addOrder method with duplicate order, of class SetOfOrders.
+     * Test that addOrder can handle duplicate orders.
      */
     @Test
     public void testPlaceDuplicateOrder() {
@@ -186,7 +185,7 @@ public class SetOfOrdersTest {
     }  
     
     /**
-     * Test of addOrder method with multiple identical orders, of class SetOfOrders.
+     * Test that addOrder can handle identical unique orders.
      */
     @Test
     public void testPlaceMultipleIdenticalOrders() {
@@ -205,7 +204,7 @@ public class SetOfOrdersTest {
     }  
     
     /**
-     * Test of addOrder method with cancelled order, of class SetOfOrders.
+     * Test that addOrder can handle cancelled orders.
      */
     @Test
     public void testPlaceCancelledOrder() {
@@ -219,7 +218,7 @@ public class SetOfOrdersTest {
     }  
 
     /**
-     * Test of getOrder method, of class SetOfOrders.
+     * Test that getOrder returns an order.
      */
     @Test
     public void testGetOrder() {
@@ -229,7 +228,7 @@ public class SetOfOrdersTest {
     }
 
     /**
-     * Test of getAllOrders method, of class SetOfOrders.
+     * Test that get all orders returns all orders.
      */
     @Test
     public void testGetAllOrders() {
@@ -239,7 +238,7 @@ public class SetOfOrdersTest {
     }
 
     /**
-     * Test find existing orders
+     * Test that view existing orders will return the correct list of orders.
      */
     @Test
     public void testViewExistingOrders() {
