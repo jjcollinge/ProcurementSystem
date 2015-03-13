@@ -807,7 +807,7 @@ public class ViewOrdersUI extends UserInterface {
         //</editor-fold>
 
         // closure
-        ViewOrdersUI that = this;
+        final  ViewOrdersUI that = this;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -827,9 +827,9 @@ public class ViewOrdersUI extends UserInterface {
             reversedList.add(ordersModel.get(i));
         }
         ordersModel.clear();
-        reversedList.stream().forEach((item) -> {
-            ordersModel.addElement(item);
-        });
+        for(Order item : reversedList) {
+            ordersModel.addElement((Order)item);
+        }
     }
 
     /**

@@ -270,20 +270,25 @@ public class PlaceOrderUI extends UserInterface {
      */
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
         
-        if(catalogUI != null) {
-            catalogUI.closeCatalog();
-            SetOfOrders orders = SetOfOrders.getInstance();
-            newOrder.setOrderDate(new Date());
-            newOrder.addSpecialInstructions("These are special instructions");
-            orders.addOrder(newOrder);
-            this.setVisible(false);
-            items.clear();
-            newOrder = null;
-            MainInterface ui = MainInterface.getInstance();
-            ui.setPosition(this.getX(), this.getY());
-            ui.Run();
+        if(newOrder.getOrderLines().size() > 0) {
+        
+            if(catalogUI != null) {
+                catalogUI.closeCatalog();
+                SetOfOrders orders = SetOfOrders.getInstance();
+                newOrder.setOrderDate(new Date());
+                newOrder.addSpecialInstructions("These are special instructions");
+                orders.addOrder(newOrder);
+                this.setVisible(false);
+                items.clear();
+                newOrder = null;
+                MainInterface ui = MainInterface.getInstance();
+                ui.setPosition(this.getX(), this.getY());
+                ui.Run();
+            } else {
+                System.out.println("catalogUI is null and cannot be closed");
+            }
         } else {
-            System.out.println("catalogUI is null and cannot be closed");
+            System.out.println("Cannot place empty order");
         }
     }//GEN-LAST:event_placeOrderBtnActionPerformed
 
@@ -402,7 +407,7 @@ public class PlaceOrderUI extends UserInterface {
         }
         //</editor-fold>
 
-        PlaceOrderUI that = PlaceOrderUI.getInstance();
+        final PlaceOrderUI that = PlaceOrderUI.getInstance();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -505,9 +510,9 @@ public class PlaceOrderUI extends UserInterface {
             reversedQuantities.add(quantities.get(i));
         }
         items.clear();
-        reversedList.stream().forEach((item) -> {
-            items.addElement(item);
-        });
+        for(Object item : reversedList) {
+            items.addElement((Item)item);
+        }
         quantities.clear();
         for(Integer quantity : reversedQuantities) {
             quantities.addElement(quantity);

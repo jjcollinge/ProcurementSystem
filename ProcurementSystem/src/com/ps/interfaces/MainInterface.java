@@ -312,7 +312,7 @@ public class MainInterface extends UserInterface {
         //</editor-fold>
         
         // closure
-        MainInterface that = MainInterface.getInstance();
+        final MainInterface that = MainInterface.getInstance();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

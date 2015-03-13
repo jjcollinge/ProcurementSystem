@@ -945,7 +945,7 @@ public class CatalogUI extends UserInterface {
         }
         //</editor-fold>
 
-        CatalogUI that = CatalogUI.getInstance();
+        final CatalogUI that = CatalogUI.getInstance();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1007,9 +1007,9 @@ public class CatalogUI extends UserInterface {
      */
     private void updateModel(DefaultListModel oldList, ArrayList newList) {        
         oldList.clear();
-        newList.stream().forEach((item) -> {
+        for(Object item : newList) {
             oldList.addElement(item);
-        });
+        }
     }
 
     /**

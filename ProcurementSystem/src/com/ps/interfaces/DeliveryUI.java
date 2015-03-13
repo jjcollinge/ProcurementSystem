@@ -990,7 +990,7 @@ public class DeliveryUI extends UserInterface {
         //</editor-fold>
 
         // closure
-        DeliveryUI that = this;
+        final DeliveryUI that = this;
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1016,9 +1016,9 @@ public class DeliveryUI extends UserInterface {
             reversedList.add(model.get(i));
         }
         model.clear();
-        reversedList.stream().forEach((item) -> {
+        for(Object item : reversedList) {
             model.addElement(item);
-        });
+        }
     }
     
     /**
