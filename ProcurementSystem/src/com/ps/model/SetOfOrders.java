@@ -146,9 +146,9 @@ public class SetOfOrders implements Serializable {
         for(Order order : orders) {
             if (order != null)
             {
-            if(order.getOrderStatus().equalsIgnoreCase("Pending")) {
-                openOrders.add(order);
-            }
+                if(order.getOrderStatus().equalsIgnoreCase("Pending")) {
+                    openOrders.add(order);
+                }
             }
         }
         return openOrders;

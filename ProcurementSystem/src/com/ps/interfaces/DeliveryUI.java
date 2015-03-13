@@ -1057,7 +1057,9 @@ public class DeliveryUI extends UserInterface {
         if(matching != null) {
             ordersModel.clear();
             for(Order order : matching) {
-                ordersModel.addElement(order);
+                if(order.getOrderStatus().equals("Pending")) {
+                    ordersModel.addElement(order);
+                }
             }
         }
     }
