@@ -16,9 +16,9 @@ public class Item implements Serializable, Comparable<Item> {
 
     /**
      * Constructor
-     * @param name
-     * @param price
-     * @param type 
+     * @param name item name
+     * @param price item price
+     * @param type item type
      */
     public Item(String name, double price, String type) {
         this.name = name;
