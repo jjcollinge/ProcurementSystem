@@ -857,6 +857,8 @@ public class CatalogUI extends UserInterface {
             ui.addItem(item, (Integer) itemQuantities.get(index));
         }
         
+        searchField.setText("Search Here");
+        
         ui.setPosition(this.getX(), this.getY());
         ui.checkout();
         this.setVisible(false);
@@ -883,6 +885,8 @@ public class CatalogUI extends UserInterface {
         // switch the panels back to default
         catalogPanel.setVisible(true);
         quantityPanel.setVisible(false);
+        
+        searchField.setText("Search Here");
         
         // get the place order ui and clear all the data in there
         PlaceOrderUI pui = PlaceOrderUI.getInstance();

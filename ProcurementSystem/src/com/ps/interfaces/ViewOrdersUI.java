@@ -132,6 +132,11 @@ public class ViewOrdersUI extends UserInterface {
         });
 
         dateTextField.setText(new SimpleDateFormat("dd/M/yyyy").format(new Date()));
+        dateTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateTextFieldActionPerformed(evt);
+            }
+        });
         dateTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 dateTextFieldKeyReleased(evt);
@@ -493,6 +498,9 @@ public class ViewOrdersUI extends UserInterface {
      * @param evt 
      */
     private void returnToExistingOrdersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToExistingOrdersBtnActionPerformed
+        dateTextField.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        supplierTextField.setText("Type here");
+        locationTextField.setText("Sheffield S1");
         orderPanel.setVisible(false);
         ordersPanel.setVisible(true);
     }//GEN-LAST:event_returnToExistingOrdersBtnActionPerformed
@@ -691,6 +699,10 @@ public class ViewOrdersUI extends UserInterface {
      */
     private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
 
+        dateTextField.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        supplierTextField.setText("Type here");
+        locationTextField.setText("Sheffield S1");
+        
         MainInterface ui = MainInterface.getInstance();
         ui.setPosition(this.getX(), this.getY());
         
@@ -733,6 +745,10 @@ public class ViewOrdersUI extends UserInterface {
             filterBySupplierBtnActionPerformed(null);
         }
     }//GEN-LAST:event_supplierTextFieldKeyReleased
+
+    private void dateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateTextFieldActionPerformed
 
     /**
      * Set default data and models for order panel
