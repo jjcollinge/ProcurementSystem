@@ -29,7 +29,7 @@ public class SetOfOrders implements Serializable {
     
     /**
      * Lazy load and get the singleton instance
-     * @return 
+     * @return SetOfOrders instance
      */
     public static SetOfOrders getInstance() {
         if(singleton == null) {

@@ -64,7 +64,7 @@ public class ViewOrdersUI extends UserInterface {
 
     /**
      * Lazy load and get singleton instance
-     * @return 
+     * @return instance of ViewOrdersUI
      */
     public static ViewOrdersUI getInstance() {
         if (singleton == null) {

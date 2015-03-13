@@ -29,7 +29,7 @@ public class SetOfDeliveries {
     
     /**
      * Lazy load and get the singleton instance
-     * @return 
+     * @return instance of SetOfDeliveries
      */
     public static SetOfDeliveries getInstance() {
         if(singleton == null) {
@@ -68,7 +68,7 @@ public class SetOfDeliveries {
      * EXTRA METHOD
      * Get individual delivery by order
      * @param order
-     * @return 
+     * @return instance of delivery class
      */
     public Delivery getDeliveryByOrder(Order order) {
         for(Delivery delivery : listOdDeliveries) {

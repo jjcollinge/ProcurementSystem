@@ -51,7 +51,7 @@ public class PlaceOrderUI extends UserInterface {
     
     /**
      * Lazy load and get the singleton instance
-     * @return 
+     * @return instance of PlaceOrderUI
      */
     public static PlaceOrderUI getInstance() {
         if(singleton == null) {
