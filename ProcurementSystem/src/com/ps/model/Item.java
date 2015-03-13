@@ -5,17 +5,17 @@ import java.io.Serializable;
 /**
  * An item represents a physical item or product and encapsulates
  * data relevant to that product.
- * @author JCollinge
+ * @author Group B
  */
 public class Item implements Serializable, Comparable<Item> {
     
-    //guessed these variable types as not on class diagram
+    // guessed these variable types as not on class diagram
     private String name;
     private double price;
     private String type;
 
     /**
-     * Ctor
+     * Constructor
      * @param name
      * @param price
      * @param type 
@@ -28,7 +28,7 @@ public class Item implements Serializable, Comparable<Item> {
     
     /**
      * Set the item price
-     * @param price 
+     * @param price new price of the item
      */
     public void setPrice(double price) {
         if(price > 0) {
@@ -38,7 +38,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /**
      * Set the item name
-     * @param name 
+     * @param name new name of the item
      */
     public void setName(String name) {
         if(name != null) {
@@ -48,7 +48,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /**
      * Set the item type
-     * @param type 
+     * @param type new type of the item
      */
     public void setType(String type) {
         if(type != null) {
@@ -58,7 +58,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /**
      * Get the item name
-     * @return 
+     * @return String item name
      */
     public String getName() {
         return name;
@@ -66,7 +66,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /**
      * Get the item price
-     * @return 
+     * @return double item price
      */
     public double getPrice() {
         return price;
@@ -74,7 +74,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /**
      * Get the item type
-     * @return 
+     * @return String item type
      */
     public String getType() {
         return type;
@@ -88,7 +88,14 @@ public class Item implements Serializable, Comparable<Item> {
     public String toString() {
         return name + " : " + type;
     }
-
+    
+    /**
+     * Override
+     * Overriding object compare to to check if an item is the same as
+     * another item
+     * @param otherItem a different instance of the item class
+     * @return int indicator code if it matches
+     */
     @Override
     public int compareTo(Item otherItem) {
         if(otherItem != null) {

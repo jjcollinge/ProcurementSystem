@@ -5,16 +5,17 @@ import java.io.Serializable;
 /**
  * Provides a quantity of items for a specific
  * order.
- * @author JCollinge
+ * @author Group B
  */
 public class OrderLine implements Serializable {
+    
     private Item item;
     private int quantity;
     
     /**
      * Default constructor
-     * @param item
-     * @param quantity
+     * @param item an instance of the item class
+     * @param quantity an integer representing item quantity
      */
     public OrderLine(Item item, int quantity) {
         this.item = item;
@@ -24,20 +25,21 @@ public class OrderLine implements Serializable {
     /**
      * Delete Item from OrderLine
      */
-    public void deleteItem(Item item) {
+    public void deleteItem() {
         this.item = null;
     }
     
     /**
      * Update the quantity
+     * @param quantity a new quantity for the orderline
      */
-    public void changeQuantity(int qty) {
-        this.quantity = qty;
+    public void changeQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     /**
      * Get the item
-     * @return 
+     * @return Item instance of the item class
      */
     public Item getItem() {
         return item;
@@ -45,7 +47,7 @@ public class OrderLine implements Serializable {
 
     /**
      * Get the quantity
-     * @return 
+     * @return integer representing quantity
      */
     public int getQuantity() {
         return quantity;

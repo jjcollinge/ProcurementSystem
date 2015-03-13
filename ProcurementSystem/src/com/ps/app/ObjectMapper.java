@@ -1,4 +1,3 @@
-
 package com.ps.app;
 
 import java.io.FileInputStream;
@@ -10,7 +9,7 @@ import java.io.ObjectOutputStream;
 
 /**
  * Responsible for serializing and deserializing POJOs
- * @author JCollinge
+ * @author Group B
  */
 public class ObjectMapper {
     
@@ -58,4 +57,5 @@ public class ObjectMapper {
         } 
         return obj;
     }
+    
 }

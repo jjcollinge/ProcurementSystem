@@ -2,7 +2,6 @@ package com.ps.interfaces;
 
 import com.ps.model.Catalog;
 import com.ps.model.Item;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -14,7 +13,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
 
 /**
  * User interface for displaying the catalog
@@ -26,7 +24,7 @@ import javax.swing.UIManager;
  * review. This UI can also be viewed in multiple
  * modes (browse, order). Depending on the mode
  * different components will be visible.
- * @author JCollinge
+ * @author Group B
  */
 public class CatalogUI extends UserInterface {
 
@@ -46,7 +44,7 @@ public class CatalogUI extends UserInterface {
     private final int MAX_QTY = 1000;
     
     /**
-     * Ctor - initialise any data and/or Swing components
+     * Creates new form CatalogUI
      */
     private CatalogUI() {
 
@@ -355,11 +353,6 @@ public class CatalogUI extends UserInterface {
         });
 
         searchField.setText("Search here");
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
-            }
-        });
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchFieldKeyReleased(evt);
@@ -561,7 +554,7 @@ public class CatalogUI extends UserInterface {
         }
         checkBoxes.clear();
         
-    /* for each item check if it is selected and create
+        /* for each item check if it is selected and create
            a checkbox and incremenet the quantity if it is */
         for (int i = 0; i < allItems.size(); i++) {
 
@@ -585,6 +578,7 @@ public class CatalogUI extends UserInterface {
     /**
      * User has pressed the ascend button on the catalog panel.
      * This will list the items in ascending order
+     * @param evt
      */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
         // reverse the list and toggle the buttons
@@ -600,6 +594,7 @@ public class CatalogUI extends UserInterface {
     /**
      * User has pressed the descend button on the catalog panel.
      * This will list the items in descending order
+     * @param evt
      */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
         // reverse the list and toggle the buttons
@@ -613,7 +608,9 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_descendBtnActionPerformed
 
     /**
-     * User has pressed the sort alphabetically button
+     * User has pressed the sort alphabetically button.
+     * This will list items in alphabetical order
+     * @param evt
      */
     private void alphabeticalSortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alphabeticalSortBtnActionPerformed
         // create a tmp array which matches the items array size
@@ -659,7 +656,9 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_alphabeticalSortBtnActionPerformed
 
     /**
-     * User has pressed the sort by category button
+     * User has pressed the sort by category button.
+     * This will sort items by category
+     * @param evt
      */
     private void categorySortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorySortBtnActionPerformed
         // create a tmp array which matches the items array size
@@ -705,7 +704,9 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_categorySortBtnActionPerformed
 
     /**
-     * User has pressed the sort by price button
+     * User has pressed the sort by price button.
+     * This will sort items by price
+     * @param evt
      */
     private void priceSortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceSortBtnActionPerformed
         // create a tmp array which matches the items array size
@@ -778,12 +779,10 @@ public class CatalogUI extends UserInterface {
         }
     }//GEN-LAST:event_searchFieldKeyReleased
 
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchFieldActionPerformed
-
     /**
-     * User has pressed the ascend button on the quantity panel
+     * User has pressed the ascend button on the quantity panel.
+     * This will list items in ascending order
+     * @param evt
      */
     private void ascendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtn1ActionPerformed
         if(!ascending1) {
@@ -797,6 +796,7 @@ public class CatalogUI extends UserInterface {
 
     /**
      * Selected item quantities values have changed
+     * @param evt
      */
     private void listOfSelectedItemQuantitiesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listOfSelectedItemQuantitiesValueChanged
         int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
@@ -838,6 +838,7 @@ public class CatalogUI extends UserInterface {
     /**
      * User pressed the proceed to order review button.
      * Switch between the catalog panel and the quantity panel
+     * @param evt
      */
     private void proceedToOrderReviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedToOrderReviewBtnActionPerformed
         
@@ -870,12 +871,13 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_proceedToOrderReviewBtnActionPerformed
 
     /**
-     * Cancel the current order. This should cleanup any temporary data and 
-     * reset the user interface to its default state before returning to the
+     * Cancel the current order. 
+     * This cleans up any temporary data and reset the user 
+     * interface to its default state before returning to the
      * Main user interface
+     * @param evt
      */
     private void cancelOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderBtnActionPerformed
-       
         // clear all the data
         selectedItems.clear();
         for(JCheckBox box : checkBoxes) {
@@ -907,7 +909,8 @@ public class CatalogUI extends UserInterface {
     }//GEN-LAST:event_cancelOrderBtnActionPerformed
 
     /**
-     * User has pressed the descend button on the quantity review panel
+     * User has pressed the descend button on the quantity review panel.
+     * This will sort the items in descending order
      * @param evt 
      */
     private void descendBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtn1ActionPerformed
@@ -972,7 +975,7 @@ public class CatalogUI extends UserInterface {
     }
 
     /**
-     * WARNING: Required by class diagram but unused.
+     * WARNING: In Class diagram but use not clear.
      * @return Item selected item
      */
     Item getSelectedItem() {
@@ -1003,11 +1006,12 @@ public class CatalogUI extends UserInterface {
         for(int i = 0; i < tmp.length; i++) {
             itemCache.add((Item) tmp[i]);
         }
-        
     }
     
     /**
      * Update a model
+     * @param oldList A list model containing values to be updated
+     * @param newList An array list containing values to update list using
      */
     private void updateModel(DefaultListModel oldList, ArrayList newList) {        
         oldList.clear();
@@ -1020,7 +1024,6 @@ public class CatalogUI extends UserInterface {
      * Close the catalog
      */
     public void closeCatalog() {
-        
         // clear all models
         allItems.clear();
         itemQuantities.clear();

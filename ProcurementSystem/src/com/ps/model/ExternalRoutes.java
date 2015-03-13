@@ -1,15 +1,16 @@
 package com.ps.model;
 
 /**
- * This class is provided on the class diagram but has no apparent use
- * within our implementation.
- * @author JCollinge
+ * WARNING: This class is provided on the class diagram but 
+ * has no apparent use within our implementation.
+ * n.b. These get functions should not be void but type isn't specified
+ * on class diagram
+ * @author Group B
  */
 public class ExternalRoutes {
     
     /**
      * Get Catalog update
-     * n.b. these get functions should not be void but type isn't on class diagram
      */
     public void getCatalogUpdate() {
         

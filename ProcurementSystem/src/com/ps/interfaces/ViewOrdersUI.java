@@ -24,7 +24,7 @@ import javax.swing.JFrame;
  * is a list of all available orders. The second view
  * is a details of a specific order based on the
  * selection of the user.
- * @author JCollinge
+ * @author Group B
  */
 public class ViewOrdersUI extends UserInterface {
 
@@ -33,6 +33,7 @@ public class ViewOrdersUI extends UserInterface {
     private DefaultListModel<Order> ordersModel;
     private DefaultListModel<Item> orderModel;
     private DefaultListModel<Integer> orderQuantityModel;
+    private Order selectedOrder;
     
     private boolean siteFiltered = false;
     private boolean dateFiltered = false;
@@ -41,16 +42,14 @@ public class ViewOrdersUI extends UserInterface {
     private boolean activeOrdersOnly = true;
     
     /**
-     * Ctor -  initialise data and Swing componenets
+     * Creates new form ViewOrdersUI
      */
     private ViewOrdersUI() {
-        
         ordersModel =  new DefaultListModel();
         orderModel = new DefaultListModel();
         orderQuantityModel = new DefaultListModel();
        
         initComponents();
-        //displayCurrentOrders();
         activeOrdersOnlyBtn.setSelected(false);
         activeOrdersOnly = false;
         
@@ -507,18 +506,23 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_returnToExistingOrdersBtnActionPerformed
 
     /**
-     * Prints an audit trail. The class diagram does not have any implementation or
-     * reference to an audit trail so we are unsure what this is required to do.
+     * Prints an audit trail. 
+     * The class diagram does not have any implementation or
+     * reference to an audit trail so we are unsure what 
+     * this is required to do.
      * @param evt 
      */
     private void printAuditTrailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printAuditTrailBtnActionPerformed
+        
         System.out.println("Audit trail: Processed(01/01/2015), Dispatched(01/01/2015), Delivered(01/01/2015)");
     }//GEN-LAST:event_printAuditTrailBtnActionPerformed
 
     /**
-     * Called when the active orders button is pressed. There is not implementation
-     * or reference to this in the class diagram so we are unsure what this should
-     * do.
+     * Called when the active orders button is pressed. 
+     * There is not implementation or reference to this in 
+     * the class diagram so we are unsure what this should do.
+     * Filters the orders using open orders which checks if
+     * an orders status is "Pending"
      * @param evt 
      */
     private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
@@ -550,8 +554,8 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
     /**
-     * Called when the descend button is pressed. Should sort the items into
-     * descending order.
+     * Called when the descend button is pressed.
+     * Sort the items into descending order.
      * @param evt 
      */
     private void descendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descendBtnActionPerformed
@@ -564,8 +568,8 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_descendBtnActionPerformed
 
     /**
-     * Called when the ascend button is pressed. Should sort the items
-     * into ascending order.
+     * Called when the ascend button is pressed. 
+     * Sorts the items into ascending order.
      * @param evt 
      */
     private void ascendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ascendBtnActionPerformed
@@ -578,7 +582,8 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_ascendBtnActionPerformed
 
     /**
-     * Should filter by supplier
+     * Called when the filter by supplier button is pressed.
+     * Filters the list of orders by supplier
      * @param evt 
      */
     private void filterBySupplierBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySupplierBtnActionPerformed
@@ -624,7 +629,8 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
     /**
-     * Should filter by date
+     * Called when the filter by date button is pressed.
+     * Filters the list of orders by date.
      * @param evt 
      */
     private void filterByDateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterByDateBtnActionPerformed
@@ -678,7 +684,8 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_filterByDateBtnActionPerformed
 
     /**
-     * Should filter by site
+     * Called when the filter by site button is pressed.
+     * Filters the list of orders by site
      * @param evt 
      */
     private void filterBySiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterBySiteBtnActionPerformed
@@ -724,8 +731,9 @@ public class ViewOrdersUI extends UserInterface {
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
     /**
-     * Called when the return to main menu button is pressed. Should clear any
-     * temporary data and handle the transition back to the main interface.
+     * Called when the return to main menu button is pressed. 
+     * Clears any temporary data and handles the transition 
+     * back to the main interface.
      * @param evt 
      */
     private void returnToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnToMainMenuBtnActionPerformed
@@ -753,6 +761,11 @@ public class ViewOrdersUI extends UserInterface {
         }       
     }//GEN-LAST:event_matchingExistingOrdersMouseReleased
 
+    /**
+     * Called when used is typing in location text field.
+     * Unfilters the by site until the user has finished typing
+     * @param evt 
+     */
     private void locationTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_locationTextFieldKeyReleased
         System.out.println("Typing site filter");
         if(siteFiltered) {
@@ -761,6 +774,11 @@ public class ViewOrdersUI extends UserInterface {
         }
     }//GEN-LAST:event_locationTextFieldKeyReleased
 
+    /**
+     * Called when used is typing in date text field.
+     * Unfilters the by date until the user has finished typing
+     * @param evt 
+     */
     private void dateTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateTextFieldKeyReleased
         System.out.println("Typing date filtered");
         if(dateFiltered) {
@@ -769,6 +787,11 @@ public class ViewOrdersUI extends UserInterface {
         }
     }//GEN-LAST:event_dateTextFieldKeyReleased
 
+    /**
+     * Called when used is typing in supplier text field.
+     * Unfilters the by supplier until the user has finished typing
+     * @param evt 
+     */
     private void supplierTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_supplierTextFieldKeyReleased
         System.out.println("Typing supplier filtered");
         if(supplierFiltered) {
@@ -786,7 +809,6 @@ public class ViewOrdersUI extends UserInterface {
      * @param order 
      */
     private void initialiseOrderPanel(Order order) {
-  
         orderModel.clear();
         orderQuantityModel.clear();
         
@@ -898,17 +920,17 @@ public class ViewOrdersUI extends UserInterface {
     }
 
     /**
-     * Load all current orders. This is provided in the class diagram but
-     * was not used.
+     * WARNING: In Class diagram but use not clear.
+     * Load all current orders.
      */
     public void loadOrders() {
     }
 
     /**
-     * Will match a given filter to a filter implementation and update
+     * Matches a given filter to a filter implementation and update
      * the model.
-     * @param filter
-     * @param param
+     * @param filter search filter name
+     * @param param search filter parameter
      */
     public void requestFilter(String filter, Object param) {
         if(param != null) {

@@ -1,19 +1,15 @@
 package com.ps.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.*;
-import java.text.*;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
 /**
- *
- * @author Simon
+ * Test suite to test the methods in the order class
+ * @author Group B
  */
 public class OrderTest {
     
@@ -22,20 +18,19 @@ public class OrderTest {
     public Item bolts;
     public String exampleSite = "Test Site";
     public String exampleOrderStatus = "Pending";
-    public String exampleSpecialInstructions = "Some Instructions";
-            
-    public OrderTest() {
-    }
+    public String exampleSpecialInstructions = "Some Instructions"; 
     
+    /**
+     * Set up objects needed for the test suite to run.
+     */
     @BeforeClass
     public static void setUpClass() {
         order = new Order();
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+    /**
+     * Set up objects needed for each test.
+     */
     @Before
     public void setupTest() {
         concrete = new Item("Concrete", 3.00, "Bag");
@@ -47,6 +42,9 @@ public class OrderTest {
         order.addSpecialInstructions(exampleSpecialInstructions);
     }
     
+    /**
+     * Clean up objects after each test.
+     */
     @After
     public void tearDownTest() {
         order.cancelOrder();
@@ -63,7 +61,7 @@ public class OrderTest {
     }
     
     /**
-     * Test of addItem method, that it inserts the correct order
+     * Test of addItem method, that it inserts the correct order.
      */
     @Test
     public void testAddItemToFail() {
@@ -73,7 +71,7 @@ public class OrderTest {
     }
     
     /**
-     * Test that addItem method handles null items
+     * Test that addItem method handles null items.
      */
     @Test
     public void testAddNullItem() {
@@ -84,7 +82,7 @@ public class OrderTest {
     }
     
     /**
-     * Test that addItem method handles duplicate items
+     * Test that addItem method handles duplicate items.
      */
     @Test
     public void testAddDuplicateItem() {
@@ -97,6 +95,9 @@ public class OrderTest {
         assertTrue(order.getOrderLines().get(0).getQuantity() == quantity);
     }
 
+    /**
+     * Test that the hasSameDate method is working correctly.
+     */
     @Test
     public void testHasSameDate() {
         System.out.println("hasSameDate");
@@ -106,6 +107,9 @@ public class OrderTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test that the hasSameDate method can handle null dates.
+     */
     @Test
     public void testHasSameDateWithNull() {
         System.out.println("hasSameDateWithNull");
@@ -114,7 +118,10 @@ public class OrderTest {
         boolean result = order.hasSameDate(date);
         assertTrue(result == false);
     }
-
+    
+    /**
+     * Test that the setOrderStatus method can handle a correct value.
+     */
     @Test
     public void testSetOrderStatus() {
         System.out.println("setOrderStatus");
@@ -123,6 +130,9 @@ public class OrderTest {
         assertTrue(order.getOrderStatus().equals(orderStatus));
     }
     
+    /**
+     * Test that the setOrderStatus method can handle null values.
+     */
     @Test
     public void testSetOrderStatusToNull() {
         System.out.println("setOrderStatusToNull");
@@ -132,7 +142,7 @@ public class OrderTest {
     }
 
     /**
-     * Test of addSpecialInstructions method, of class Order.
+     * Test that the addSpecialInstructions method can handle correct values.
      */
     @Test
     public void testAddSpecialInstructions() {
@@ -142,6 +152,9 @@ public class OrderTest {
         assertTrue(order.getSpecialInstructions().equals(instructions));
     }
     
+    /**
+     * Test that the addSpecialInstructions method can handle null values.
+     */
     @Test
     public void testAddSpecialInstructionsNull() {
         System.out.println("testAddSpecialInstructionsNull");
@@ -149,7 +162,10 @@ public class OrderTest {
         order.addSpecialInstructions(instructions);
         assertTrue(order.getSpecialInstructions().equals(exampleSpecialInstructions));
     }
-
+    
+    /**
+     * Test that the setOrderDate method can sets dates correctly.
+     */
     @Test
     public void testSetOrderDate() {
         System.out.println("setOrderDate");
@@ -158,6 +174,9 @@ public class OrderTest {
         assertEquals(order.getOrderDate(), yesterday);
     }
     
+    /**
+     * Test that the setOrderDate can handle null values.
+     */
     @Test
     public void testSetOrderDateToNull() {
         System.out.println("setOrderDateToNull");
@@ -167,7 +186,7 @@ public class OrderTest {
     }
     
     /**
-     * Test of getSite method, of class Order.
+     * Test that the setSite method can handle correct values.
      */
     @Test
     public void testSetSite() {
@@ -177,6 +196,9 @@ public class OrderTest {
         assertEquals(order.getSite(), site);
     }
     
+    /**
+     * Test that the setSite method can handle null values.
+     */
     @Test
     public void testSetSiteToNull() {
         System.out.println("setSiteToNull");

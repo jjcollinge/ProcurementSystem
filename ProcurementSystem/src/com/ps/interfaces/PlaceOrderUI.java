@@ -1,4 +1,3 @@
-
 package com.ps.interfaces;
 
 import com.ps.model.Item;
@@ -17,7 +16,7 @@ import javax.swing.JFrame;
  * review/checkout page which allows the user to
  * view their selected items and quantities and make
  * ammendments.
- * @author JCollinge
+ * @author Group B
  */
 public class PlaceOrderUI extends UserInterface {
 
@@ -440,6 +439,7 @@ public class PlaceOrderUI extends UserInterface {
     }
     
     /**
+     * WARNING: In Class diagram but use not clear.
      * Complete the current order
      */
     public void completeOrder() {
@@ -447,6 +447,7 @@ public class PlaceOrderUI extends UserInterface {
     }
     
     /**
+     * WARNING: In Class diagram but use not clear.
      * Returns the option
      * @return Order
      */
@@ -456,8 +457,8 @@ public class PlaceOrderUI extends UserInterface {
     
     /**
      * add an item to the current order
-     * @param item
-     * @param quantity 
+     * @param item an instance of the item class
+     * @param quantity a numeric quantity
      */
     public void addItem(Item item, int quantity) {
         newOrder.addItem(item, quantity);
@@ -489,7 +490,6 @@ public class PlaceOrderUI extends UserInterface {
      * Add all order lines from the current order to the models.
      */
     public void checkout() {
-        
         ascendBtn.setSelected(true);
         ascending = true;
         
@@ -528,7 +528,7 @@ public class PlaceOrderUI extends UserInterface {
     
     /**
      * set the current orders site field
-     * @param site 
+     * @param site a string indicating a site name
      */
     public void setSite(String site) {
         if(newOrder == null) {

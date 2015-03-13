@@ -6,20 +6,20 @@ import com.ps.app.ObjectMapper;
 
 /**
  * A catalog stores a list of all available items.
- * Should be persistent between runs.
- * @author JCollinge
+ * Persistent between runs.
+ * @author Group B
  */
 public class Catalog implements Serializable {
     
-    private ArrayList<Item> listOfItems;    //included <Item>
+    private ArrayList<Item> listOfItems;
     private static Catalog singleton;
     private final String filename = "catalog.ser";
     
     /**
-     * Ctor
+     * Constructor
      */
     private Catalog() {
-        
+        // deserialize catalog if possible
         listOfItems = (ArrayList<Item>)ObjectMapper.Deserialize(filename);
         if(listOfItems == null) {
             initCatalog();
@@ -27,8 +27,7 @@ public class Catalog implements Serializable {
     }
     
     /**
-     * Return Catalog
-     * n.b. should this be here, if its just returning the current instance? is it a singleton?
+     * Return the catalog instance
      * @return Catalog current catalog
      */
     public static Catalog getCatalog() {
@@ -53,6 +52,7 @@ public class Catalog implements Serializable {
     }
     
     /**
+     * WARNING: In Class diagram but use not clear.
      * Update listOfItems
      */
     public void updateCatalog() {
@@ -60,6 +60,7 @@ public class Catalog implements Serializable {
     }
     
     /**
+     * WARNING: In Class diagram but no search filter for catalog in UI.
      * Find Item by name
      */
     public void findItemByName() {
@@ -67,6 +68,7 @@ public class Catalog implements Serializable {
     }
     
     /**
+     * WARNING: In Class diagram but no search filter for catalog in UI.
      * Filter Items by type
      */
     public void filterByType() {
