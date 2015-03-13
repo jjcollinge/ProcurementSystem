@@ -271,8 +271,13 @@ public class PlaceOrderUI extends UserInterface {
     private void placeOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderBtnActionPerformed
         
         if(newOrder.getOrderLines().size() > 0) {
-        
             if(catalogUI != null) {
+                // update quantities
+                ArrayList<OrderLine> oLs = newOrder.getOrderLines();
+                for(int i = 0; i < quantities.size(); i++) {
+                    oLs.get(i).changeQuantity(quantities.get(i));
+                }
+
                 catalogUI.closeCatalog();
                 SetOfOrders orders = SetOfOrders.getInstance();
                 newOrder.setOrderDate(new Date());
@@ -280,6 +285,8 @@ public class PlaceOrderUI extends UserInterface {
                 orders.addOrder(newOrder);
                 this.setVisible(false);
                 items.clear();
+                quantities.clear();
+                inputValueField.setText("Input value");
                 newOrder = null;
                 MainInterface ui = MainInterface.getInstance();
                 ui.setPosition(this.getX(), this.getY());
