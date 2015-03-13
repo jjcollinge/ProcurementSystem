@@ -546,6 +546,8 @@ public class CatalogUI extends UserInterface {
         for(int i = 0; i < tmp.length; i++) {
             quantitiesCache.add((Integer) tmp[i]);
         }
+        System.out.println("Initilaise quantities: " + itemQuantities);
+        System.out.println("Updating quantities cache: " + quantitiesCache);
     }
     
     /**
@@ -769,14 +771,10 @@ public class CatalogUI extends UserInterface {
             updateModel(allItems, searchedItems);
             updateModel(itemQuantities, searchedQuantities);
             updateCheckBoxes();
-//            searchedItems.stream().forEach((item) -> {
-//                allItems.addElement(item);
-//            });
         } else {
             updateModel(allItems, itemCache);
             updateModel(itemQuantities, quantitiesCache);
             updateCheckBoxes();
-            //displayCatalog();
         }
     }//GEN-LAST:event_searchFieldKeyReleased
 
@@ -804,7 +802,6 @@ public class CatalogUI extends UserInterface {
         int selectedIndex = ((JList) evt.getSource()).getSelectedIndex();
         
         if(selectedIndex >= 0 && selectedIndex < allItems.size()) {
-        
             if (selectedItems.contains(allItems.get(selectedIndex))) {
                 
                 JTextField quantity = new JTextField();
@@ -825,17 +822,15 @@ public class CatalogUI extends UserInterface {
                 //validate input
                 if(value > 0 && value < MAX_QTY) {
                     if(selectedIndex >= 0 && selectedIndex < itemQuantities.size()) {
-                        itemQuantities.set(selectedIndex, value);
+                        itemQuantities.set(selectedIndex, value); 
+                        System.out.println("Updating quantities: " + itemQuantities);
+                        quantitiesCache.set(selectedIndex, value);
+                        System.out.println("Updating quantities cache: " + quantitiesCache);
                     }
                 } else {
                     System.out.println("Illegal quantities value " + value + " was entered.");
                     return;
                 }
-            }
-            Object[] tmp = itemQuantities.toArray();
-            quantitiesCache.clear();
-            for(int i = 0; i < tmp.length; i++) {
-                quantitiesCache.add((Integer) tmp[i]);
             }
         }
     }//GEN-LAST:event_listOfSelectedItemQuantitiesValueChanged
