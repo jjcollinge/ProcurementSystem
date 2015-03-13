@@ -38,7 +38,7 @@ public class ViewOrdersUI extends UserInterface {
     private boolean dateFiltered = false;
     private boolean supplierFiltered = false;
     private boolean ascending = true;
-    private boolean openOrders = true;
+    private boolean activeOrdersOnly = true;
     
     /**
      * Ctor -  initialise data and Swing componenets
@@ -51,7 +51,8 @@ public class ViewOrdersUI extends UserInterface {
        
         initComponents();
         //displayCurrentOrders();
-        activeOrdersOnlyBtn.setSelected(true);
+        activeOrdersOnlyBtn.setSelected(false);
+        activeOrdersOnly = false;
         
         //Settings
         jLayeredPane1.setPreferredSize(new Dimension(400, 540));
@@ -521,24 +522,30 @@ public class ViewOrdersUI extends UserInterface {
      * @param evt 
      */
     private void activeOrdersOnlyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activeOrdersOnlyBtnActionPerformed
-        if(openOrders) {
-            orders = SetOfOrders.getInstance();
-        
-            ordersModel.clear();
-            for(Order order : orders.getAllOrders()) {
-                ordersModel.addElement(order);
+        activeOrdersOnly = !activeOrdersOnly;
+        System.out.println("Active only: " + activeOrdersOnly);
+        activeOrdersOnlyBtn.setSelected(activeOrdersOnly);
+        if(dateFiltered) {
+            dateFiltered = false;
+            filterByDateBtnActionPerformed(null);
+        } else if(siteFiltered) {
+            siteFiltered = false;
+            filterBySiteBtnActionPerformed(null);
+        } else if(supplierFiltered) {
+            supplierFiltered = false;
+            filterBySupplierBtnActionPerformed(null);
+        } else {
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
             }
-            activeOrdersOnlyBtn.setSelected(false);
-            openOrders = false;
-        } else {  
-            orders = SetOfOrders.getInstance();
-        
-            ordersModel.clear();
-            for(Order order : orders.getOpenOrders()) {
-                ordersModel.addElement(order);
-            }
-            activeOrdersOnlyBtn.setSelected(true);
-            openOrders = true;
         }
     }//GEN-LAST:event_activeOrdersOnlyBtnActionPerformed
 
@@ -602,9 +609,17 @@ public class ViewOrdersUI extends UserInterface {
         
         if(!supplierFiltered && !dateFiltered && !siteFiltered) {
             System.out.println("no filter selected");
-            openOrders = true;
-            activeOrdersOnlyBtn.setSelected(false);
-            activeOrdersOnlyBtnActionPerformed(null);
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
+            }
         }
     }//GEN-LAST:event_filterBySupplierBtnActionPerformed
 
@@ -646,11 +661,19 @@ public class ViewOrdersUI extends UserInterface {
 
         }
         
-        if(!supplierFiltered && !dateFiltered && !siteFiltered) {
+       if(!supplierFiltered && !dateFiltered && !siteFiltered) {
             System.out.println("no filter selected");
-            openOrders = true;
-            activeOrdersOnlyBtn.setSelected(false);
-            activeOrdersOnlyBtnActionPerformed(null);
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
+            }
         }
     }//GEN-LAST:event_filterByDateBtnActionPerformed
 
@@ -686,9 +709,17 @@ public class ViewOrdersUI extends UserInterface {
         
         if(!supplierFiltered && !dateFiltered && !siteFiltered) {
             System.out.println("no filter selected");
-            openOrders = true;
-            activeOrdersOnlyBtn.setSelected(false);
-            activeOrdersOnlyBtnActionPerformed(null);
+            if(activeOrdersOnly) {
+                ordersModel.clear();
+                for(Order order : orders.getOpenOrders()) {
+                    ordersModel.addElement(order);
+                }
+            } else {
+                ordersModel.clear();
+                for(Order order : orders.getAllOrders()) {
+                    ordersModel.addElement(order);
+                }
+            }
         }
     }//GEN-LAST:event_filterBySiteBtnActionPerformed
 
@@ -852,8 +883,18 @@ public class ViewOrdersUI extends UserInterface {
      * Displays all of the current orders
      */
     public void displayCurrentOrders() {
-        openOrders = false;
-        activeOrdersOnlyBtnActionPerformed(null);
+        orders = SetOfOrders.getInstance();
+        if(activeOrdersOnly) {
+            ordersModel.clear();
+            for(Order order : orders.getOpenOrders()) {
+                ordersModel.addElement(order);
+            }
+        } else {
+            ordersModel.clear();
+            for(Order order : orders.getAllOrders()) {
+                ordersModel.addElement(order);
+            }
+        }
     }
 
     /**
@@ -879,11 +920,17 @@ public class ViewOrdersUI extends UserInterface {
             } else if(filter.equalsIgnoreCase("supplier")) {
                 matching = orders.filterBySupplier((String)param);
             }
-            System.out.println("filtered: " + matching);
+            System.out.println("filtered:\n " + matching);
             
             ordersModel.clear();
             for(Order order : matching) {
-                ordersModel.addElement(order);
+                if(activeOrdersOnly) {
+                    if(order.getOrderStatus().equals("Pending")) {
+                        ordersModel.addElement(order);
+                    }
+                } else {
+                    ordersModel.addElement(order);
+                }
             } 
         }
     }
