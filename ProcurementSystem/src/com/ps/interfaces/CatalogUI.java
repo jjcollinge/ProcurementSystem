@@ -847,6 +847,11 @@ public class CatalogUI extends UserInterface {
             return;
         }
         
+        if(selectedItems.size() != allItems.size()) {
+            System.out.println("Can't proceed with an order until search field is reset!");
+            return;
+        }
+        
         // get the place order ui
         PlaceOrderUI ui = PlaceOrderUI.getInstance();
         
