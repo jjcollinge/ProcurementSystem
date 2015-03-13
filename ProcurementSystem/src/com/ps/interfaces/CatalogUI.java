@@ -848,7 +848,7 @@ public class CatalogUI extends UserInterface {
             return;
         }
         
-        if(selectedItems.size() != allItems.size()) {
+        if(allItems.size() != itemCache.size()) {
             System.out.println("Can't proceed with an order until search field is reset!");
             return;
         }
